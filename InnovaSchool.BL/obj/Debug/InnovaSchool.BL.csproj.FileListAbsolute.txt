@@ -1,0 +1,36 @@
+D:\Proyectos\InnovaSchool\InnovaSchool\InnovaSchool - prueba\InnovaSchool.BL\bin\Debug\InnovaSchool.BL.dll
+D:\Proyectos\InnovaSchool\InnovaSchool\InnovaSchool - prueba\InnovaSchool.BL\bin\Debug\InnovaSchool.BL.pdb
+D:\Proyectos\InnovaSchool\InnovaSchool\InnovaSchool - prueba\InnovaSchool.BL\bin\Debug\InnovaSchool.DAL.dll
+D:\Proyectos\InnovaSchool\InnovaSchool\InnovaSchool - prueba\InnovaSchool.BL\bin\Debug\InnovaSchool.Entity.dll
+D:\Proyectos\InnovaSchool\InnovaSchool\InnovaSchool - prueba\InnovaSchool.BL\bin\Debug\InnovaSchool.DAL.pdb
+D:\Proyectos\InnovaSchool\InnovaSchool\InnovaSchool - prueba\InnovaSchool.BL\bin\Debug\InnovaSchool.Entity.pdb
+D:\Proyectos\InnovaSchool\InnovaSchool\InnovaSchool - prueba\InnovaSchool.BL\obj\Debug\InnovaSchool.BL.csprojResolveAssemblyReference.cache
+D:\Proyectos\InnovaSchool\InnovaSchool\InnovaSchool - prueba\InnovaSchool.BL\obj\Debug\InnovaSchool.BL.dll
+D:\Proyectos\InnovaSchool\InnovaSchool\InnovaSchool - prueba\InnovaSchool.BL\obj\Debug\InnovaSchool.BL.pdb
+D:\Proyectos\InnovaSchool\InnovaSchool\InnovaSchool - prueba WEB\InnovaSchool.BL\bin\Debug\InnovaSchool.BL.dll
+D:\Proyectos\InnovaSchool\InnovaSchool\InnovaSchool - prueba WEB\InnovaSchool.BL\bin\Debug\InnovaSchool.BL.pdb
+D:\Proyectos\InnovaSchool\InnovaSchool\InnovaSchool - prueba WEB\InnovaSchool.BL\bin\Debug\InnovaSchool.DAL.dll
+D:\Proyectos\InnovaSchool\InnovaSchool\InnovaSchool - prueba WEB\InnovaSchool.BL\bin\Debug\InnovaSchool.Entity.dll
+D:\Proyectos\InnovaSchool\InnovaSchool\InnovaSchool - prueba WEB\InnovaSchool.BL\bin\Debug\InnovaSchool.DAL.pdb
+D:\Proyectos\InnovaSchool\InnovaSchool\InnovaSchool - prueba WEB\InnovaSchool.BL\bin\Debug\InnovaSchool.Entity.pdb
+D:\Proyectos\InnovaSchool\InnovaSchool\InnovaSchool - prueba WEB\InnovaSchool.BL\obj\Debug\InnovaSchool.BL.csprojResolveAssemblyReference.cache
+D:\Proyectos\InnovaSchool\InnovaSchool\InnovaSchool - prueba WEB\InnovaSchool.BL\obj\Debug\InnovaSchool.BL.dll
+D:\Proyectos\InnovaSchool\InnovaSchool\InnovaSchool - prueba WEB\InnovaSchool.BL\obj\Debug\InnovaSchool.BL.pdb
+D:\Proyectos\InnovaSchool\InnovaSchool\InnovaSchool\InnovaSchool.BL\bin\Debug\InnovaSchool.BL.dll
+D:\Proyectos\InnovaSchool\InnovaSchool\InnovaSchool\InnovaSchool.BL\bin\Debug\InnovaSchool.BL.pdb
+D:\Proyectos\InnovaSchool\InnovaSchool\InnovaSchool\InnovaSchool.BL\bin\Debug\InnovaSchool.DAL.dll
+D:\Proyectos\InnovaSchool\InnovaSchool\InnovaSchool\InnovaSchool.BL\bin\Debug\InnovaSchool.Entity.dll
+D:\Proyectos\InnovaSchool\InnovaSchool\InnovaSchool\InnovaSchool.BL\bin\Debug\InnovaSchool.DAL.pdb
+D:\Proyectos\InnovaSchool\InnovaSchool\InnovaSchool\InnovaSchool.BL\bin\Debug\InnovaSchool.Entity.pdb
+D:\Proyectos\InnovaSchool\InnovaSchool\InnovaSchool\InnovaSchool.BL\obj\Debug\InnovaSchool.BL.csprojResolveAssemblyReference.cache
+D:\Proyectos\InnovaSchool\InnovaSchool\InnovaSchool\InnovaSchool.BL\obj\Debug\InnovaSchool.BL.dll
+D:\Proyectos\InnovaSchool\InnovaSchool\InnovaSchool\InnovaSchool.BL\obj\Debug\InnovaSchool.BL.pdb
+D:\Taller de Proyecto III\InnovaSchoolPlantilla\InnovaSchool\InnovaSchool\InnovaSchool.BL\bin\Debug\InnovaSchool.BL.dll
+D:\Taller de Proyecto III\InnovaSchoolPlantilla\InnovaSchool\InnovaSchool\InnovaSchool.BL\bin\Debug\InnovaSchool.BL.pdb
+D:\Taller de Proyecto III\InnovaSchoolPlantilla\InnovaSchool\InnovaSchool\InnovaSchool.BL\bin\Debug\InnovaSchool.DAL.dll
+D:\Taller de Proyecto III\InnovaSchoolPlantilla\InnovaSchool\InnovaSchool\InnovaSchool.BL\bin\Debug\InnovaSchool.Entity.dll
+D:\Taller de Proyecto III\InnovaSchoolPlantilla\InnovaSchool\InnovaSchool\InnovaSchool.BL\bin\Debug\InnovaSchool.DAL.pdb
+D:\Taller de Proyecto III\InnovaSchoolPlantilla\InnovaSchool\InnovaSchool\InnovaSchool.BL\bin\Debug\InnovaSchool.Entity.pdb
+D:\Taller de Proyecto III\InnovaSchoolPlantilla\InnovaSchool\InnovaSchool\InnovaSchool.BL\obj\Debug\InnovaSchool.BL.csprojResolveAssemblyReference.cache
+D:\Taller de Proyecto III\InnovaSchoolPlantilla\InnovaSchool\InnovaSchool\InnovaSchool.BL\obj\Debug\InnovaSchool.BL.dll
+D:\Taller de Proyecto III\InnovaSchoolPlantilla\InnovaSchool\InnovaSchool\InnovaSchool.BL\obj\Debug\InnovaSchool.BL.pdb

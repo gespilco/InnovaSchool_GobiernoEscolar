@@ -1,0 +1,19 @@
+D:\Proyectos\InnovaSchool\InnovaSchool\InnovaSchool - prueba\InnovaSchool.Entity\bin\Debug\InnovaSchool.Entity.dll
+D:\Proyectos\InnovaSchool\InnovaSchool\InnovaSchool - prueba\InnovaSchool.Entity\bin\Debug\InnovaSchool.Entity.pdb
+D:\Proyectos\InnovaSchool\InnovaSchool\InnovaSchool - prueba\InnovaSchool.Entity\obj\Debug\InnovaSchool.Entity.csprojResolveAssemblyReference.cache
+D:\Proyectos\InnovaSchool\InnovaSchool\InnovaSchool - prueba\InnovaSchool.Entity\obj\Debug\InnovaSchool.Entity.dll
+D:\Proyectos\InnovaSchool\InnovaSchool\InnovaSchool - prueba\InnovaSchool.Entity\obj\Debug\InnovaSchool.Entity.pdb
+D:\Proyectos\InnovaSchool\InnovaSchool\InnovaSchool - prueba WEB\InnovaSchool.Entity\bin\Debug\InnovaSchool.Entity.dll
+D:\Proyectos\InnovaSchool\InnovaSchool\InnovaSchool - prueba WEB\InnovaSchool.Entity\bin\Debug\InnovaSchool.Entity.pdb
+D:\Proyectos\InnovaSchool\InnovaSchool\InnovaSchool - prueba WEB\InnovaSchool.Entity\obj\Debug\InnovaSchool.Entity.dll
+D:\Proyectos\InnovaSchool\InnovaSchool\InnovaSchool - prueba WEB\InnovaSchool.Entity\obj\Debug\InnovaSchool.Entity.pdb
+D:\Proyectos\InnovaSchool\InnovaSchool\InnovaSchool\InnovaSchool.Entity\bin\Debug\InnovaSchool.Entity.dll
+D:\Proyectos\InnovaSchool\InnovaSchool\InnovaSchool\InnovaSchool.Entity\bin\Debug\InnovaSchool.Entity.pdb
+D:\Proyectos\InnovaSchool\InnovaSchool\InnovaSchool\InnovaSchool.Entity\obj\Debug\InnovaSchool.Entity.dll
+D:\Proyectos\InnovaSchool\InnovaSchool\InnovaSchool\InnovaSchool.Entity\obj\Debug\InnovaSchool.Entity.pdb
+D:\Proyectos\InnovaSchool\InnovaSchool\InnovaSchool\InnovaSchool.Entity\obj\Debug\InnovaSchool.Entity.csprojResolveAssemblyReference.cache
+D:\Taller de Proyecto III\InnovaSchoolPlantilla\InnovaSchool\InnovaSchool\InnovaSchool.Entity\bin\Debug\InnovaSchool.Entity.dll
+D:\Taller de Proyecto III\InnovaSchoolPlantilla\InnovaSchool\InnovaSchool\InnovaSchool.Entity\bin\Debug\InnovaSchool.Entity.pdb
+D:\Taller de Proyecto III\InnovaSchoolPlantilla\InnovaSchool\InnovaSchool\InnovaSchool.Entity\obj\Debug\InnovaSchool.Entity.csprojResolveAssemblyReference.cache
+D:\Taller de Proyecto III\InnovaSchoolPlantilla\InnovaSchool\InnovaSchool\InnovaSchool.Entity\obj\Debug\InnovaSchool.Entity.dll
+D:\Taller de Proyecto III\InnovaSchoolPlantilla\InnovaSchool\InnovaSchool\InnovaSchool.Entity\obj\Debug\InnovaSchool.Entity.pdb
