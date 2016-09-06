@@ -41,7 +41,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConexionUtil.cs" />
+    <Compile Include="DAlumnoEmpadronado.cs" />
+    <Compile Include="DCargo.cs" />
+    <Compile Include="DPartidoPostulante.cs" />
     <Compile Include="DUsuario.cs" />
+    <Compile Include="Extensions\DataReaderExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

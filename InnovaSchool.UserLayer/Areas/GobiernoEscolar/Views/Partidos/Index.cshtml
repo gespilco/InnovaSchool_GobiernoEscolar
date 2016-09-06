@@ -1,0 +1,82 @@
+﻿@model List<InnovaSchool.Entity.Result.SP_ListarPartidoPostulante_Result>
+@{
+    ViewBag.Title = "Partidos";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section breadcrumb{
+    <li>
+        <i class="icon-angle-right"></i>
+        <a href="#">Gobierno Escolar</a>
+    </li>
+    <li>
+        <i class="icon-angle-right"></i>
+        <a href="~/GobiernoEscolar/Partidos">Partidos</a>
+    </li>
+}
+
+<div class="row-fluid sortable ui-sortable">
+    <div class="box span12">
+        <div class="box-header" data-original-title="">
+            <h2><i class="halflings-icon white edit"></i><span class="break"></span>Actualizar información del Partido Postulante</h2>
+            <div class="box-icon">
+                <a href="#" class="btn-minimize"><i class="halflings-icon white chevron-down"></i></a>
+            </div>
+        </div>
+        <div class="box-content">
+            <div class="form-horizontal">
+                <table class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>Partido</th>
+                            <th class="span4">Estado</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var row in Model)
+                        {
+                            <tr>
+                                <td><a href="~/GobiernoEscolar/Partidos/Registro/@row.idPartido">@row.Nombre</a></td>
+                                <td>@row.Estado</td>
+                            </tr>
+                        }
+
+                    </tbody>
+                </table>
+                <div class="form-group">
+                    <div class="col-xs-12">
+                        <a href="~/GobiernoEscolar/Partidos/Registro" class="btn btn-default">Nuevo</a>
+                        @if (SessionHelper.IsInRole("Administrador"))
+                        {
+                            <button type="button" class="btn btn-primary">Generar credenciales</button>    
+                        }                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(function () {
+        $('.btn-primary').click(function () {
+            appMaster.Confirm({
+                Title: 'Aviso',
+                Message: 'Se va a generar credenciales para los partidos registrados. ¿Procedemos?',
+                Yes: function () {                    
+                    $.ajax({
+                        type: 'POST',
+                        url: '@Url.Content("~/GobiernoEscolar/Partidos/GenerarCredenciales")',
+                        contentType: 'application/json',
+                        success: function (data) {                            
+                            appMaster.MessageBox('Listo', 'Se han generado las credenciales para ' + data + ' partidos.');
+                        }
+                    });
+                },
+                YesText: 'Si',
+                NoText: 'No'
+            });
+        });
+    });
+</script>
+

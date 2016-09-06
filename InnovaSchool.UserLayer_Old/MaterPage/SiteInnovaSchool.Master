@@ -1,0 +1,143 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="SiteInnovaSchool.master.cs" Inherits="InnovaSchool.UserLayer.MaterPage.SiteInnovaSchool" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <!-- start: Meta -->
+    <meta name="autor" content="Giancarlo Espilco" />
+    <title>Innova Schools</title>
+    <!-- end: Meta -->
+	<!-- start: Mobile Specific -->
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<!-- end: Mobile Specific -->
+    <!-- start: Favicon -->
+    <link rel="shortcut icon" href="../img/favicon.png" />
+	<!-- end: Favicon -->
+    <!-- start: JavaScript-->
+    <script src="../Scripts/jquery-1.9.1.min.js"></script>
+    <script src="../Scripts/jquery-migrate-1.0.0.min.js"></script>
+    <script src="../Scripts/jquery-ui-1.10.0.custom.min.js"></script>
+    <script src="../Scripts/jquery.ui.touch-punch.js"></script>
+    <script src="../Scripts/modernizr.js"></script>
+    <script src="../Scripts/bootstrap.min.js"></script>
+    <script src="../Scripts/jquery.cookie.js"></script>
+    <script src='../Scripts/fullcalendar.min.js'></script>
+    <script src='../Scripts/jquery.dataTables.min.js'></script>
+    <script src="../Scripts/excanvas.js"></script>
+    <script src="../Scripts/jquery.flot.js"></script>
+    <script src="../Scripts/jquery.flot.pie.js"></script>
+    <script src="../Scripts/jquery.flot.stack.js"></script>
+    <script src="../Scripts/jquery.flot.resize.min.js"></script>
+    <script src="../Scripts/jquery.chosen.min.js"></script>
+    <script src="../Scripts/jquery.uniform.min.js"></script>
+    <script src="../Scripts/jquery.cleditor.min.js"></script>
+    <script src="../Scripts/jquery.noty.js"></script>
+    <script src="../Scripts/jquery.elfinder.min.js"></script>
+    <script src="../Scripts/jquery.raty.min.js"></script>
+    <script src="../Scripts/jquery.iphone.toggle.js"></script>
+    <script src="../Scripts/jquery.uploadify-3.1.min.js"></script>
+    <script src="../Scripts/jquery.gritter.min.js"></script>
+    <script src="../Scripts/jquery.imagesloaded.js"></script>
+    <script src="../Scripts/jquery.masonry.min.js"></script>
+    <script src="../Scripts/jquery.knob.modified.js"></script>
+    <script src="../Scripts/jquery.sparkline.min.js"></script>
+    <script src="../Scripts/counter.js"></script>
+    <script src="../Scripts/retina.js"></script>
+    <script src="../Scripts/custom.js"></script>
+    <script src="../Scripts/mensaje.js"></script>
+    <!-- end: JavaScript-->
+	<!-- start: CSS -->
+	<link href="../css/bootstrap.css" rel="stylesheet" />
+	<link href="../css/bootstrap-responsive.min.css" rel="stylesheet" />
+	<link href="../css/style.css" rel="stylesheet" />
+	<link href="../css/style-responsive.css" rel="stylesheet" />
+	<link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800&subset=latin,cyrillic-ext,latin-ext" rel="stylesheet" type="text/css" />
+	<link href="../css/pages.css" rel="stylesheet" />
+    <!-- end: CSS -->
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body role="document">
+	<!-- start: Header -->
+	<div class="navbar">
+		<div class="navbar-inner">
+			<div class="container-fluid">
+				<a class="btn btn-navbar" data-toggle="collapse" data-target=".top-nav.nav-collapse,.sidebar-nav.nav-collapse">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</a>
+				<a class="brand" href="../Index.aspx"><span><img src="../Img/logo/innova_schools-logo.png" class="img-responsive" id="logo" /></span></a>	
+				<!-- start: Header Menu -->
+				<div class="nav-no-collapse header-nav">
+					<ul class="nav pull-right">
+						<!-- start: User Dropdown -->
+						<li class="dropdown">
+							<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+								<i class="halflings-icon white user"></i><asp:Label ID="lblUsuario" runat="server" Text="lblUsuario"></asp:Label>
+								<span class="caret"></span>
+							</a>
+							<ul class="dropdown-menu">
+								<li class="dropdown-menu-title">
+ 									<span>Account Settings</span>
+								</li>
+								<li><a href="#"><i class="halflings-icon user"></i> Profile</a></li>
+								<li><a href="../Login.aspx"><i class="halflings-icon off"></i> Logout</a></li>
+							</ul>
+						</li>
+						<!-- end: User Dropdown -->
+					</ul>
+				</div>
+				<!-- end: Header Menu -->
+			</div>
+		</div>
+	</div>
+	<!-- start: Header -->
+		<div class="container-fluid-full">
+        <div class="row-fluid">
+            <!-- start: Main Menu -->
+            <div id="sidebar-left" class="span2">
+                <div class="nav-collapse sidebar-nav">
+                    <ul class="nav nav-tabs nav-stacked main-menu">
+                        <li><a href="../Index.aspx"><i class="icon-home"></i><span class="hidden-tablet">Inicio</span></a></li>
+                        <li>
+                            <a class="dropmenu" href="#"><i class="icon-folder-close"></i><span class="hidden-tablet">Gobierno Escolar</span><span class="label label-warning"> 3 </span></a>
+                            <ul>
+                                <li><a class="submenu" href="../Interfaces/frmPartidoPostulante.aspx"><i class="icon-book"></i><span class="hidden-tablet">Partido Postulante</span></a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!-- end: Main Menu -->
+            <div id="content" class="span10 background-body">
+                <ul class="breadcrumb">
+				    <li>
+					    <i class="icon-home"></i>
+					    <a href="../Index.aspx">Inicio</a> 
+				    </li>
+                    <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                    </asp:ContentPlaceHolder>
+			    </ul>
+                <form id="form1" runat="server" >
+                <div>
+                    <asp:ContentPlaceHolder ID="ContentPlaceHolder2" runat="server">
+                    </asp:ContentPlaceHolder>
+                </div>
+                <!-- Mensaje de Alerta -->
+	            <div id="mensaje"></div>
+                <!-- Fin de Mensaje -->
+                </form>
+            </div><!--/.fluid-container-->
+        </div><!--/#content.span10-->
+		</div><!--/fluid-row-->
+    <!-- INICIO PIE DE PAGINA -->
+	<footer>
+		<p>
+			<span style="text-align:left;float:left">© Copyright InnovaSchool 2016 - UPC. Todos los Derechos Reservados.</span>
+		</p>
+	</footer>
+    <!-- FIN PIE DE PAGINA -->
+</body>
+</html>

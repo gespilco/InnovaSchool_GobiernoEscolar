@@ -7,7 +7,7 @@
     <ProductVersion>
     </ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{2D3180C5-6F6E-463E-AD7A-37B6E595FE3E}</ProjectGuid>
+    <ProjectGuid>{5AEC31AC-3099-45CF-B892-38B959AB328F}</ProjectGuid>
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
@@ -57,129 +57,148 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="CSS\bootstrap-responsive.css" />
-    <Content Include="CSS\bootstrap-responsive.min.css" />
-    <Content Include="CSS\bootstrap.css" />
-    <Content Include="CSS\bootstrap.min.css" />
-    <Content Include="CSS\chosen.css" />
-    <Content Include="CSS\elfinder.min.css" />
-    <Content Include="CSS\elfinder.theme.css" />
-    <Content Include="CSS\font-awesome-ie7.min.css" />
-    <Content Include="CSS\font-awesome.min.css" />
-    <Content Include="CSS\fullcalendar.css" />
-    <Content Include="CSS\glyphicons.css" />
-    <Content Include="CSS\halflings.css" />
-    <Content Include="CSS\ie.css" />
-    <Content Include="CSS\ie9.css" />
-    <Content Include="CSS\jquery-ui-1.8.21.custom.css" />
-    <Content Include="CSS\jquery.cleditor.css" />
-    <Content Include="CSS\jquery.gritter.css" />
-    <Content Include="CSS\jquery.iphone.toggle.css" />
-    <Content Include="CSS\jquery.noty.css" />
-    <Content Include="CSS\noty_theme_default.css" />
-    <Content Include="CSS\pages.css" />
-    <Content Include="CSS\style-forms.css" />
-    <Content Include="CSS\style-responsive.css" />
-    <Content Include="CSS\style.css" />
-    <Content Include="CSS\uniform.default.css" />
-    <Content Include="CSS\uploadify.css" />
-    <Content Include="Error\NoAccess.html" />
-    <Content Include="Font\glyphicons-regular.svg" />
-    <Content Include="Font\glyphiconshalflings-regular.svg" />
-    <Content Include="Img\arrows-active.png" />
-    <Content Include="Img\arrows-normal.png" />
-    <Content Include="Img\avatar.jpg" />
-    <Content Include="Img\bg-Index.png" />
-    <Content Include="Img\bg-input-focus.png" />
-    <Content Include="Img\bg-input.png" />
-    <Content Include="Img\bg-login.jpg" />
-    <Content Include="Img\bg-login.png" />
-    <Content Include="Img\browser-chrome-big.png" />
-    <Content Include="Img\browser-firefox-big.png" />
-    <Content Include="Img\browser-ie.png" />
-    <Content Include="Img\browser-opera.png" />
-    <Content Include="Img\browser-safari.png" />
-    <Content Include="Img\buttons.gif" />
-    <Content Include="Img\chat-left%402x.png" />
-    <Content Include="Img\chat-left-metro%402x.png" />
-    <Content Include="Img\chat-left-metro.png" />
-    <Content Include="Img\chat-left.png" />
-    <Content Include="Img\chat-right%402x.png" />
-    <Content Include="Img\chat-right-metro%402x.png" />
-    <Content Include="Img\chat-right-metro.png" />
-    <Content Include="Img\chat-right.png" />
-    <Content Include="Img\chosen-sprite.png" />
-    <Content Include="Img\close-button-white.png" />
-    <Content Include="Img\close-button.png" />
-    <Content Include="Img\crop.gif" />
-    <Content Include="Img\dialogs.png" />
-    <Content Include="Img\favicon.png" />
-    <Content Include="Img\gallery\photo1.jpg" />
-    <Content Include="Img\gallery\photo10.jpg" />
-    <Content Include="Img\gallery\photo11.jpg" />
-    <Content Include="Img\gallery\photo12.jpg" />
-    <Content Include="Img\gallery\photo13.jpg" />
-    <Content Include="Img\gallery\photo2.jpg" />
-    <Content Include="Img\gallery\photo3.jpg" />
-    <Content Include="Img\gallery\photo4.jpg" />
-    <Content Include="Img\gallery\photo5.jpg" />
-    <Content Include="Img\gallery\photo6.jpg" />
-    <Content Include="Img\gallery\photo7.jpg" />
-    <Content Include="Img\gallery\photo8.jpg" />
-    <Content Include="Img\gallery\photo9.jpg" />
-    <Content Include="Img\glyphicons-halflings-white.png" />
-    <Content Include="Img\glyphicons-halflings.png" />
-    <Content Include="Img\glyphicons-white.png" />
-    <Content Include="Img\glyphicons-white.svg" />
-    <Content Include="Img\glyphicons.png" />
-    <Content Include="Img\glyphicons.svg" />
-    <Content Include="Img\glyphicons_halflings-white.png" />
-    <Content Include="Img\glyphicons_halflings-white.svg" />
-    <Content Include="Img\glyphicons_halflings.png" />
-    <Content Include="Img\glyphicons_halflings.svg" />
-    <Content Include="Img\icons-big.png" />
-    <Content Include="Img\icons-small.png" />
-    <Content Include="Img\iphone-style-checkboxes\off-63584.png" />
-    <Content Include="Img\iphone-style-checkboxes\on-63584.png" />
-    <Content Include="Img\iphone-style-checkboxes\slider_center-63584.png" />
-    <Content Include="Img\iphone-style-checkboxes\slider_left-63584.png" />
-    <Content Include="Img\iphone-style-checkboxes\slider_right-63584.png" />
-    <Content Include="Img\logo\innova_schools-logo.png" />
-    <Content Include="Img\logo\innova_schools.png" />
-    <Content Include="Img\logo\logo.png" />
-    <Content Include="Img\progress.gif" />
-    <Content Include="Img\quicklook-bg.png" />
-    <Content Include="Img\quicklook-icons.png" />
-    <Content Include="Img\quote.png" />
-    <Content Include="Img\resize.png" />
-    <Content Include="Img\slider_r8.png" />
-    <Content Include="Img\spinner-mini.gif" />
-    <Content Include="Img\sprite.png" />
-    <Content Include="Img\timeline-bg.png" />
-    <Content Include="Img\timeline-left-arrow%402x.png" />
-    <Content Include="Img\timeline-left-arrow.png" />
-    <Content Include="Img\timeline-right-arrow%402x.png" />
-    <Content Include="Img\timeline-right-arrow.png" />
-    <Content Include="Img\toolbar.gif" />
-    <Content Include="Img\toolbar.png" />
-    <Content Include="Img\ui-bg_flat_0_aaaaaa_40x100.png" />
-    <Content Include="Img\ui-bg_flat_75_ffffff_40x100.png" />
-    <Content Include="Img\ui-bg_glass_55_fbf9ee_1x400.png" />
-    <Content Include="Img\ui-bg_glass_65_ffffff_1x400.png" />
-    <Content Include="Img\ui-bg_glass_75_dadada_1x400.png" />
-    <Content Include="Img\ui-bg_glass_75_e6e6e6_1x400.png" />
-    <Content Include="Img\ui-bg_glass_95_fef1ec_1x400.png" />
-    <Content Include="Img\ui-bg_highlight-soft_75_cccccc_1x100.png" />
-    <Content Include="Img\ui-icons_222222_256x240.png" />
-    <Content Include="Img\ui-icons_2e83ff_256x240.png" />
-    <Content Include="Img\ui-icons_454545_256x240.png" />
-    <Content Include="Img\ui-icons_888888_256x240.png" />
-    <Content Include="Img\ui-icons_cd0a0a_256x240.png" />
-    <Content Include="Img\uploadify-cancel.png" />
-    <Content Include="Img\web.png" />
-    <Content Include="Index.aspx" />
-    <Content Include="Interfaces\frmPartidoPostulante.aspx" />
-    <Content Include="Login.aspx" />
+    <Reference Include="System.Web.Razor">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.0.0\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Webpages">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.0.0\lib\net45\System.Web.Webpages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Webpages.Deployment">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.0.0\lib\net45\System.Web.Webpages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Webpages.Razor">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.0.0\lib\net45\System.Web.Webpages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Helpers">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.0.0\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.0.0\lib\net45\System.Web.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\css\bootstrap-responsive.css" />
+    <Content Include="Content\css\bootstrap-responsive.min.css" />
+    <Content Include="Content\css\bootstrap.css" />
+    <Content Include="Content\css\bootstrap.min.css" />
+    <Content Include="Content\css\chosen.css" />
+    <Content Include="Content\css\elfinder.min.css" />
+    <Content Include="Content\css\elfinder.theme.css" />
+    <Content Include="Content\css\font-awesome-ie7.min.css" />
+    <Content Include="Content\css\font-awesome.min.css" />
+    <Content Include="Content\css\fullcalendar.css" />
+    <Content Include="Content\css\glyphicons.css" />
+    <Content Include="Content\css\halflings.css" />
+    <Content Include="Content\css\ie.css" />
+    <Content Include="Content\css\ie9.css" />
+    <Content Include="Content\css\jquery-ui-1.8.21.custom.css" />
+    <Content Include="Content\css\jquery.cleditor.css" />
+    <Content Include="Content\css\jquery.gritter.css" />
+    <Content Include="Content\css\jquery.iphone.toggle.css" />
+    <Content Include="Content\css\jquery.noty.css" />
+    <Content Include="Content\css\noty_theme_default.css" />
+    <Content Include="Content\css\pages.css" />
+    <Content Include="Content\css\style-forms.css" />
+    <Content Include="Content\css\style-responsive.css" />
+    <Content Include="Content\css\style.css" />
+    <Content Include="Content\css\uniform.default.css" />
+    <Content Include="Content\css\uploadify.css" />
+    <Content Include="Content\font\glyphicons-regular.svg" />
+    <Content Include="Content\font\glyphiconshalflings-regular.svg" />
+    <Content Include="Content\img\arrows-active.png" />
+    <Content Include="Content\img\arrows-normal.png" />
+    <Content Include="Content\img\avatar.jpg" />
+    <Content Include="Content\img\bg-Index.png" />
+    <Content Include="Content\img\bg-input-focus.png" />
+    <Content Include="Content\img\bg-input.png" />
+    <Content Include="Content\img\bg-login.jpg" />
+    <Content Include="Content\img\bg-login.png" />
+    <Content Include="Content\img\browser-chrome-big.png" />
+    <Content Include="Content\img\browser-firefox-big.png" />
+    <Content Include="Content\img\browser-ie.png" />
+    <Content Include="Content\img\browser-opera.png" />
+    <Content Include="Content\img\browser-safari.png" />
+    <Content Include="Content\img\buttons.gif" />
+    <Content Include="Content\img\chat-left%402x.png" />
+    <Content Include="Content\img\chat-left-metro%402x.png" />
+    <Content Include="Content\img\chat-left-metro.png" />
+    <Content Include="Content\img\chat-left.png" />
+    <Content Include="Content\img\chat-right%402x.png" />
+    <Content Include="Content\img\chat-right-metro%402x.png" />
+    <Content Include="Content\img\chat-right-metro.png" />
+    <Content Include="Content\img\chat-right.png" />
+    <Content Include="Content\img\chosen-sprite.png" />
+    <Content Include="Content\img\close-button-white.png" />
+    <Content Include="Content\img\close-button.png" />
+    <Content Include="Content\img\crop.gif" />
+    <Content Include="Content\img\dialogs.png" />
+    <Content Include="Content\img\favicon.png" />
+    <Content Include="Content\img\gallery\photo1.jpg" />
+    <Content Include="Content\img\gallery\photo10.jpg" />
+    <Content Include="Content\img\gallery\photo11.jpg" />
+    <Content Include="Content\img\gallery\photo12.jpg" />
+    <Content Include="Content\img\gallery\photo13.jpg" />
+    <Content Include="Content\img\gallery\photo2.jpg" />
+    <Content Include="Content\img\gallery\photo3.jpg" />
+    <Content Include="Content\img\gallery\photo4.jpg" />
+    <Content Include="Content\img\gallery\photo5.jpg" />
+    <Content Include="Content\img\gallery\photo6.jpg" />
+    <Content Include="Content\img\gallery\photo7.jpg" />
+    <Content Include="Content\img\gallery\photo8.jpg" />
+    <Content Include="Content\img\gallery\photo9.jpg" />
+    <Content Include="Content\img\glyphicons-halflings-white.png" />
+    <Content Include="Content\img\glyphicons-halflings.png" />
+    <Content Include="Content\img\glyphicons-white.png" />
+    <Content Include="Content\img\glyphicons-white.svg" />
+    <Content Include="Content\img\glyphicons.png" />
+    <Content Include="Content\img\glyphicons.svg" />
+    <Content Include="Content\img\glyphicons_halflings-white.png" />
+    <Content Include="Content\img\glyphicons_halflings-white.svg" />
+    <Content Include="Content\img\glyphicons_halflings.png" />
+    <Content Include="Content\img\glyphicons_halflings.svg" />
+    <Content Include="Content\img\icons-big.png" />
+    <Content Include="Content\img\icons-small.png" />
+    <Content Include="Content\img\iphone-style-checkboxes\off-63584.png" />
+    <Content Include="Content\img\iphone-style-checkboxes\on-63584.png" />
+    <Content Include="Content\img\iphone-style-checkboxes\slider_center-63584.png" />
+    <Content Include="Content\img\iphone-style-checkboxes\slider_left-63584.png" />
+    <Content Include="Content\img\iphone-style-checkboxes\slider_right-63584.png" />
+    <Content Include="Content\img\logo\innova_schools-logo.png" />
+    <Content Include="Content\img\logo\innova_schools.png" />
+    <Content Include="Content\img\logo\logo.png" />
+    <Content Include="Content\img\progress.gif" />
+    <Content Include="Content\img\quicklook-bg.png" />
+    <Content Include="Content\img\quicklook-icons.png" />
+    <Content Include="Content\img\quote.png" />
+    <Content Include="Content\img\resize.png" />
+    <Content Include="Content\img\slider_r8.png" />
+    <Content Include="Content\img\spinner-mini.gif" />
+    <Content Include="Content\img\sprite.png" />
+    <Content Include="Content\img\timeline-bg.png" />
+    <Content Include="Content\img\timeline-left-arrow%402x.png" />
+    <Content Include="Content\img\timeline-left-arrow.png" />
+    <Content Include="Content\img\timeline-right-arrow%402x.png" />
+    <Content Include="Content\img\timeline-right-arrow.png" />
+    <Content Include="Content\img\toolbar.gif" />
+    <Content Include="Content\img\toolbar.png" />
+    <Content Include="Content\img\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\img\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Content\img\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Content\img\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\img\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Content\img\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Content\img\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\img\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Content\img\ui-icons_222222_256x240.png" />
+    <Content Include="Content\img\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\img\ui-icons_454545_256x240.png" />
+    <Content Include="Content\img\ui-icons_888888_256x240.png" />
+    <Content Include="Content\img\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\img\uploadify-cancel.png" />
+    <Content Include="Content\img\web.png" />
+    <Content Include="Global.asax" />
+    <Content Include="Scripts\app.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\counter.js" />
@@ -212,57 +231,50 @@
     <Content Include="Scripts\mensaje.js" />
     <Content Include="Scripts\modernizr.js" />
     <Content Include="Scripts\retina.js" />
-    <Content Include="Web.config">
-      <SubType>Designer</SubType>
-    </Content>
+    <Content Include="Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Common\Constant.cs" />
-    <Compile Include="Index.aspx.cs">
-      <DependentUpon>Index.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Areas\GobiernoEscolar\Controllers\PartidosController.cs" />
+    <Compile Include="Areas\GobiernoEscolar\GobiernoEscolarAreaRegistration.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\RestringidoController.cs" />
+    <Compile Include="Filters\CustomAuthorizeAttribute.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Index.aspx.designer.cs">
-      <DependentUpon>Index.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Interfaces\frmPartidoPostulante.aspx.cs">
-      <DependentUpon>frmPartidoPostulante.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Interfaces\frmPartidoPostulante.aspx.designer.cs">
-      <DependentUpon>frmPartidoPostulante.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Login.aspx.cs">
-      <DependentUpon>Login.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Login.aspx.designer.cs">
-      <DependentUpon>Login.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="MaterPage\SiteInnovaSchool.Master.cs">
-      <DependentUpon>SiteInnovaSchool.Master</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="MaterPage\SiteInnovaSchool.Master.designer.cs">
-      <DependentUpon>SiteInnovaSchool.Master</DependentUpon>
-    </Compile>
+    <Compile Include="Helper\SessionHelper.cs" />
+    <Compile Include="Models\EPartidoModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources\Resources.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="MaterPage\SiteInnovaSchool.Master" />
-    <Content Include="Font\fontawesome-webfont-0.eot" />
-    <Content Include="Font\fontawesome-webfont-62877.eot" />
-    <Content Include="Font\fontawesome-webfont-62877.ttf" />
-    <Content Include="Font\fontawesome-webfont-62877.woff" />
-    <Content Include="Font\glyphicons-regular-0.eot" />
-    <Content Include="Font\glyphicons-regular.eot" />
-    <Content Include="Font\glyphicons-regular.ttf" />
-    <Content Include="Font\glyphicons-regular.woff" />
-    <Content Include="Font\glyphiconshalflings-regular-0.eot" />
-    <Content Include="Font\glyphiconshalflings-regular.eot" />
-    <Content Include="Font\glyphiconshalflings-regular.ttf" />
-    <Content Include="Font\glyphiconshalflings-regular.woff" />
+    <Content Include="Views\web.config" />
+    <Content Include="packages.config" />
+    <Content Include="Content\font\fontawesome-webfont-0.eot" />
+    <Content Include="Content\font\fontawesome-webfont-62877.eot" />
+    <Content Include="Content\font\fontawesome-webfont-62877.ttf" />
+    <Content Include="Content\font\fontawesome-webfont-62877.woff" />
+    <Content Include="Content\font\glyphicons-regular-0.eot" />
+    <Content Include="Content\font\glyphicons-regular.eot" />
+    <Content Include="Content\font\glyphicons-regular.ttf" />
+    <Content Include="Content\font\glyphicons-regular.woff" />
+    <Content Include="Content\font\glyphiconshalflings-regular-0.eot" />
+    <Content Include="Content\font\glyphiconshalflings-regular.eot" />
+    <Content Include="Content\font\glyphiconshalflings-regular.ttf" />
+    <Content Include="Content\font\glyphiconshalflings-regular.woff" />
+    <Content Include="Areas\GobiernoEscolar\Views\Partidos\Registro.cshtml" />
+    <Content Include="Areas\GobiernoEscolar\Views\Partidos\Actualizar.cshtml" />
+    <Content Include="Areas\GobiernoEscolar\Views\Partidos\PlanGobierno.cshtml" />
+    <Content Include="Areas\GobiernoEscolar\Views\web.config" />
+    <Content Include="Areas\GobiernoEscolar\Views\Partidos\Index.cshtml" />
+    <Content Include="Views\Restringido\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -271,7 +283,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Content\" />
+    <Folder Include="App_Data\" />
+    <Folder Include="Areas\GobiernoEscolar\Models\" />
+    <Folder Include="Areas\GobiernoEscolar\Views\Shared\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\InnovaSchool.BL\InnovaSchool.BL.csproj">
@@ -296,9 +310,9 @@
         <WebProjectProperties>
           <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>8895</DevelopmentServerPort>
+          <DevelopmentServerPort>60460</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:8895/</IISUrl>
+          <IISUrl>http://localhost:60460/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

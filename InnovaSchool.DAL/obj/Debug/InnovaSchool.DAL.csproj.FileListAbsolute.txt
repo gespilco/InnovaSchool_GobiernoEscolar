@@ -23,3 +23,17 @@ D:\Taller de Proyecto III\InnovaSchoolPlantilla\InnovaSchool\InnovaSchool\Innova
 D:\Taller de Proyecto III\InnovaSchoolPlantilla\InnovaSchool\InnovaSchool\InnovaSchool.DAL\obj\Debug\InnovaSchool.DAL.csprojResolveAssemblyReference.cache
 D:\Taller de Proyecto III\InnovaSchoolPlantilla\InnovaSchool\InnovaSchool\InnovaSchool.DAL\obj\Debug\InnovaSchool.DAL.dll
 D:\Taller de Proyecto III\InnovaSchoolPlantilla\InnovaSchool\InnovaSchool\InnovaSchool.DAL\obj\Debug\InnovaSchool.DAL.pdb
+C:\Users\GIAN\InnovaSchool\InnovaSchool.DAL\bin\Debug\InnovaSchool.DAL.dll
+C:\Users\GIAN\InnovaSchool\InnovaSchool.DAL\bin\Debug\InnovaSchool.DAL.pdb
+C:\Users\GIAN\InnovaSchool\InnovaSchool.DAL\bin\Debug\InnovaSchool.Entity.dll
+C:\Users\GIAN\InnovaSchool\InnovaSchool.DAL\bin\Debug\InnovaSchool.Entity.pdb
+C:\Users\GIAN\InnovaSchool\InnovaSchool.DAL\obj\Debug\InnovaSchool.DAL.csprojResolveAssemblyReference.cache
+C:\Users\GIAN\InnovaSchool\InnovaSchool.DAL\obj\Debug\InnovaSchool.DAL.dll
+C:\Users\GIAN\InnovaSchool\InnovaSchool.DAL\obj\Debug\InnovaSchool.DAL.pdb
+D:\UPC\diana\InnovaSchool\InnovaSchool.DAL\bin\Debug\InnovaSchool.DAL.dll
+D:\UPC\diana\InnovaSchool\InnovaSchool.DAL\bin\Debug\InnovaSchool.DAL.pdb
+D:\UPC\diana\InnovaSchool\InnovaSchool.DAL\bin\Debug\InnovaSchool.Entity.dll
+D:\UPC\diana\InnovaSchool\InnovaSchool.DAL\bin\Debug\InnovaSchool.Entity.pdb
+D:\UPC\diana\InnovaSchool\InnovaSchool.DAL\obj\Debug\InnovaSchool.DAL.csprojResolveAssemblyReference.cache
+D:\UPC\diana\InnovaSchool\InnovaSchool.DAL\obj\Debug\InnovaSchool.DAL.dll
+D:\UPC\diana\InnovaSchool\InnovaSchool.DAL\obj\Debug\InnovaSchool.DAL.pdb
