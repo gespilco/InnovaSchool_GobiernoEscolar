@@ -16,7 +16,7 @@ namespace InnovaSchool.DAL
 
         public List<SP_ListarPartidoPostulante_Result> ListarPartidoPostulante_DAL()
         {
-            SqlCommand cmd = new SqlCommand("SP_ListarPartidoPostulante", cn);            
+            SqlCommand cmd = new SqlCommand("SP_ListarPartidoPostulante", cn);
             cmd.CommandType = CommandType.StoredProcedure;
 
             cn.Open();
@@ -29,6 +29,23 @@ namespace InnovaSchool.DAL
             return list;
         }
 
+
+        public SP_ListarPartidoPostulanteById ListarPartidoPostulante_DAL(int IdPartido)
+        {
+            SqlCommand cmd = new SqlCommand("SP_ListarPartidoPostulanteById", cn);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@IdPartido", IdPartido);
+
+            cn.Open();
+            SqlDataReader drd = cmd.ExecuteReader(CommandBehavior.SingleResult);
+            List<SP_ListarPartidoPostulanteById> list = drd.MapToList<SP_ListarPartidoPostulanteById>();
+            drd.Close();
+
+            cn.Close();
+
+            return list.FirstOrDefault();
+        }
+
         public int RegistrarPartidoPostulante_DAL(EPartidoPostulante objEN)
         {
             try
@@ -38,28 +55,26 @@ namespace InnovaSchool.DAL
                 cmd.Parameters.AddWithValue("@PartidoID", objEN.PartidoID);
                 cmd.Parameters.AddWithValue("@Nombre", objEN.Nombre);
                 cmd.Parameters.AddWithValue("@Estado", objEN.Estado);
-                cmd.Parameters.AddWithValue("@Logo", objEN.Logo);
-                cmd.Parameters.AddWithValue("@FechaReg", objEN.FechaReg);
-                cmd.Parameters.AddWithValue("@idvoto", objEN.idvoto);
-                cmd.Parameters.AddWithValue("@idplan", objEN.idplan);
-              
-                //SqlDataAdapter da = new SqlDataAdapter(cmd);
-                //cn.Open();
-                //int n = cmd.ExecuteNonQuery();
-                //cn.Close();
-                //return n;
+                if (objEN.Logo != null) cmd.Parameters.AddWithValue("@Logo", objEN.Logo);
+                //cmd.Parameters.AddWithValue("@FechaReg", objEN.FechaReg);
+                //cmd.Parameters.AddWithValue("@idvoto", objEN.idvoto);
+                //cmd.Parameters.AddWithValue("@idplan", objEN.idplan);                
 
                 cn.Open();
-                int Id = (int)cmd.ExecuteScalar();
+                var result = cmd.ExecuteScalar();
                 cn.Close();
-                return Id;
+                return int.Parse(result.ToString());
             }
             catch (Exception)
             {
+                if (cn.State == ConnectionState.Open)
+                    cn.Close();
                 throw;
             }
 
         }
+
+
         public int ActualizarPartidoPostulante_DAL(EPartidoPostulante objEN)
         {
             try
@@ -72,7 +87,7 @@ namespace InnovaSchool.DAL
                 cmd.Parameters.AddWithValue("@FechaReg", objEN.FechaReg);
                 cmd.Parameters.AddWithValue("@idvoto", objEN.idvoto);
                 cmd.Parameters.AddWithValue("@idplan", objEN.idplan);
-            
+
 
                 SqlDataAdapter da = new SqlDataAdapter(cmd);
                 cn.Open();

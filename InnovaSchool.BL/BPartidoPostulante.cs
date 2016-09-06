@@ -17,6 +17,12 @@ namespace InnovaSchool.BL
            DPartidoPostulante Obj_Dal = new DPartidoPostulante();
            return Obj_Dal.ListarPartidoPostulante_DAL();
         }
+
+        public SP_ListarPartidoPostulanteById ListarPartidoPostulante_BL(int IdPartido)
+        {
+            DPartidoPostulante Obj_Dal = new DPartidoPostulante();
+            return Obj_Dal.ListarPartidoPostulante_DAL(IdPartido);
+        }
        
         public int RegistrarPartido_BL(EPartidoPostulante objEN)
         {

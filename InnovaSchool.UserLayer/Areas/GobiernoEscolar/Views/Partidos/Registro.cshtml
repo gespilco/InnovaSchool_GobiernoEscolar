@@ -3,6 +3,10 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<style type="text/css">
+    #logo-partido { border:2px solid #808080; padding:5px; max-height:150px; max-width:100%; cursor:pointer; }
+</style>
+
 @section breadcrumb{
     <li>
         <i class="icon-angle-right"></i>
@@ -37,7 +41,7 @@
                                     <div class="control-group">
                                         <label class="control-label">Nombre del partido</label>
                                         <div class="controls">
-                                            <input name="Nombre" type="text" class="input-xxlarge editable-input" title="Se necesita un nombre">
+                                            <input name="NombrePartido" type="text" class="input-xxlarge editable-input" title="Se necesita un nombre">
                                         </div>
                                     </div>
                                 </div>
@@ -54,19 +58,19 @@
                                     <div class="control-group">
                                         <label class="control-label">Codigo Alumno</label>
                                         <div class="controls">
-                                            <input name="CodigoAlumno" type="text" class="input-small editable-input" title="Se necesita un nombre">
+                                            <input name="CodigoAlumno" type="text" class="input-small editable-input" title="Se necesita un nombre" />
                                         </div>
                                     </div>
                                     <div class="control-group">
                                         <label class="control-label">Nombre Alumno</label>
                                         <div class="controls">
-                                            <input name="NombreAlumno" type="text" class="input-xlarge editable-input" title="Se necesita un nombre">
+                                            <input name="NombreAlumno" type="text" class="input-xlarge editable-input" title="Se necesita un nombre" disabled />
                                         </div>
                                     </div>
                                     <div class="control-group">
                                         <label class="control-label">Grado</label>
                                         <div class="controls">
-                                            <input name="GradoAlumno" type="text" class="editable-input" title="Se necesita un nombre">
+                                            <input name="GradoAlumno" type="text" class="editable-input" title="Se necesita un nombre" disabled />
                                             <button class="btn btn-default">>></button>
                                         </div>
                                     </div>
@@ -111,7 +115,63 @@
     </div>
 </div>
 <script type="text/javascript">
+    var App = {        
+        Id: '@ViewBag.IdPartido',
+        Init: function () {
+            var id = '@ViewBag.IdPartido';
+            if (id) {
+                $.get('@Url.Content("~/GobiernoEscolar/Partidos/VerPartido")', { id: id })
+                    .done(function (data) {
+                        //console.log(data);
+                        var p = data.Partido;
+                        App.Id = p.IdPartido;
+                        $('[name=NombrePartido]').val(p.Nombre);
+
+                        if (data.Logo) {
+                            $('#logo-partido').attr('src', "data:image/png;base64," + data.Logo);
+                        }
+                    });
+            }
+        },
+        Guardar: function () {
+            var frm = $('#form');
+            var nombre = $('[name=NombrePartido]').val();
+            var logo = $('#logo-partido').attr('src');
+            var integrantes = [];
+
+            var params = {
+                IdPartido: App.Id,
+                NombrePartido: nombre,
+                Logo: logo,
+                Integrantes: integrantes
+            };
+
+            //console.log(params);
+
+            if (!params.NombrePartido) {
+                appMaster.MessageBox('Aviso', 'Ingrese un nombre para el partido');
+                return;
+            }
+
+            $.ajax({
+                type: 'POST',
+                url: frm.attr('action'),
+                data: JSON.stringify(params),
+                dataType: 'json',
+                contentType: 'application/json',
+                success: function (response) {
+                    appMaster.MessageBox('Listo', 'El partido ha sido guardado');
+                },
+                error: function (xhr) {
+                    alert("error");
+                }
+            });
+        }
+    };
+
     $(function () {
+        App.Init();
+
         $('#logo-partido').click(function () {
             $('#upload').click();
         });
@@ -132,40 +192,18 @@
                     $('#logo-partido').attr('src', e.target.result);
                 };
                 FR.readAsDataURL(file);
-            }
-        });
-
-        $('.btn-primary').click(function () {
-            var formData = new FormData();
-            var files = document.getElementById("upload").files;
-            for (var i = 0; i < files.length; i++) {
-                var file = files[i];
-
-                formData.append("image", file);
             }
 
-            var personas = JSON.stringify([{ NombreAlumno: 'ABC' }]);
-            formData.append("data", personas);
-            formData.append("partido", 'Partido politico');
+        });
 
-            var frm = $('#form');
-            //var formData = new FormData(frm.get(0));
+        $('input[name=CodigoAlumno]').keydown(function (e) {
+            if (e.keyCode == 13) {
+                appMaster.MessageBox('Enter', 'Agregar funcion!!');
+            }
+        });
 
-            $.ajax({
-                type: "POST",
-                url: frm.attr('action'),
-                data: formData,
-                dataType: 'json',
-                contentType: false,
-                processData: false,
-                success: function (response) {
-                    alert('Enviado!!');
-
-                },
-                error: function (error) {
-                    alert("error");
-                }
-            });
+        $('.btn-primary').click(function () {            
+            App.Guardar();
         });
     });
 </script>

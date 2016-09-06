@@ -46,6 +46,7 @@
     <Compile Include="DPartidoPostulante.cs" />
     <Compile Include="DUsuario.cs" />
     <Compile Include="Extensions\DataReaderExtensions.cs" />
+    <Compile Include="Extensions\SqlParameterExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
