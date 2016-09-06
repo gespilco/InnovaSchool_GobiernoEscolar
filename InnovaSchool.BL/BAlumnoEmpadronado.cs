@@ -11,12 +11,11 @@ namespace InnovaSchool.BL
 {
     public class BAlumnoEmpadronado
     {
-         public DataTable ListarAlumnoEmpadronado_BL(EAlumnoEmpadronado objEN)
+        public DataTable ListarAlumnoEmpadronado_BL(EAlumnoEmpadronado objEN)
         {
            DAlumnoEmpadronado Obj_Dal = new DAlumnoEmpadronado();
             return Obj_Dal.ListarAlumnosEmpadronados_DAL(objEN);
         }
-
        
         public int RegistrarAlumnoEmpadronado_BL(EAlumnoEmpadronado objEN)
         {

@@ -29,7 +29,6 @@ namespace InnovaSchool.DAL
             return list;
         }
 
-
         public int RegistrarPartidoPostulante_DAL(EPartidoPostulante objEN)
         {
             try

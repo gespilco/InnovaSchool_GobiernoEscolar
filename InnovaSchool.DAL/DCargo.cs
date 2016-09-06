@@ -12,7 +12,7 @@ namespace InnovaSchool.DAL
     public class DCargo
     {
      
-            static SqlConnection cn = new SqlConnection(ConexionUtil.Get_Connection());
+        static SqlConnection cn = new SqlConnection(ConexionUtil.Get_Connection());
 
         public DataTable ListarCargos_DAL(ECargo objEN)
         {

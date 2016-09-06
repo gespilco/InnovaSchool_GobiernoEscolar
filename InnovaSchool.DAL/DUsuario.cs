@@ -62,6 +62,5 @@ namespace InnovaSchool.DAL
             }
             return retval;
         }
-
     }
 }
