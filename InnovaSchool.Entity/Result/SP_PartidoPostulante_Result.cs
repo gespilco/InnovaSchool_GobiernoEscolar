@@ -10,6 +10,7 @@ namespace InnovaSchool.Entity.Result
     {
         public int idPartido { get; set; }
         public string Nombre { get; set; }
-        public string Estado { get; set; }        
+        public string Estado { get; set; }
+        public int IdAlumno { get; set; }
     }
 }
