@@ -13,6 +13,7 @@ namespace InnovaSchool.DAL
         public SP_ListarAlumnoById_Result ListarAlumno_DAL(int idAlumno)
         {
             SqlCommand cmd = new SqlCommand("SP_ListarAlumnoById", cn);
+
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.AddWithValue("@idAlumno", idAlumno);
 
