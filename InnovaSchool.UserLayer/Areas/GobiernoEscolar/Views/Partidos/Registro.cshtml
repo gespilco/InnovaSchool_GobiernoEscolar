@@ -3,9 +3,140 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<style type="text/css">
-    #logo-partido { border: 2px solid #ddd; padding: 5px; max-height: 150px; max-width: 100%; cursor: pointer; box-sizing: border-box; }
-</style>
+@section styles
+{
+    <style type="text/css">
+        #logo-partido { border: 2px solid #ddd; padding: 5px; max-height: 150px; max-width: 100%; cursor: pointer; box-sizing: border-box; }
+    </style>
+}
+
+@section scripts
+{
+    <script src="~/Scripts/knockout-3.4.0.js"></script>
+    <script type="text/javascript">
+        function ViewModel() {
+            var self = this;
+            self.Partido = {
+                IdPartido: ko.observable('@ViewBag.IdPartido'),
+                NombrePartido: ko.observable(),
+                Logo: ko.observable('http://placehold.it/200x200'),
+                Integrantes: ko.observableArray()
+            }
+
+            self.Alumno = {
+                IdAlumno: ko.observable(),
+                Nombre: ko.observable(),
+                Grado: ko.observable()
+            };
+
+            self.IntegranteSeleccionado = ko.observable();
+
+            self.Cargos = ['Presidente', 'Secretario', 'Vocal'];
+
+            self.Guardar = function () {
+                var params = ko.toJS(self.Partido);
+
+                //console.log(params);
+
+                if (!params.NombrePartido) {
+                    appMaster.MessageBox('Aviso', 'Ingrese un nombre para el partido');
+                    return;
+                }
+
+                $.ajax({
+                    type: 'POST',
+                    url: '@Url.Content("~/GobiernoEscolar/Partidos/Registro")',
+                    data: JSON.stringify(params),
+                    dataType: 'json',
+                    contentType: 'application/json',
+                    success: function (response) {
+                        appMaster.MessageBox('Listo', 'El partido ha sido guardado');
+                    },
+                    error: function (xhr) {
+                        alert("error");
+                    }
+                });
+            }
+
+            self.Init = function () {
+                if (self.Partido.IdPartido()) {
+                    $.get('@Url.Content("~/GobiernoEscolar/Partidos/VerPartido")', { id: self.Partido.IdPartido() })
+                        .done(function (data) {
+                            //console.log(data);
+                            var p = data.Partido;
+                            self.Partido.IdPartido(p.IdPartido);
+                            self.Partido.NombrePartido(p.Nombre);
+
+                            if (data.Logo) {
+                                self.Partido.Logo("data:image/png;base64," + data.Logo);
+                            }
+                        }).fail(function (xhr) { console.log(xhr); });
+                }
+            }
+
+            self.BuscarAlumno = function (v, e) {
+                if (e.keyCode == 13) {
+                    //self.Alumno.IdAlumno()
+                    self.Alumno.Nombre('Alumno ' + new Date().getTime());
+                    self.Alumno.Grado('4');
+                }
+            }
+
+            self.AgregarIntegrante = function () {
+                var alumno = ko.toJS(self.Alumno);
+                self.Partido.Integrantes.push(alumno);
+                self.Alumno.IdAlumno(null);
+                self.Alumno.Nombre(null);
+                self.Alumno.Grado(null);
+            }
+
+            self.SeleccionarIntegrante = function (data) {
+                self.IntegranteSeleccionado(data);
+            }
+
+            self.EliminarIntegrante = function () {
+                var sel = ko.utils.arrayFirst(self.Partido.Integrantes(), function (x) {
+                    return x.IdAlumno == self.IntegranteSeleccionado().IdAlumno;
+                });
+
+                if (sel) {
+                    self.Partido.Integrantes.remove(sel);
+                    self.IntegranteSeleccionado(null);
+                }
+            }
+
+            self.CambiarLogo = function () {
+                $('#upload').click();
+            }
+
+            $('#upload').change(function () {
+                var input = this;
+
+                if (input.files && input.files[0]) {
+                    var file = input.files[0];
+
+                    if (file.type !== '' && !file.type.match('image.*')) {
+                        appMaster.MessageBox('Error', 'Archivo no es una imagen');
+                        return;
+                    }
+
+                    var FR = new FileReader();
+                    FR.onload = function (e) {
+                        self.Partido.Logo(e.target.result);
+                    };
+                    FR.readAsDataURL(file);
+                }
+
+            });
+        }
+
+        $(function () {
+            var model = new ViewModel();
+            ko.applyBindings(model);
+            model.Init();
+        });
+    </script>
+}
 
 @section breadcrumb{
     <li>
@@ -22,197 +153,98 @@
     </li>
 }
 
-<div>
-    <div class="row-fluid sortable ui-sortable">
-        <div class="box span12">
-            <div class="box-header" data-original-title="">
-                <h2><i class="halflings-icon white edit"></i><span class="break"></span>Informacion del Partido</h2>
-                <div class="box-icon">
-                    <a href="#" class="btn-minimize"><i class="halflings-icon white chevron-down"></i></a>
+<div class="form-horizontal">
+    <fieldset>
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-sm-9">
+                        <div class="control-group">
+                            <label class="control-label">Nombre del partido</label>
+                            <div class="controls">
+                                <input name="NombrePartido" type="text" data-bind="value: Partido.NombrePartido" class="form-control" title="Se necesita un nombre">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-3 text-right">
+                        <div class="form-group">
+                            <div class="col-xs-12">
+                                <img id="logo-partido" data-bind="attr: {'src': Partido.Logo}, click: CambiarLogo">
+                                <br />
+                                <input id="upload" type="file" name="image" accept="image/*" style="display:none" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <div class="col-xs-12">
+                                <label class="control-label">Codigo Alumno</label>
+                                <input name="CodigoAlumno" type="text" data-bind="value: Alumno.IdAlumno, valueUpdate: 'afterkeydown', event: { keyup: BuscarAlumno }" class="form-control" title="Se necesita un nombre" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-xs-12">
+                                <label class="control-label">Nombre Alumno</label>
+                                <input name="NombreAlumno" type="text" data-bind="value: Alumno.Nombre" class="form-control" title="Se necesita un nombre" disabled />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-xs-12">
+                                <label class="control-label">Grado</label>
+                                <input name="GradoAlumno" type="text" data-bind="value: Alumno.Grado" class="form-control" title="Se necesita un nombre" disabled />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-xs-12">
+                                <label class="control-label">Cargo</label>
+                                <select name="Cargo" class="form-control" data-bind="options: Cargos, value: Alumno.Cargo"></select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-1 col-sm-2">
+                        <div class="hidden-xs">
+                            <br /><br /><br /><br /><br /><br />
+                        </div>                        
+                        <div class="form-group">
+                            <div class="col-xs-12">
+                                <button class="btn btn-default" data-bind="click: AgregarIntegrante">>></button>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-xs-12">
+                                <button class="btn btn-default" data-bind="enable: IntegranteSeleccionado, click: EliminarIntegrante"><<</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-7 col-sm-6">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Nombre</th>
+                                    <th>Grado</th>
+                                    <th>Cargo</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!--ko foreach: Partido.Integrantes-->
+                                <tr data-bind="click: $root.SeleccionarIntegrante">
+                                    <td data-bind="text: $data.Nombre"></td>
+                                    <td data-bind="text: $data.Grado"></td>
+                                    <td data-bind="text: $data.Cargo"></td>
+                                </tr>
+                                <!--/ko-->
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
-            <div class="box-content">
-                <div class="form-horizontal">
-                    @using (Html.BeginForm("Registro", "Partidos", new { area = "GobiernoEscolar" }, FormMethod.Post, new { id = "form", enctype = "multipart/form-data" }))
-                    {
-                        <fieldset>
-                            <div class="row-fluid">
-                                <div class="span9">
-                                    <div class="control-group">
-                                        <label class="control-label">Nombre del partido</label>
-                                        <div class="controls">
-                                            <input name="NombrePartido" type="text" class="input-xxlarge editable-input" title="Se necesita un nombre">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="span3 text-right">
-                                    <div class="control-group">
-                                        <img id="logo-partido" src="http://placehold.it/200x200">
-                                        <br />
-                                        <input id="upload" type="file" name="image" accept="image/*" style="display:none" />
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row-fluid">
-                                <div class="span6">
-                                    <div class="control-group">
-                                        <label class="control-label">Codigo Alumno</label>
-                                        <div class="controls">
-                                            <input name="CodigoAlumno" type="text" class="input-small editable-input" title="Se necesita un nombre" />
-                                        </div>
-                                    </div>
-                                    <div class="control-group">
-                                        <label class="control-label">Nombre Alumno</label>
-                                        <div class="controls">
-                                            <input name="NombreAlumno" type="text" class="input-xlarge editable-input" title="Se necesita un nombre" disabled />
-                                        </div>
-                                    </div>
-                                    <div class="control-group">
-                                        <label class="control-label">Grado</label>
-                                        <div class="controls">
-                                            <input name="GradoAlumno" type="text" class="editable-input" title="Se necesita un nombre" disabled />
-                                            <button class="btn btn-default">>></button>
-                                        </div>
-                                    </div>
-                                    <div class="control-group">
-                                        <label class="control-label">Cargo</label>
-                                        <div class="controls">
-                                            <select name="Cargo"></select>
-                                            <button class="btn btn-default"><<</button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="span6">
-                                    <table class="table table-bordered">
-                                        <thead>
-                                            <tr>
-                                                <th>Nombre</th>
-                                                <th>Grado</th>
-                                                <th>Cargo</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-
-                            <div class="form-actions">
-                                <button type="button" class="btn btn-primary">Guardar</button>
-                                <button type="button" class="btn btn-default">Imprimir</button>
-                                <a href="~/GobiernoEscolar/Partidos/PlanGobierno/1" class="btn btn-success">Visualizar plan de gobierno</a>
-                            </div>
-                        </fieldset>
-                    }
-                </div>
+            <div class="panel-footer text-center">
+                <button type="button" class="btn btn-primary" data-bind="click: Guardar">Guardar</button>
+                <button type="button" class="btn btn-default">Imprimir</button>
+                <a href="~/GobiernoEscolar/Partidos/PlanGobierno/1" class="btn btn-success">Visualizar plan de gobierno</a>
             </div>
-        </div>
-    </div>
+        </div>        
+    </fieldset>
 </div>
-<script src="~/Scripts/knockout-3.4.0.js"></script>
-<script type="text/javascript">
-    function ViewModel() {
-        var self = this;
-        self.Partido = {
-            IdPartido: ko.observable('@ViewBag.IdPartido'),
-            NombrePartido: ko.observable(),
-            Logo: ko.observable(),
-            Integrantes: ko.observableArray()
-        }
-
-        self.Guardar = function () {
-            var nombre = $('[name=NombrePartido]').val();
-            var logo = $('#logo-partido').attr('src');
-            var integrantes = [];
-
-            var params = {
-                IdPartido: App.Id,
-                NombrePartido: nombre,
-                Logo: logo,
-                Integrantes: integrantes
-            };
-
-            //console.log(params);
-
-            if (!params.NombrePartido) {
-                appMaster.MessageBox('Aviso', 'Ingrese un nombre para el partido');
-                return;
-            }
-
-            $.ajax({
-                type: 'POST',
-                url: '@Url.Content("~/GobiernoEscolar/Partidos/Registro")',
-                data: JSON.stringify(params),
-                dataType: 'json',
-                contentType: 'application/json',
-                success: function (response) {
-                    appMaster.MessageBox('Listo', 'El partido ha sido guardado');
-                },
-                error: function (xhr) {
-                    alert("error");
-                }
-            });
-        }
-
-        self.Init = function () {
-            if (App.Id) {
-                $.get('@Url.Content("~/GobiernoEscolar/Partidos/VerPartido")', { id: App.Id })
-                    .done(function (data) {
-                        //console.log(data);
-                        var p = data.Partido;
-                        App.Id = p.IdPartido;
-                        $('[name=NombrePartido]').val(p.Nombre);
-
-                        if (data.Logo) {
-                            $('#logo-partido').attr('src', "data:image/png;base64," + data.Logo);
-                        }
-                    });
-            }
-        }
-    }
-
-    $(function () {
-        var model = new ViewModel();
-        //ko.applyBindings(model);
-
-
-        $('#logo-partido').click(function () {
-            $('#upload').click();
-        });
-
-        $('#upload').change(function () {
-            var input = this;
-
-            if (input.files && input.files[0]) {
-                var file = input.files[0];
-
-                if (file.type !== '' && !file.type.match('image.*')) {
-                    toastr.warning('Archivo no es una imagen');
-                    return;
-                }
-
-                var FR = new FileReader();
-                FR.onload = function (e) {
-                    $('#logo-partido').attr('src', e.target.result);
-                };
-                FR.readAsDataURL(file);
-            }
-
-        });
-
-        $('input[name=CodigoAlumno]').keydown(function (e) {
-            if (e.keyCode == 13) {
-                appMaster.MessageBox('Enter', 'Agregar funcion!!');
-            }
-        });
-
-        $('.btn-primary').click(function () {
-            App.Guardar();
-        });
-    });
-</script>

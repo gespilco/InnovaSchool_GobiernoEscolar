@@ -3,13 +3,15 @@
     ViewBag.Title = "Index";
 }
 
-<div class="row-fluid">
-    <div class="span6" ontablet="span7" ondesktop="span6">
-        <h1 class="bienvenido">Bienvenid@@</h1>
-        <br />
-        <h2 class="titulo">Sistema de Gestión Escolar</h2>
-    </div>
-    <div class="span6 bg-index" ontablet="span7" ondesktop="span6">
-    </div>
-</div>
+@section scripts
+{
+    <script type="text/javascript">
+        $(function () {
+            $('.breadcrumb').hide();
+        });
+    </script>
+}
 
+<div align="center">
+    <img src="~/Content/img/ColegioPortada.jpg" alt="" />
+</div>
