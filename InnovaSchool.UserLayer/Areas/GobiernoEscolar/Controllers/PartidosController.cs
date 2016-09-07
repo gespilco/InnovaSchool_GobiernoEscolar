@@ -36,10 +36,35 @@ namespace InnovaSchool.UserLayer.Areas.GobiernoEscolar.Controllers
             return View();
         }
 
+        [HttpPost]
+        public int Registro(EPartidoModel model)
+        {
+            EPartidoPostulante partido = new EPartidoPostulante();
+            partido.idPartido = model.IdPartido;
+            partido.Nombre = model.NombrePartido;
+            partido.Estado = "Registrado";
+            if (model.Logo != null)
+            {
+                var res = new Resources.Resources();
+                string b64 = model.Logo.Substring(model.Logo.IndexOf(",") + 1);
+                if (res.IsBase64String(b64))
+                {
+                    byte[] bytes = System.Convert.FromBase64String(b64);
+                    partido.Logo = bytes;
+                }
+            }
+
+            partido.Integrantes = model.Integrantes;
+
+            oBPartidoPostulante = new BPartidoPostulante();
+            return oBPartidoPostulante.RegistrarPartido_BL(partido);
+        }
+
         public JsonResult VerPartido(int id)
         {
             oBPartidoPostulante = new BPartidoPostulante();
             var result = oBPartidoPostulante.ListarPartidoPostulante_BL(id);
+            var integrantes = oBPartidoPostulante.ListarIntegrantesPartido_BL(id);
 
             string foto = "";
 
@@ -49,49 +74,20 @@ namespace InnovaSchool.UserLayer.Areas.GobiernoEscolar.Controllers
                 result.Logo = null;
             }            
 
-            return Json(new { Partido = result, Logo = foto }, JsonRequestBehavior.AllowGet);
-        }
-
-        //[HttpPost]
-        //public int Registro(string partido, string data, HttpPostedFileBase image)
-        //{            
-        //    List<EPartidoModel> personas = new JavaScriptSerializer().Deserialize<List<EPartidoModel>>(data);            
-
-        //    foreach (var p in personas)
-        //    {
-        //        p.Cargo = "xx";
-        //    }
-
-        //    //partido.FechaReg = DateTime.Now;
-        //    oBPartidoPostulante = new BPartidoPostulante();
-        //    return 1;//oBPartidoPostulante.RegistrarPartido_BL(partido);
-        //}        
-
-        [HttpPost]
-        public int Registro(EPartidoModel model)
-        {
-            EPartidoPostulante partido = new EPartidoPostulante();
-            partido.PartidoID = model.IdPartido;
-            partido.Nombre = model.NombrePartido;
-            partido.Estado = "Registrado";
-            if (model.Logo != null)
-            {                
-                var res = new Resources.Resources();
-                string b64 = model.Logo.Substring(model.Logo.IndexOf(",") + 1);
-                if (res.IsBase64String(b64))
-                {
-                    byte[] bytes = System.Convert.FromBase64String(b64);
-                    partido.Logo = bytes;
-                }                
-            }            
-
-            oBPartidoPostulante = new BPartidoPostulante();
-            return oBPartidoPostulante.RegistrarPartido_BL(partido);
+            return Json(new { Partido = result, Logo = foto, Integrantes = integrantes }, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult PlanGobierno(int? id)
         {
-            ViewBag.NombrePartido = "Nombre del partido político";
+            if (id != null)
+            {
+                ViewBag.IdPartido = id;
+                oBPartidoPostulante = new BPartidoPostulante();
+                var result = oBPartidoPostulante.ListarPartidoPostulante_BL((int)id);
+
+                ViewBag.NombrePartido = result.Nombre;
+            }
+            
             return View();
         }
 
@@ -110,5 +106,13 @@ namespace InnovaSchool.UserLayer.Areas.GobiernoEscolar.Controllers
             
             return Json(lista.Count);
         }
-	}
+
+        #region Metodos
+        public JsonResult ListarCargos()
+        {
+            BCargo oBCargo = new BCargo();
+            return Json(oBCargo.ListarCargo_BL(DateTime.Now.Year), JsonRequestBehavior.AllowGet);
+        }
+        #endregion
+    }
 }

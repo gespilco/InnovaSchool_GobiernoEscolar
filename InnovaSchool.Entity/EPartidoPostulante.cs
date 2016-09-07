@@ -8,15 +8,12 @@ namespace InnovaSchool.Entity
 {
     public class EPartidoPostulante
     {
-
-        public int PartidoID { get; set; }
-        public string Nombre { get; set; }
-        public string Estado { get; set; }
+        public int idPartido { get; set; }
+        public string Nombre { get; set; }        
         public byte[] Logo { get; set; }
-        public DateTime FechaReg { get; set; }
-        public int idvoto { get; set; }
-        public int idplan { get; set; }
-        public int idpersona { get; set; }
+        public DateTime FechaReg { get; set; }                
+        public string Estado { get; set; }
 
+        public List<EIntegrante> Integrantes { get; set; }
     }
 }

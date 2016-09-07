@@ -7,6 +7,7 @@
 {
     <style type="text/css">
         #logo-partido { border: 2px solid #ddd; padding: 5px; max-height: 150px; max-width: 100%; cursor: pointer; box-sizing: border-box; }
+        tr.seleccionado td { background-color: #ffc078; }
     </style>
 }
 
@@ -24,14 +25,16 @@
             }
 
             self.Alumno = {
-                IdAlumno: ko.observable(),
+                idAlumno: ko.observable(),
                 Nombre: ko.observable(),
-                Grado: ko.observable()
+                Grado: ko.observable(),
+                idCargo: ko.observable(),
+                Cargo: ko.observable()
             };
 
             self.IntegranteSeleccionado = ko.observable();
 
-            self.Cargos = ['Presidente', 'Secretario', 'Vocal'];
+            self.Cargos = ko.observableArray();
 
             self.Guardar = function () {
                 var params = ko.toJS(self.Partido);
@@ -58,51 +61,76 @@
                 });
             }
 
-            self.Init = function () {
-                if (self.Partido.IdPartido()) {
-                    $.get('@Url.Content("~/GobiernoEscolar/Partidos/VerPartido")', { id: self.Partido.IdPartido() })
-                        .done(function (data) {
-                            //console.log(data);
-                            var p = data.Partido;
-                            self.Partido.IdPartido(p.IdPartido);
-                            self.Partido.NombrePartido(p.Nombre);
-
-                            if (data.Logo) {
-                                self.Partido.Logo("data:image/png;base64," + data.Logo);
-                            }
-                        }).fail(function (xhr) { console.log(xhr); });
-                }
-            }
-
             self.BuscarAlumno = function (v, e) {
-                if (e.keyCode == 13) {
-                    //self.Alumno.IdAlumno()
-                    self.Alumno.Nombre('Alumno ' + new Date().getTime());
-                    self.Alumno.Grado('4');
+                if (e.keyCode == 13) { 
+                    var idAlumno = self.Alumno.idAlumno();
+                    if (idAlumno) {                        
+                        self.Alumno.Nombre(null);
+                        self.Alumno.Grado(null);
+
+                        $.getJSON('@Url.Content("~/Alumno/Detalle")', { id: idAlumno }).done(function (data) {
+                            if (data.Alumno) {                                
+                                self.Alumno.Nombre(data.Alumno.Nombre);
+                                self.Alumno.Grado(data.Alumno.Grado);
+                            } else {
+                                appMaster.MessageBox('No existe', 'El código no pertence a ningún alumno');
+                            }                            
+                        });
+                    }                    
                 }
             }
+
+            self.Cargo_Change = ko.computed(function () {
+                var id = self.Alumno.idCargo();
+                var cargo = ko.utils.arrayFirst(self.Cargos(), function (x) { return x.idCargo == id });
+                if (cargo) {
+                    self.Alumno.Cargo(cargo.tipoCargo);
+                }
+
+            });
 
             self.AgregarIntegrante = function () {
                 var alumno = ko.toJS(self.Alumno);
+                alumno.Seleccionado = ko.observable(false);
+
+                var obj = ko.utils.arrayFirst(self.Partido.Integrantes(), function (x) { return x.Cargo == alumno.Cargo });
+                if (obj != null) {
+                    appMaster.MessageBox('Atención', 'Ya existe un ' + alumno.Cargo + ' en los integrantes');
+                    return;
+                }
+
                 self.Partido.Integrantes.push(alumno);
-                self.Alumno.IdAlumno(null);
+                self.Alumno.idAlumno(null);
                 self.Alumno.Nombre(null);
                 self.Alumno.Grado(null);
             }
 
             self.SeleccionarIntegrante = function (data) {
                 self.IntegranteSeleccionado(data);
+                ko.utils.arrayForEach(self.Partido.Integrantes(), function (x) { x.Seleccionado(false) });
+                data.Seleccionado(true);
             }
 
             self.EliminarIntegrante = function () {
                 var sel = ko.utils.arrayFirst(self.Partido.Integrantes(), function (x) {
-                    return x.IdAlumno == self.IntegranteSeleccionado().IdAlumno;
+                    return x.idAlumno == self.IntegranteSeleccionado().idAlumno;
                 });
 
                 if (sel) {
                     self.Partido.Integrantes.remove(sel);
                     self.IntegranteSeleccionado(null);
+
+                    self.Alumno.idAlumno(sel.idAlumno);
+                    self.Alumno.Nombre(sel.Nombre);
+                    self.Alumno.Grado(sel.Grado);
+                    self.Alumno.Cargo(sel.Cargo);
                 }
+            }
+
+            self.ListarCargos = function () {
+                $.getJSON('@Url.Content("~/GobiernoEscolar/Partidos/ListarCargos")').done(function (data) {
+                    self.Cargos(data);
+                });
             }
 
             self.CambiarLogo = function () {
@@ -128,6 +156,31 @@
                 }
 
             });
+
+            self.Init = function () {
+                if (self.Partido.IdPartido()) {
+                    $.get('@Url.Content("~/GobiernoEscolar/Partidos/VerPartido")', { id: self.Partido.IdPartido() })
+                        .done(function (data) {
+                            //console.log(data);
+                            var p = data.Partido;
+                            self.Partido.IdPartido(p.IdPartido);
+                            self.Partido.NombrePartido(p.Nombre);
+
+                            if (data.Logo) {
+                                self.Partido.Logo("data:image/png;base64," + data.Logo);
+                            }
+
+                            //Asignamos la variable seleccionado
+                            ko.utils.arrayForEach(data.Integrantes, function (x) {
+                                x.Seleccionado = ko.observable(false)
+                            });
+
+                            self.Partido.Integrantes(data.Integrantes);
+                        }).fail(function (xhr) { console.log(xhr); });
+                }
+
+                self.ListarCargos();
+            }
         }
 
         $(function () {
@@ -179,9 +232,9 @@
                 <div class="row">
                     <div class="col-sm-4">
                         <div class="form-group">
-                            <div class="col-xs-12">
+                            <div class="col-sm-6">
                                 <label class="control-label">Codigo Alumno</label>
-                                <input name="CodigoAlumno" type="text" data-bind="value: Alumno.IdAlumno, valueUpdate: 'afterkeydown', event: { keyup: BuscarAlumno }" class="form-control" title="Se necesita un nombre" />
+                                <input name="CodigoAlumno" type="text" data-bind="value: Alumno.idAlumno, valueUpdate: 'afterkeydown', event: { keyup: BuscarAlumno }" class="form-control" title="Se necesita un nombre" />
                             </div>
                         </div>
                         <div class="form-group">
@@ -199,17 +252,17 @@
                         <div class="form-group">
                             <div class="col-xs-12">
                                 <label class="control-label">Cargo</label>
-                                <select name="Cargo" class="form-control" data-bind="options: Cargos, value: Alumno.Cargo"></select>
+                                <select name="Cargo" class="form-control" data-bind="options: Cargos, optionsText: 'tipoCargo', optionsValue: 'idCargo', value: Alumno.idCargo"></select>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-1 col-sm-2">
+                    <div class="col-sm-2 text-center">
                         <div class="hidden-xs">
                             <br /><br /><br /><br /><br /><br />
-                        </div>                        
+                        </div>
                         <div class="form-group">
                             <div class="col-xs-12">
-                                <button class="btn btn-default" data-bind="click: AgregarIntegrante">>></button>
+                                <button class="btn btn-default" data-bind="enable: Alumno.Nombre, click: AgregarIntegrante">>></button>
                             </div>
                         </div>
                         <div class="form-group">
@@ -218,21 +271,31 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-7 col-sm-6">
+                    <div class="col-sm-6">
+
                         <table class="table table-bordered">
                             <thead>
                                 <tr>
-                                    <th>Nombre</th>
-                                    <th>Grado</th>
-                                    <th>Cargo</th>
+                                    <th class="text-center">Nombre</th>
+                                    <th class="text-center">Grado</th>
+                                    <th class="text-center">Cargo</th>
                                 </tr>
                             </thead>
                             <tbody>
+                                <!--ko if: Partido.Integrantes().length > 0-->
                                 <!--ko foreach: Partido.Integrantes-->
-                                <tr data-bind="click: $root.SeleccionarIntegrante">
+                                <tr class="pointer" data-bind="click: $root.SeleccionarIntegrante, css: {'seleccionado': $data.Seleccionado}">
                                     <td data-bind="text: $data.Nombre"></td>
-                                    <td data-bind="text: $data.Grado"></td>
-                                    <td data-bind="text: $data.Cargo"></td>
+                                    <td class="text-center" data-bind="text: $data.Grado + '°'"></td>
+                                    <td class="text-center" data-bind="text: $data.Cargo"></td>
+                                </tr>
+                                <!--/ko-->
+                                <!--/ko-->
+                                <!--ko if: Partido.Integrantes().length == 0-->
+                                <tr>
+                                    <td colspan="3" class="text-center">
+                                        <h5>No hay integrantes agregados</h5>
+                                    </td>
                                 </tr>
                                 <!--/ko-->
                             </tbody>
@@ -243,8 +306,12 @@
             <div class="panel-footer text-center">
                 <button type="button" class="btn btn-primary" data-bind="click: Guardar">Guardar</button>
                 <button type="button" class="btn btn-default">Imprimir</button>
-                <a href="~/GobiernoEscolar/Partidos/PlanGobierno/1" class="btn btn-success">Visualizar plan de gobierno</a>
+                @if(@ViewBag.IdPartido != null)
+                {
+                    <a href="~/GobiernoEscolar/Partidos/PlanGobierno/@ViewBag.IdPartido" class="btn btn-success">Visualizar plan de gobierno</a>
+                }
+
             </div>
-        </div>        
+        </div>
     </fieldset>
 </div>

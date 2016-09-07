@@ -170,6 +170,7 @@
     <Compile Include="Areas\GobiernoEscolar\GobiernoEscolarAreaRegistration.cs" />
     <Compile Include="Areas\GobiernoEscolar\Models\EPartidoModel.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AlumnoController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\RestringidoController.cs" />
@@ -210,6 +211,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Areas\GobiernoEscolar\Views\Shared\" />
     <Folder Include="Models\" />
+    <Folder Include="Views\Alumno\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\InnovaSchool.BL\InnovaSchool.BL.csproj">

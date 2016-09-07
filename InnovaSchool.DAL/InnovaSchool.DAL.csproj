@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConexionUtil.cs" />
+    <Compile Include="DAlumno.cs" />
     <Compile Include="DAlumnoEmpadronado.cs" />
     <Compile Include="DCargo.cs" />
     <Compile Include="DPartidoPostulante.cs" />

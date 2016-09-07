@@ -8,6 +8,6 @@ namespace InnovaSchool.UserLayer.Areas.GobiernoEscolar.Models
         public int IdPartido { get; set; }
         public string NombrePartido { get; set; }
         public string Logo { get; set; }
-        public List<EPartidoIntegrantes> Integrantes { get; set; }
+        public List<EIntegrante> Integrantes { get; set; }
     }    
 }

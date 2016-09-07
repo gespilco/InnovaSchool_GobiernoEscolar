@@ -14,26 +14,41 @@ namespace InnovaSchool.BL
     {
         public List<SP_ListarPartidoPostulante_Result> ListarPartidoPostulante_BL()
         {
-           DPartidoPostulante Obj_Dal = new DPartidoPostulante();
-           return Obj_Dal.ListarPartidoPostulante_DAL();
+            DPartidoPostulante Obj_Dal = new DPartidoPostulante();
+            return Obj_Dal.ListarPartidoPostulante_DAL();
         }
 
-        public SP_ListarPartidoPostulanteById ListarPartidoPostulante_BL(int IdPartido)
+        public SP_ListarPartidoPostulanteById_Result ListarPartidoPostulante_BL(int IdPartido)
         {
             DPartidoPostulante Obj_Dal = new DPartidoPostulante();
             return Obj_Dal.ListarPartidoPostulante_DAL(IdPartido);
         }
-       
+
         public int RegistrarPartido_BL(EPartidoPostulante objEN)
         {
-           DPartidoPostulante Obj_Dal = new DPartidoPostulante();            
-            return Obj_Dal.RegistrarPartidoPostulante_DAL(objEN);
+            DPartidoPostulante Obj_Dal = new DPartidoPostulante();
+            //Registramos el partido
+            int result = Obj_Dal.RegistrarPartidoPostulante_DAL(objEN);
+
+            Obj_Dal.EliminarIntegrantes_DAL(result);
+
+            //Registramos los integrantes
+            if (objEN.Integrantes != null)
+            {
+                foreach (var obj in objEN.Integrantes)
+                {
+                    obj.idPartido = result;
+                    Obj_Dal.RegistrarIntegrante_DAL(obj);
+                }
+            }
+            
+            return result;
         }
 
-        public int ActualizarInstrumento_BL(EPartidoPostulante objEN)
+        public List<SP_ListarIntegrantesPartido_Result> ListarIntegrantesPartido_BL(int idPartido)
         {
             DPartidoPostulante Obj_Dal = new DPartidoPostulante();
-            return Obj_Dal.ActualizarPartidoPostulante_DAL(objEN);
+            return Obj_Dal.ListarIntegrantesPartido_DAL(idPartido);
         }
 
         public int EliminarInstrumento_BL(EPartidoPostulante objEN)
@@ -41,8 +56,8 @@ namespace InnovaSchool.BL
             DPartidoPostulante Obj_Dal = new DPartidoPostulante();
             return Obj_Dal.EliminarPartidoPostulante_DAL(objEN);
         }
-    
 
-       
-}    
+
+
+    }
 }

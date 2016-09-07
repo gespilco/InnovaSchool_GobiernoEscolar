@@ -3,6 +3,23 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+@section scripts
+{
+    <script src="~/Scripts/knockout-3.4.0.js"></script>
+    <script type="text/javascript">
+        function ViewModel()
+        {
+            var self = this;
+
+        }
+
+        $(function () {
+            var modelo = new ViewModel();
+            ko.applyBindings(modelo);
+        });
+    </script>
+}
+
 @section breadcrumb{
     <li>
         <i class="icon-angle-right"></i>
@@ -10,7 +27,7 @@
     </li>
     <li>
         <i class="icon-angle-right"></i>
-        <a href="~/GobiernoEscolar/Partidos/Registro/1">@(ViewBag.NombrePartido ?? "Partido")</a>
+        <a href="~/GobiernoEscolar/Partidos/Registro/@ViewBag.IdPartido">@(ViewBag.NombrePartido ?? "Partido")</a>
     </li>
     <li>
         <i class="icon-angle-right"></i>
@@ -18,7 +35,7 @@
     </li>
 }
 <div class="form-horizontal">
-    <fieldset>        
+    <fieldset>
         <div class="panel panel-default">
             <div class="panel-heading"><h4 style="margin:0">Plan de Gobierno</h4></div>
             <div class="panel-body">
@@ -62,6 +79,6 @@
                 <button type="button" class="btn btn-default">Imprime</button>
                 <button type="button" class="btn btn-danger">Observar</button>
             </div>
-        </div>        
+        </div>
     </fieldset>
 </div>

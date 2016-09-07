@@ -39,13 +39,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="EPartidoIntegrantes.cs" />
+    <Compile Include="EAlumno.cs" />
+    <Compile Include="EIntegrante.cs" />
+    <Compile Include="Result\SP_ListarAlumnoById_Result.cs" />
+    <Compile Include="Result\SP_ListarIntegrantesPartido_Result.cs" />
     <Compile Include="EAlumnoEmpadronado.cs" />
     <Compile Include="ECargo.cs" />
     <Compile Include="EPartidoPostulante.cs" />
+    <Compile Include="EPersona.cs" />
     <Compile Include="EUsuario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Result\SP_ListarPartidoPostulanteById.cs" />
+    <Compile Include="Result\SP_ListarPartidoPostulanteById_Result.cs" />
     <Compile Include="Result\SP_ListarPartidoPostulante_Result.cs" />
     <Compile Include="Result\SP_PartidoPostulante_Result.cs" />
   </ItemGroup>

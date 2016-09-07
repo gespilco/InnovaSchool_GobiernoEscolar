@@ -6,11 +6,10 @@ using System.Threading.Tasks;
 
 namespace InnovaSchool.Entity.Result
 {
-    public class SP_ListarPartidoPostulanteById
+    public class SP_ListarAlumnoById_Result
     {
-        public int IdPartido { get; set; }
+        public int idAlumno { get; set; }
         public string Nombre { get; set; }
-        public string Estado { get; set; }
-        public byte[] Logo { get; set; }
+        public string Grado { get; set; }
     }
 }

@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BAlumno.cs" />
     <Compile Include="BAlumnoEmpadronado.cs" />
     <Compile Include="BCargo.cs" />
     <Compile Include="BPartidoPostulante.cs" />
