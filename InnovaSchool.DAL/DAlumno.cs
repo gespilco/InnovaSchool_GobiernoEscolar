@@ -1,11 +1,8 @@
 ﻿using InnovaSchool.Entity.Result;
-using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace InnovaSchool.DAL
 {
@@ -23,7 +20,6 @@ namespace InnovaSchool.DAL
             SqlDataReader drd = cmd.ExecuteReader(CommandBehavior.SingleResult);
             List<SP_ListarAlumnoById_Result> list = drd.MapToList<SP_ListarAlumnoById_Result>();
             drd.Close();
-
             cn.Close();
 
             return list.FirstOrDefault();
