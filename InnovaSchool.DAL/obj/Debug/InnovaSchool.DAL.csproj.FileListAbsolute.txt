@@ -44,3 +44,10 @@ D:\team\UPC\diana\InnovaSchool\InnovaSchool.DAL\bin\Debug\InnovaSchool.Entity.pd
 D:\team\UPC\diana\InnovaSchool\InnovaSchool.DAL\obj\Debug\InnovaSchool.DAL.csprojResolveAssemblyReference.cache
 D:\team\UPC\diana\InnovaSchool\InnovaSchool.DAL\obj\Debug\InnovaSchool.DAL.dll
 D:\team\UPC\diana\InnovaSchool\InnovaSchool.DAL\obj\Debug\InnovaSchool.DAL.pdb
+D:\UPC\diana\GitHub\InnovaSchool_GobiernoEscolar\InnovaSchool.DAL\bin\Debug\InnovaSchool.DAL.dll
+D:\UPC\diana\GitHub\InnovaSchool_GobiernoEscolar\InnovaSchool.DAL\bin\Debug\InnovaSchool.DAL.pdb
+D:\UPC\diana\GitHub\InnovaSchool_GobiernoEscolar\InnovaSchool.DAL\bin\Debug\InnovaSchool.Entity.dll
+D:\UPC\diana\GitHub\InnovaSchool_GobiernoEscolar\InnovaSchool.DAL\bin\Debug\InnovaSchool.Entity.pdb
+D:\UPC\diana\GitHub\InnovaSchool_GobiernoEscolar\InnovaSchool.DAL\obj\Debug\InnovaSchool.DAL.csprojResolveAssemblyReference.cache
+D:\UPC\diana\GitHub\InnovaSchool_GobiernoEscolar\InnovaSchool.DAL\obj\Debug\InnovaSchool.DAL.dll
+D:\UPC\diana\GitHub\InnovaSchool_GobiernoEscolar\InnovaSchool.DAL\obj\Debug\InnovaSchool.DAL.pdb

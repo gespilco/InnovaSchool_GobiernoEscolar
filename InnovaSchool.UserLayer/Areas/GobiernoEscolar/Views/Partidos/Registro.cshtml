@@ -4,7 +4,7 @@
 }
 
 <style type="text/css">
-    #logo-partido { border: 2px solid #808080; padding: 5px; max-height: 150px; max-width: 100%; cursor: pointer; box-sizing: border-box; }
+    #logo-partido { border: 2px solid #ddd; padding: 5px; max-height: 150px; max-width: 100%; cursor: pointer; box-sizing: border-box; }
 </style>
 
 @section breadcrumb{
@@ -49,7 +49,7 @@
                                     <div class="control-group">
                                         <img id="logo-partido" src="http://placehold.it/200x200">
                                         <br />
-                                        <input id="upload" type="file" name="image" style="display:none" />
+                                        <input id="upload" type="file" name="image" accept="image/*" style="display:none" />
                                     </div>
                                 </div>
                             </div>
@@ -114,27 +114,18 @@
         </div>
     </div>
 </div>
+<script src="~/Scripts/knockout-3.4.0.js"></script>
 <script type="text/javascript">
-    var App = {        
-        Id: '@ViewBag.IdPartido',
-        Init: function () {
-            var id = '@ViewBag.IdPartido';
-            if (id) {
-                $.get('@Url.Content("~/GobiernoEscolar/Partidos/VerPartido")', { id: id })
-                    .done(function (data) {
-                        //console.log(data);
-                        var p = data.Partido;
-                        App.Id = p.IdPartido;
-                        $('[name=NombrePartido]').val(p.Nombre);
+    function ViewModel() {
+        var self = this;
+        self.Partido = {
+            IdPartido: ko.observable('@ViewBag.IdPartido'),
+            NombrePartido: ko.observable(),
+            Logo: ko.observable(),
+            Integrantes: ko.observableArray()
+        }
 
-                        if (data.Logo) {
-                            $('#logo-partido').attr('src', "data:image/png;base64," + data.Logo);
-                        }
-                    });
-            }
-        },
-        Guardar: function () {
-            var frm = $('#form');
+        self.Guardar = function () {
             var nombre = $('[name=NombrePartido]').val();
             var logo = $('#logo-partido').attr('src');
             var integrantes = [];
@@ -155,7 +146,7 @@
 
             $.ajax({
                 type: 'POST',
-                url: frm.attr('action'),
+                url: '@Url.Content("~/GobiernoEscolar/Partidos/Registro")',
                 data: JSON.stringify(params),
                 dataType: 'json',
                 contentType: 'application/json',
@@ -167,10 +158,28 @@
                 }
             });
         }
-    };
+
+        self.Init = function () {
+            if (App.Id) {
+                $.get('@Url.Content("~/GobiernoEscolar/Partidos/VerPartido")', { id: App.Id })
+                    .done(function (data) {
+                        //console.log(data);
+                        var p = data.Partido;
+                        App.Id = p.IdPartido;
+                        $('[name=NombrePartido]').val(p.Nombre);
+
+                        if (data.Logo) {
+                            $('#logo-partido').attr('src', "data:image/png;base64," + data.Logo);
+                        }
+                    });
+            }
+        }
+    }
 
     $(function () {
-        App.Init();
+        var model = new ViewModel();
+        //ko.applyBindings(model);
+
 
         $('#logo-partido').click(function () {
             $('#upload').click();
@@ -202,7 +211,7 @@
             }
         });
 
-        $('.btn-primary').click(function () {            
+        $('.btn-primary').click(function () {
             App.Guardar();
         });
     });

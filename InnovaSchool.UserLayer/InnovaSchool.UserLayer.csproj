@@ -228,6 +228,8 @@
     <Content Include="Scripts\jquery.ui.touch-punch.js" />
     <Content Include="Scripts\jquery.uniform.min.js" />
     <Content Include="Scripts\jquery.uploadify-3.1.min.js" />
+    <Content Include="Scripts\knockout-3.4.0.debug.js" />
+    <Content Include="Scripts\knockout-3.4.0.js" />
     <Content Include="Scripts\mensaje.js" />
     <Content Include="Scripts\modernizr.js" />
     <Content Include="Scripts\retina.js" />
@@ -308,7 +310,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>60460</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
