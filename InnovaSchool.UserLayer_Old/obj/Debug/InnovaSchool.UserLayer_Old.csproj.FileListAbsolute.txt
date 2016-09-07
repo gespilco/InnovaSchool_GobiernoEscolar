@@ -1,0 +1,12 @@
+D:\UPC\diana\InnovaSchool\InnovaSchool.UserLayer_Old\bin\InnovaSchool.UserLayer.dll.config
+D:\UPC\diana\InnovaSchool\InnovaSchool.UserLayer_Old\bin\InnovaSchool.UserLayer.dll
+D:\UPC\diana\InnovaSchool\InnovaSchool.UserLayer_Old\bin\InnovaSchool.UserLayer.pdb
+D:\UPC\diana\InnovaSchool\InnovaSchool.UserLayer_Old\bin\InnovaSchool.BL.dll
+D:\UPC\diana\InnovaSchool\InnovaSchool.UserLayer_Old\bin\InnovaSchool.Entity.dll
+D:\UPC\diana\InnovaSchool\InnovaSchool.UserLayer_Old\bin\InnovaSchool.DAL.dll
+D:\UPC\diana\InnovaSchool\InnovaSchool.UserLayer_Old\bin\InnovaSchool.BL.pdb
+D:\UPC\diana\InnovaSchool\InnovaSchool.UserLayer_Old\bin\InnovaSchool.Entity.pdb
+D:\UPC\diana\InnovaSchool\InnovaSchool.UserLayer_Old\bin\InnovaSchool.DAL.pdb
+D:\UPC\diana\InnovaSchool\InnovaSchool.UserLayer_Old\obj\Debug\InnovaSchool.UserLayer_Old.csprojResolveAssemblyReference.cache
+D:\UPC\diana\InnovaSchool\InnovaSchool.UserLayer_Old\obj\Debug\InnovaSchool.UserLayer.dll
+D:\UPC\diana\InnovaSchool\InnovaSchool.UserLayer_Old\obj\Debug\InnovaSchool.UserLayer.pdb
