@@ -95,6 +95,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Areas\GobiernoEscolar\Views\Plantillas\Credenciales.html" />
     <Content Include="Content\css\bootstrap.css" />
     <Content Include="Content\css\bootstrap.min.css" />
     <Content Include="Content\css\justified-nav.css" />
@@ -143,6 +144,7 @@
     <Content Include="Content\font\font-awesome-4.3.0\scss\_rotated-flipped.scss" />
     <Content Include="Content\font\font-awesome-4.3.0\scss\_stacked.scss" />
     <Content Include="Content\font\font-awesome-4.3.0\scss\_variables.scss" />
+    <Content Include="Areas\GobiernoEscolar\Views\PadronElectoral\Index.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -166,6 +168,7 @@
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Areas\GobiernoEscolar\Controllers\PadronElectoralController.cs" />
     <Compile Include="Areas\GobiernoEscolar\Controllers\PartidosController.cs" />
     <Compile Include="Areas\GobiernoEscolar\GobiernoEscolarAreaRegistration.cs" />
     <Compile Include="Areas\GobiernoEscolar\Models\EPartidoModel.cs" />

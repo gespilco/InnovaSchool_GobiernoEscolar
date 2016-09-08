@@ -66,7 +66,7 @@
                         }
                     });
                 }
-                
+
                 if (params.Integrantes.length < 3) {
                     appMaster.Confirm({
                         Title: 'Aviso',
@@ -81,21 +81,21 @@
             }
 
             self.BuscarAlumno = function (v, e) {
-                if (e.keyCode == 13) { 
+                if (e.keyCode == 13) {
                     var idAlumno = self.Alumno.idAlumno();
-                    if (idAlumno) {                        
+                    if (idAlumno) {
                         self.Alumno.Nombre(null);
                         self.Alumno.Grado(null);
 
                         $.getJSON('@Url.Content("~/Alumno/Detalle")', { id: idAlumno }).done(function (data) {
-                            if (data.Alumno) {                                
+                            if (data.Alumno) {
                                 self.Alumno.Nombre(data.Alumno.Nombre);
                                 self.Alumno.Grado(data.Alumno.Grado);
                             } else {
                                 appMaster.MessageBox('Aviso', 'Código de estudiante no existe, no procede el registro');
-                            }                            
+                            }
                         });
-                    }                    
+                    }
                 }
             }
 
@@ -241,111 +241,109 @@
 }
 
 <div class="form-horizontal">
-    <fieldset>
-        <div class="panel panel-default">
-            <div class="panel-body">
-                <div class="row">
-                    <div class="col-sm-9">
-                        <div class="control-group">
-                            <label class="control-label">Nombre del partido</label>
-                            <div class="controls">
-                                <input name="NombrePartido" type="text" data-bind="value: Partido.NombrePartido" class="form-control" title="Se necesita un nombre">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-3 text-right">
-                        <div class="form-group">
-                            <div class="col-xs-12">
-                                <img id="logo-partido" data-bind="attr: {'src': Partido.Logo}, click: CambiarLogo">
-                                <br />
-                                <input id="upload" type="file" name="image" accept="image/*" style="display:none" />
-                            </div>
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-sm-9">
+                    <div class="control-group">
+                        <label class="control-label">Nombre del partido</label>
+                        <div class="controls">
+                            <input name="NombrePartido" type="text" data-bind="value: Partido.NombrePartido" class="form-control" title="Se necesita un nombre">
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-sm-4">
-                        <div class="form-group">
-                            <div class="col-sm-6">
-                                <label class="control-label">Codigo Alumno</label>
-                                <input name="CodigoAlumno" type="text" data-bind="value: Alumno.idAlumno, valueUpdate: 'afterkeydown', event: { keyup: BuscarAlumno }" class="form-control" title="Se necesita un nombre" />
-                            </div>
+                <div class="col-sm-3 text-right">
+                    <div class="form-group">
+                        <div class="col-xs-12">
+                            <img id="logo-partido" data-bind="attr: {'src': Partido.Logo}, click: CambiarLogo">
+                            <br />
+                            <input id="upload" type="file" name="image" accept="image/*" style="display:none" />
                         </div>
-                        <div class="form-group">
-                            <div class="col-xs-12">
-                                <label class="control-label">Nombre Alumno</label>
-                                <input name="NombreAlumno" type="text" data-bind="value: Alumno.Nombre" class="form-control" title="Se necesita un nombre" disabled />
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-xs-12">
-                                <label class="control-label">Grado</label>
-                                <input name="GradoAlumno" type="text" data-bind="value: Alumno.Grado" class="form-control" title="Se necesita un nombre" disabled />
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-xs-12">
-                                <label class="control-label">Cargo</label>
-                                <select name="Cargo" class="form-control" data-bind="options: Cargos, optionsText: 'tipoCargo', optionsValue: 'idCargo', value: Alumno.idCargo"></select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-2 text-center">
-                        <div class="hidden-xs">
-                            <br /><br /><br /><br /><br /><br />
-                        </div>
-                        <div class="form-group">
-                            <div class="col-xs-12">
-                                <button class="btn btn-default" data-bind="enable: Alumno.Nombre, click: AgregarIntegrante">>></button>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-xs-12">
-                                <button class="btn btn-default" data-bind="enable: IntegranteSeleccionado, click: EliminarIntegrante"><<</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6">
-
-                        <table class="table table-bordered">
-                            <thead>
-                                <tr>
-                                    <th class="text-center">Nombre</th>
-                                    <th class="text-center">Grado</th>
-                                    <th class="text-center">Cargo</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <!--ko if: Partido.Integrantes().length > 0-->
-                                <!--ko foreach: Partido.Integrantes-->
-                                <tr class="pointer" data-bind="click: $root.SeleccionarIntegrante, css: {'seleccionado': $data.Seleccionado}">
-                                    <td data-bind="text: $data.Nombre"></td>
-                                    <td class="text-center" data-bind="text: $data.Grado + '°'"></td>
-                                    <td class="text-center" data-bind="text: $data.Cargo"></td>
-                                </tr>
-                                <!--/ko-->
-                                <!--/ko-->
-                                <!--ko if: Partido.Integrantes().length == 0-->
-                                <tr>
-                                    <td colspan="3" class="text-center">
-                                        <h5>No hay integrantes agregados</h5>
-                                    </td>
-                                </tr>
-                                <!--/ko-->
-                            </tbody>
-                        </table>
                     </div>
                 </div>
             </div>
-            <div class="panel-footer text-center">
-                <button type="button" class="btn btn-primary" data-bind="click: Guardar">Guardar</button>
-                <button type="button" class="btn btn-default">Imprimir</button>
-                @if(@ViewBag.IdPartido != null)
-                {
-                    <a href="~/GobiernoEscolar/Partidos/PlanGobierno/@ViewBag.IdPartido" class="btn btn-success">Visualizar plan de gobierno</a>
-                }
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <div class="col-sm-6">
+                            <label class="control-label">Codigo Alumno</label>
+                            <input name="CodigoAlumno" type="text" data-bind="value: Alumno.idAlumno, valueUpdate: 'afterkeydown', event: { keyup: BuscarAlumno }" class="form-control" title="Se necesita un nombre" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-xs-12">
+                            <label class="control-label">Nombre Alumno</label>
+                            <input name="NombreAlumno" type="text" data-bind="value: Alumno.Nombre" class="form-control" title="Se necesita un nombre" disabled />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-xs-12">
+                            <label class="control-label">Grado</label>
+                            <input name="GradoAlumno" type="text" data-bind="value: Alumno.Grado" class="form-control" title="Se necesita un nombre" disabled />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-xs-12">
+                            <label class="control-label">Cargo</label>
+                            <select name="Cargo" class="form-control" data-bind="options: Cargos, optionsText: 'tipoCargo', optionsValue: 'idCargo', value: Alumno.idCargo"></select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-2 text-center">
+                    <div class="hidden-xs">
+                        <br /><br /><br /><br /><br /><br />
+                    </div>
+                    <div class="form-group">
+                        <div class="col-xs-12">
+                            <button class="btn btn-default" data-bind="enable: Alumno.Nombre, click: AgregarIntegrante">>></button>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-xs-12">
+                            <button class="btn btn-default" data-bind="enable: IntegranteSeleccionado, click: EliminarIntegrante"><<</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
 
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th class="text-center">Nombre</th>
+                                <th class="text-center">Grado</th>
+                                <th class="text-center">Cargo</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!--ko if: Partido.Integrantes().length > 0-->
+                            <!--ko foreach: Partido.Integrantes-->
+                            <tr class="pointer" data-bind="click: $root.SeleccionarIntegrante, css: {'seleccionado': $data.Seleccionado}">
+                                <td data-bind="text: $data.Nombre"></td>
+                                <td class="text-center" data-bind="text: $data.Grado + '°'"></td>
+                                <td class="text-center" data-bind="text: $data.Cargo"></td>
+                            </tr>
+                            <!--/ko-->
+                            <!--/ko-->
+                            <!--ko if: Partido.Integrantes().length == 0-->
+                            <tr>
+                                <td colspan="3" class="text-center">
+                                    <h5>No hay integrantes agregados</h5>
+                                </td>
+                            </tr>
+                            <!--/ko-->
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
-    </fieldset>
+        <div class="panel-footer text-center">
+            <button type="button" class="btn btn-primary" data-bind="click: Guardar">Guardar</button>
+            <button type="button" class="btn btn-default">Imprimir</button>
+            @if(@ViewBag.IdPartido != null)
+                {
+                <a href="~/GobiernoEscolar/Partidos/PlanGobierno/@ViewBag.IdPartido" class="btn btn-success">Visualizar plan de gobierno</a>
+                }
+
+        </div>
+    </div>
 </div>
