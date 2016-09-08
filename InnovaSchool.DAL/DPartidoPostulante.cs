@@ -70,6 +70,63 @@ namespace InnovaSchool.DAL
             }
         }
 
+        public List<string> ListarPartidosValidacion_DAL()
+        {
+            try
+            {
+                SqlCommand cmd = new SqlCommand("SP_ListarPartidosValidacion", cn);
+                cmd.CommandType = CommandType.StoredProcedure;                              
+
+                cn.Open();
+                SqlDataReader drd = cmd.ExecuteReader(CommandBehavior.SingleResult);
+
+                List<string> lista = new List<string>();
+                if (drd != null && drd.HasRows)
+                {
+                    while (drd.Read())
+                    {
+                        lista.Add(drd.GetString(0));
+                    }
+                }                
+                
+                cn.Close();
+                drd.Close();
+                return lista;
+            }
+            catch (Exception)
+            {
+                if (cn.State == ConnectionState.Open)
+                    cn.Close();
+                throw;
+            }
+        }
+
+        public SP_ValidarIntegrantePartido_Result ValidarIntegranteInscrito_DAL(int idAlumno, int anoAcademico)
+        {
+            try
+            {
+                SqlCommand cmd = new SqlCommand("SP_ValidarIntegrantePartido", cn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@idAlumno", idAlumno);
+                cmd.Parameters.AddWithValue("@anoAcademico", anoAcademico);
+
+                cn.Open();
+                SqlDataReader drd = cmd.ExecuteReader(CommandBehavior.SingleResult);
+                var result = drd.MapToList<SP_ValidarIntegrantePartido_Result>();
+
+                cn.Close();
+                drd.Close();
+
+                return result.FirstOrDefault();
+            }
+            catch (Exception)
+            {
+                if (cn.State == ConnectionState.Open)
+                    cn.Close();
+                throw;
+            }
+        }
+
         public List<SP_ListarIntegrantesPartido_Result> ListarIntegrantesPartido_DAL(int idPartido)
         {
             SqlCommand cmd = new SqlCommand("SP_ListarIntegrantesPartido", cn);

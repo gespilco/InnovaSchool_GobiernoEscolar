@@ -31,33 +31,53 @@ namespace InnovaSchool.UserLayer.Areas.GobiernoEscolar.Controllers
         }
 
         public ActionResult Registro(int? id)
-        {            
+        {
             ViewBag.IdPartido = id;
             return View();
         }
 
         [HttpPost]
-        public int Registro(EPartidoModel model)
+        public JsonResult Registro(EPartidoModel model)
         {
-            EPartidoPostulante partido = new EPartidoPostulante();
-            partido.idPartido = model.IdPartido;
-            partido.Nombre = model.NombrePartido;
-            partido.Estado = "Registrado";
-            if (model.Logo != null)
+            int? id = null;
+            string mensaje = "";
+            oBPartidoPostulante = new BPartidoPostulante();
+
+            //Verificamos las coincidencias del nombre
+            bool isValid = true;
+
+            //Validar el nombre del partido si se esta registrando
+            if ((model.IdPartido == 0))
+                isValid = oBPartidoPostulante.ValidarPartido(model.NombrePartido);
+
+            if (isValid)
             {
-                var res = new Resources.Resources();
-                string b64 = model.Logo.Substring(model.Logo.IndexOf(",") + 1);
-                if (res.IsBase64String(b64))
+                EPartidoPostulante partido = new EPartidoPostulante();
+                partido.idPartido = model.IdPartido;
+                partido.Nombre = model.NombrePartido;
+                if (model.Logo != null)
                 {
-                    byte[] bytes = System.Convert.FromBase64String(b64);
-                    partido.Logo = bytes;
+                    var res = new Resources.Resources();
+                    string b64 = model.Logo.Substring(model.Logo.IndexOf(",") + 1);
+                    if (res.IsBase64String(b64))
+                    {
+                        byte[] bytes = System.Convert.FromBase64String(b64);
+                        partido.Logo = bytes;
+                    }
                 }
+
+                partido.Integrantes = model.Integrantes;
+
+                id = oBPartidoPostulante.RegistrarPartido_BL(partido);
+                mensaje = "Ok";
+            }
+            else
+            {
+                mensaje = "Nombre de partido tiene mas de 50% de coincidencia. No procede con el registro";
             }
 
-            partido.Integrantes = model.Integrantes;
 
-            oBPartidoPostulante = new BPartidoPostulante();
-            return oBPartidoPostulante.RegistrarPartido_BL(partido);
+            return Json(new { Id = id, Mensaje = mensaje });
         }
 
         public JsonResult VerPartido(int id)
@@ -72,7 +92,7 @@ namespace InnovaSchool.UserLayer.Areas.GobiernoEscolar.Controllers
             {
                 foto = System.Convert.ToBase64String(result.Logo);
                 result.Logo = null;
-            }            
+            }
 
             return Json(new { Partido = result, Logo = foto, Integrantes = integrantes }, JsonRequestBehavior.AllowGet);
         }
@@ -87,7 +107,7 @@ namespace InnovaSchool.UserLayer.Areas.GobiernoEscolar.Controllers
 
                 ViewBag.NombrePartido = result.Nombre;
             }
-            
+
             return View();
         }
 
@@ -103,7 +123,7 @@ namespace InnovaSchool.UserLayer.Areas.GobiernoEscolar.Controllers
                     row.Nombre += "xxx";
                 }
             }
-            
+
             return Json(lista.Count);
         }
 
@@ -112,6 +132,14 @@ namespace InnovaSchool.UserLayer.Areas.GobiernoEscolar.Controllers
         {
             BCargo oBCargo = new BCargo();
             return Json(oBCargo.ListarCargo_BL(DateTime.Now.Year), JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult ValidarIntegranteInscrito(int id)
+        {
+            oBPartidoPostulante = new BPartidoPostulante();
+            var result = oBPartidoPostulante.ValidarIntegranteInscrito(id);
+
+            return Json(new { Integrante = result }, JsonRequestBehavior.AllowGet);
         }
         #endregion
     }

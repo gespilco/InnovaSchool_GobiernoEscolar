@@ -52,6 +52,7 @@
     <Compile Include="Result\SP_ListarPartidoPostulanteById_Result.cs" />
     <Compile Include="Result\SP_ListarPartidoPostulante_Result.cs" />
     <Compile Include="Result\SP_PartidoPostulante_Result.cs" />
+    <Compile Include="Result\SP_ValidarIntegrantePartido_Result.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

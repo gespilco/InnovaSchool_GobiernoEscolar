@@ -4,6 +4,13 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+@section styles
+{
+    <style type="text/css">
+        .Incompleto { color: red; }
+    </style>
+}
+
 @section breadcrumb{
     <li>
         <i class="icon-angle-right"></i>
@@ -55,15 +62,15 @@
                     <thead>
                         <tr>
                             <th>Partido</th>
-                            <th class="span4">Estado</th>
+                            <th class="col-xs-3 text-center">Estado</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach (var row in Model)
                         {
-                            <tr>
+                            <tr class="@row.Estado">
                                 <td><a href="~/GobiernoEscolar/Partidos/Registro/@row.idPartido">@row.Nombre</a></td>
-                                <td>@row.Estado</td>
+                                <td class="text-center">@row.Estado</td>
                             </tr>
                         }
 
