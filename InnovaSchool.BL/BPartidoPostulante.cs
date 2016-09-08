@@ -3,10 +3,12 @@ using InnovaSchool.Entity;
 using InnovaSchool.Entity.Result;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace InnovaSchool.BL
 {
@@ -89,7 +91,31 @@ namespace InnovaSchool.BL
             return Obj_Dal.EliminarPartidoPostulante_DAL(objEN);
         }
 
+        public int GenerarCredenciales_BL(List<SP_ListarIntegrantesPartido_Result> alumnos)
+        {
+            EEmail emisor = new EEmail("procesoelectoral@innovaschool.pe", "Innova School");
+            int procesados = 0;
 
+            string Plantilla = BOperaciones.GetHtmlPage(HttpContext.Current.Server.MapPath(ConfigurationManager.AppSettings["PlantillaCredencialesVoto"]));
+
+            //foreach (var item in alumnos)
+            //{
+            //    EEmailStatus status = BEmail.EnviarEmail(emisor, new List<EEmail>() { new EEmail(item.correoElectronico, item.nombre + " " + item.apellidos) },
+            //         "Credenciales", Plantilla
+            //         .Replace("{Nombres}", item.nombre)
+            //         .Replace("{Apellidos}", item.apellidos)
+            //         .Replace("{Usuario}", "ALUMNO-" + item.idAlumno.ToString())
+            //         .Replace("{Clave}", "123456")
+            //         );
+
+            //    if (status.Estado == true)
+            //    {
+            //        procesados++;
+            //    }
+            //}
+
+            return procesados;
+        }
 
     }
 }

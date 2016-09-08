@@ -48,6 +48,7 @@
     <Compile Include="BEmail.cs" />
     <Compile Include="BOperaciones.cs" />
     <Compile Include="BPartidoPostulante.cs" />
+    <Compile Include="BPlanGobierno.cs" />
     <Compile Include="BUsuario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

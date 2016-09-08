@@ -97,6 +97,41 @@ namespace InnovaSchool.UserLayer.Areas.GobiernoEscolar.Controllers
             return Json(new { Partido = result, Logo = foto, Integrantes = integrantes }, JsonRequestBehavior.AllowGet);
         }
 
+        [CustomAuthorize(Roles = "Comision_leg")]
+        public JsonResult GenerarCredenciales()
+        {
+            var lista = (List<SP_ListarPartidoPostulante_Result>)Session["Partidos"];
+
+            if (lista != null)
+            {
+                oBPartidoPostulante = new BPartidoPostulante();
+                //List<SP_ListarIntegrantesPartido_Result> integrantes = null;
+
+                //foreach (var row in lista)
+                //{
+                //    integrantes = oBPartidoPostulante.ListarIntegrantesPartido_BL(row.idPartido);
+                //    oBPartidoPostulante.GenerarCredenciales_BL(integrantes);
+                //}
+            }
+
+            return Json(lista.Count);
+        }
+
+        public JsonResult ListarCargos()
+        {
+            BCargo oBCargo = new BCargo();
+            return Json(oBCargo.ListarCargo_BL(DateTime.Now.Year), JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult ValidarIntegranteInscrito(int id)
+        {
+            oBPartidoPostulante = new BPartidoPostulante();
+            var result = oBPartidoPostulante.ValidarIntegranteInscrito(id);
+
+            return Json(new { Integrante = result }, JsonRequestBehavior.AllowGet);
+        }
+
+        #region Plan de gobierno
         public ActionResult PlanGobierno(int? id)
         {
             if (id != null)
@@ -111,35 +146,48 @@ namespace InnovaSchool.UserLayer.Areas.GobiernoEscolar.Controllers
             return View();
         }
 
-        [CustomAuthorize(Roles = "Supervisor")]
-        public JsonResult GenerarCredenciales()
+        public JsonResult CargarPlanGobierno(int idPartido)
         {
-            var lista = (List<SP_ListarPartidoPostulante_Result>)Session["Partidos"];
+            BPlanGobierno oBPlanGobierno = new BPlanGobierno();
+            
+            EPlanGobierno Plan = oBPlanGobierno.SP_PlanGobiernoPartido_BL(idPartido);
+            List<SP_ListarActividadesPlanGobierno_Result> Actividades = null;
+            List<SP_ListarInstrumentosPlanGobierno_Result> Instrumentos = null;
 
-            if (lista != null)
+            if (Plan != null)
             {
-                foreach (var row in lista)
-                {
-                    row.Nombre += "xxx";
-                }
+                Actividades = oBPlanGobierno.SP_ListarActividadesPlanGobierno_BL(Plan.idplan);
+                Instrumentos = oBPlanGobierno.SP_ListarInstrumentosPlanGobierno_BL(idPartido);
             }
 
-            return Json(lista.Count);
+            return Json(new
+            {
+                Plan = Plan,
+                Actividades = Actividades,
+                Instrumentos = Instrumentos
+            }, JsonRequestBehavior.AllowGet);
         }
 
-        #region Metodos
-        public JsonResult ListarCargos()
+        public int AprobarPlanGobierno(int idPlan)
         {
-            BCargo oBCargo = new BCargo();
-            return Json(oBCargo.ListarCargo_BL(DateTime.Now.Year), JsonRequestBehavior.AllowGet);
+            BPlanGobierno oBPlanGobierno = new BPlanGobierno();             
+            return oBPlanGobierno.SP_AprobarPlanGobierno_BL(idPlan);
         }
 
-        public JsonResult ValidarIntegranteInscrito(int id)
-        {
-            oBPartidoPostulante = new BPartidoPostulante();
-            var result = oBPartidoPostulante.ValidarIntegranteInscrito(id);
+        public JsonResult VerSubActividadesPlan(int idActividad)
+        {            
+            BPlanGobierno oBPlanGobierno = new BPlanGobierno(); 
 
-            return Json(new { Integrante = result }, JsonRequestBehavior.AllowGet);
+            var result = oBPlanGobierno.SP_ListarSubActividadesPlanGobierno_BL(idActividad);
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        public int GuardarObservacionActividad(EObservacion obs)
+        {
+            BPlanGobierno oBPlanGobierno = new BPlanGobierno();
+            int result = oBPlanGobierno.SP_GuardarObservacionActividad_DAL(obs);
+
+            return result;
         }
         #endregion
     }

@@ -30,8 +30,8 @@ namespace InnovaSchool.UserLayer.Controllers
             };
             EUsuario UsuarioExistente;
             BUsuario BUsuario = new BUsuario();
-            //UsuarioExistente = BUsuario.VerificarUsuario(EUsuario);
-            UsuarioExistente = new EUsuario() { IdUsuario = 1, Usuario = "admin", Estado = 1 };
+            UsuarioExistente = BUsuario.VerificarUsuario(EUsuario);
+            //UsuarioExistente = new EUsuario() { IdUsuario = 1, Usuario = "admin", Estado = 1 };
             if (UsuarioExistente == null)
             {                
                 ViewBag.Mensaje = "Usuario y/o contraseña incorrecta(s).";
@@ -42,7 +42,7 @@ namespace InnovaSchool.UserLayer.Controllers
                 SessionHelper.Usuario = UsuarioExistente;
 
                 //Roles
-                SessionHelper.Roles = new List<string>() { "Administrador", "Alumno" };
+                SessionHelper.Roles = new List<string>() { UsuarioExistente.Rol };
 
                 if (ReturnUrl != null && ReturnUrl != string.Empty)
                 {

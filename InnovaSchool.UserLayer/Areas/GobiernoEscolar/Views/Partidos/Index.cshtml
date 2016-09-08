@@ -36,7 +36,7 @@
                             url: '@Url.Content("~/GobiernoEscolar/Partidos/GenerarCredenciales")',
                             contentType: 'application/json',
                             success: function (data) {
-                                appMaster.MessageBox('Listo', 'Se han generado las credenciales para ' + data + ' partidos.');
+                                appMaster.MessageBox('Listo', 'Se han generado las credenciales para los integrantes de los partidos.');
                             }
                         });
                     },
@@ -79,7 +79,7 @@
                 <div class="form-group">
                     <div class="col-xs-12">
                         <a href="~/GobiernoEscolar/Partidos/Registro" class="btn btn-default">Nuevo</a>
-                        @if (SessionHelper.IsInRole("Administrador"))
+                        @if (SessionHelper.IsInRole("Comision_leg"))
                         {
                             <button type="button" class="btn btn-primary">Generar credenciales</button>
                         }

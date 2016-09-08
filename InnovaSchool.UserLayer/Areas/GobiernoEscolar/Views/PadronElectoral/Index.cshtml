@@ -8,13 +8,12 @@
 @section scripts
 {
     <script type="text/javascript">
-        function GenerarPadron()
-        {
+        function GenerarPadron() {
             appMaster.Confirm({
                 Title: 'Padrón Electoral',
                 Message: '¿Desea generar el padrón electoral?',
                 Yes: function () {
-                   window.location.href = '@Url.Content("~/GobiernoEscolar/PadronElectoral/GenerarPadron")';
+                    window.location.href = '@Url.Content("~/GobiernoEscolar/PadronElectoral/GenerarPadron")';
                 }
             });
 
@@ -30,7 +29,7 @@
                 }
             });
         }
-</script>
+    </script>
 }
 
 @section breadcrumb{
@@ -54,9 +53,12 @@
             @if (Model.Count == 0)
             {
                 <a class="btn btn-link" onclick="GenerarPadron()">Generar padrón electoral</a><span>|</span>
-            }            
-            <button type="button" class="btn btn-link">Imprimir informe</button><span>|</span>
-            <a class="btn btn-link" onclick="Notificar()">Notificar alumnos</a>
+            }
+            else
+            {
+                <button type="button" class="btn btn-link">Imprimir informe</button><span>|</span>
+                <a class="btn btn-link" onclick="Notificar()">Notificar alumnos</a>
+            }
         </div>
         <div class="panel-body">
             @if (Model.Count > 0)
@@ -89,11 +91,11 @@
             }
             else
             {
-                <h3>No se ha generado aún el padrón electoral</h3>                                
+                <h3>No se ha generado aún el padrón electoral</h3>
             }
 
             @if (TempData["Mensaje"] != null && TempData["Mensaje"] != "")
-            {                
+            {
                 <h5 class="alert alert-danger">@TempData["Mensaje"]</h5>
             }
         </div>
