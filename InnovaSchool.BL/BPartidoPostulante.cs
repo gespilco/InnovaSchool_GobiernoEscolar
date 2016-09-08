@@ -26,6 +26,15 @@ namespace InnovaSchool.BL
 
         public int RegistrarPartido_BL(EPartidoPostulante objEN)
         {
+            objEN.Estado = "Incompleto";
+
+            if (objEN.Integrantes != null)
+            {
+                if (objEN.Integrantes.Count == 3)
+                {
+                    objEN.Estado = "Registrado";
+                }
+            }
             DPartidoPostulante Obj_Dal = new DPartidoPostulante();
             //Registramos el partido
             int result = Obj_Dal.RegistrarPartidoPostulante_DAL(objEN);
@@ -43,6 +52,29 @@ namespace InnovaSchool.BL
             }
             
             return result;
+        }
+
+        public bool ValidarPartido(string nombre)
+        {
+            DPartidoPostulante Obj_Dal = new DPartidoPostulante();
+            List<string> partidos = Obj_Dal.ListarPartidosValidacion_DAL();
+
+            foreach (string p in partidos)
+            {
+                if (p == nombre)
+                {
+                    return false;
+                }
+            }
+
+            return true;
+
+        }
+
+        public SP_ValidarIntegrantePartido_Result ValidarIntegranteInscrito(int idAlumno)
+        {
+            DPartidoPostulante Obj_Dal = new DPartidoPostulante();
+            return Obj_Dal.ValidarIntegranteInscrito_DAL(idAlumno, DateTime.Now.Year);
         }
 
         public List<SP_ListarIntegrantesPartido_Result> ListarIntegrantesPartido_BL(int idPartido)

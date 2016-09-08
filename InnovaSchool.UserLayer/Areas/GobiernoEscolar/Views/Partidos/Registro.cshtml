@@ -42,23 +42,42 @@
                 //console.log(params);
 
                 if (!params.NombrePartido) {
-                    appMaster.MessageBox('Aviso', 'Ingrese un nombre para el partido');
+                    appMaster.MessageBox('Aviso', 'No se puede grabar un partido sin nombre');
                     return;
                 }
 
-                $.ajax({
-                    type: 'POST',
-                    url: '@Url.Content("~/GobiernoEscolar/Partidos/Registro")',
-                    data: JSON.stringify(params),
-                    dataType: 'json',
-                    contentType: 'application/json',
-                    success: function (response) {
-                        appMaster.MessageBox('Listo', 'El partido ha sido guardado');
-                    },
-                    error: function (xhr) {
-                        alert("error");
-                    }
-                });
+                var f = function () {
+                    $.ajax({
+                        type: 'POST',
+                        url: '@Url.Content("~/GobiernoEscolar/Partidos/Registro")',
+                        data: JSON.stringify(params),
+                        dataType: 'json',
+                        contentType: 'application/json',
+                        success: function (data) {
+                            if (data.Id) {
+                                self.Partido.IdPartido(data.Id);
+                                appMaster.MessageBox('Listo', 'El partido ha sido guardado');
+                            } else {
+                                appMaster.MessageBox('Atención', data.Mensaje);
+                            }
+                        },
+                        error: function (xhr) {
+                            alert("error");
+                        }
+                    });
+                }
+                
+                if (params.Integrantes.length < 3) {
+                    appMaster.Confirm({
+                        Title: 'Aviso',
+                        Message: 'Faltan registrar ' + (3 - params.Integrantes.length) + ' Candidatos de este partido. ¿Procedemos con la grabación?',
+                        Yes: function () {
+                            f();
+                        }
+                    })
+                } else {
+                    f();
+                }
             }
 
             self.BuscarAlumno = function (v, e) {
@@ -73,7 +92,7 @@
                                 self.Alumno.Nombre(data.Alumno.Nombre);
                                 self.Alumno.Grado(data.Alumno.Grado);
                             } else {
-                                appMaster.MessageBox('No existe', 'El código no pertence a ningún alumno');
+                                appMaster.MessageBox('Aviso', 'Código de estudiante no existe, no procede el registro');
                             }                            
                         });
                     }                    
@@ -90,19 +109,34 @@
             });
 
             self.AgregarIntegrante = function () {
+                if (self.Partido.Integrantes().length == 3) {
+                    appMaster.MessageBox('Aviso', 'Los integrantes del partido estan completos, no se puede agregar.');
+                    return;
+                }
+
                 var alumno = ko.toJS(self.Alumno);
+
                 alumno.Seleccionado = ko.observable(false);
 
                 var obj = ko.utils.arrayFirst(self.Partido.Integrantes(), function (x) { return x.Cargo == alumno.Cargo });
                 if (obj != null) {
-                    appMaster.MessageBox('Atención', 'Ya existe un ' + alumno.Cargo + ' en los integrantes');
+                    appMaster.MessageBox('Aviso', 'Ya existe un ' + alumno.Cargo + ' en los integrantes');
                     return;
                 }
 
-                self.Partido.Integrantes.push(alumno);
-                self.Alumno.idAlumno(null);
-                self.Alumno.Nombre(null);
-                self.Alumno.Grado(null);
+                $.getJSON('@Url.Content("~/GobiernoEscolar/Partidos/ValidarIntegranteInscrito")', { id: alumno.idAlumno }).
+                    done(function (data) {
+                        console.log(data);
+                        if (!data.Integrante || data.Integrante.idPartido == self.Partido.IdPartido()) {
+                            self.Partido.Integrantes.push(alumno);
+                            self.Alumno.idAlumno(null);
+                            self.Alumno.Nombre(null);
+                            self.Alumno.Grado(null);
+                        } else {
+                            appMaster.MessageBox('Aviso', 'El estudiante ya esta inscrito en otro partido. No procede el registro');
+                        }
+                    });
+
             }
 
             self.SeleccionarIntegrante = function (data) {
