@@ -1,0 +1,123 @@
+﻿using InnovaSchool.Entity;
+using InnovaSchool.Entity.Result;
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace InnovaSchool.DAL
+{
+    public class DPlanGobierno
+    {
+        static SqlConnection cn = new SqlConnection(ConexionUtil.Get_Connection());
+
+        public EPlanGobierno SP_PlanGobiernoPartido_DAL(int idPartido)
+        {
+            SqlCommand cmd = new SqlCommand("SP_PlanGobiernoPartido", cn);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@idPartido", idPartido);
+
+            cn.Open();
+            SqlDataReader drd = cmd.ExecuteReader(CommandBehavior.SingleResult);
+            var list = drd.MapToList<EPlanGobierno>();
+            drd.Close();
+            cn.Close();
+
+            return list.FirstOrDefault();
+        }
+
+        public List<SP_ListarActividadesPlanGobierno_Result> SP_ListarActividadesPlanGobierno_DAL(int idPlan)
+        {
+            SqlCommand cmd = new SqlCommand("SP_ListarActividadesPlanGobierno", cn);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@idPlan", idPlan);
+
+            cn.Open();
+            SqlDataReader drd = cmd.ExecuteReader(CommandBehavior.SingleResult);
+            List<SP_ListarActividadesPlanGobierno_Result> list = drd.MapToList<SP_ListarActividadesPlanGobierno_Result>();
+            drd.Close();
+            cn.Close();
+
+            return list.ToList();
+        }
+
+        public List<SP_ListarSubActividadesPlanGobierno_Result> SP_ListarSubActividadesPlanGobierno_DAL(int idActividad)
+        {
+            SqlCommand cmd = new SqlCommand("SP_ListarSubActividadesPlanGobierno", cn);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@idActividad", idActividad);
+
+            cn.Open();
+            SqlDataReader drd = cmd.ExecuteReader(CommandBehavior.SingleResult);
+            var list = drd.MapToList<SP_ListarSubActividadesPlanGobierno_Result>();
+            drd.Close();
+            cn.Close();
+
+            return list.ToList();
+        }
+
+        public List<SP_ListarInstrumentosPlanGobierno_Result> SP_ListarInstrumentosPlanGobierno_DAL(int idPlan)
+        {
+            SqlCommand cmd = new SqlCommand("SP_ListarInstrumentosPlanGobierno", cn);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@idPlan", idPlan);
+
+            cn.Open();
+            SqlDataReader drd = cmd.ExecuteReader(CommandBehavior.SingleResult);
+            List<SP_ListarInstrumentosPlanGobierno_Result> list = drd.MapToList<SP_ListarInstrumentosPlanGobierno_Result>();
+            drd.Close();
+            cn.Close();
+
+            return list.ToList();
+        }
+
+        public int SP_GuardarObservacionActividad_DAL(EObservacion objEN)
+        {
+            try
+            {
+                SqlCommand cmd = new SqlCommand("SP_GuardarObservacionActividad", cn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddParameter("@Descripcion", objEN.Descripcion);
+                //cmd.Parameters.AddParameter("@NivelObservacion", objEN.NivelObservacion);
+                //cmd.Parameters.AddParameter("@idInstrumento", objEN.idInstrumento);
+                cmd.Parameters.AddParameter("@idActividadPropuesta", objEN.idActividadPropuesta);
+                cmd.Parameters.AddParameter("@idactPlan", objEN.idactPlan);
+
+                cn.Open();
+                var result = cmd.ExecuteNonQuery();
+                cn.Close();
+                return result;
+            }
+            catch (Exception)
+            {
+                if (cn.State == ConnectionState.Open)
+                    cn.Close();
+                throw;
+            }
+        }
+
+        public int SP_AprobarPlanGobierno_DAL(int idPlan)
+        {
+            try
+            {
+                SqlCommand cmd = new SqlCommand("SP_AprobarPlanGobierno", cn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@idPlan", idPlan);                
+
+                cn.Open();
+                var result = cmd.ExecuteNonQuery();
+                cn.Close();
+                return result;
+            }
+            catch (Exception)
+            {
+                if (cn.State == ConnectionState.Open)
+                    cn.Close();
+                throw;
+            }
+        }
+    }
+}

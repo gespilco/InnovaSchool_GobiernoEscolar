@@ -1,22 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace InnovaSchool.Entity
 {
     public class EAlumnoEmpadronado
     {
-
-        public int idaluemp { get; set; }
-
-        public int codaluemp { get; set; }
-        public int estadovotador { get; set; }
-        public string añoescolar { get; set; }
-        
-
-
-
+        public int idalumnoempadronado { get; set; }
+        public Nullable<long> codalumnoempadronado { get; set; }
+        public string estado { get; set; }
+        public Nullable<int> añoescolar { get; set; }
+        public Nullable<int> idAlumno { get; set; }
+        public Nullable<int> idProceso { get; set; }
     }
 }

@@ -1,0 +1,106 @@
+﻿@model List<InnovaSchool.Entity.Result.SP_ListarAlumnosPadronElectoral_Result>
+
+@{
+    ViewBag.Title = "Generar padron electoral";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section scripts
+{
+    <script type="text/javascript">
+        function GenerarPadron() {
+            appMaster.Confirm({
+                Title: 'Padrón Electoral',
+                Message: '¿Desea generar el padrón electoral?',
+                Yes: function () {
+                    window.location.href = '@Url.Content("~/GobiernoEscolar/PadronElectoral/GenerarPadron")';
+                }
+            });
+
+        }
+        function Notificar() {
+            appMaster.Confirm({
+                Title: 'Credenciales',
+                Message: '¿Desea generar las credenciales de los alumnos empadronados?',
+                Yes: function () {
+                    $.post('@Url.Content("~/GobiernoEscolar/PadronElectoral/Notificar")', null, function (data) {
+                        appMaster.MessageBox('Credenciales generadas', 'Se ha generado las credenciales');
+                    });
+                }
+            });
+        }
+    </script>
+}
+
+@section breadcrumb{
+    <li>
+        <i class="icon-angle-right"></i>
+        <a href="#">Gobierno Escolar</a>
+    </li>
+    <li>
+        <i class="icon-angle-right"></i>
+        <a href="#">Padrón Electoral</a>
+    </li>
+    <li>
+        <i class="icon-angle-right"></i>
+        <a href="#">Reportes de votaciones</a>
+    </li>
+}
+
+<div class="form-horizontal">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            @if (Model.Count == 0)
+            {
+                <a class="btn btn-link" onclick="GenerarPadron()">Generar padrón electoral</a><span>|</span>
+            }
+            else
+            {
+                <button type="button" class="btn btn-link">Imprimir informe</button><span>|</span>
+                <a class="btn btn-link" onclick="Notificar()">Notificar alumnos</a>
+            }
+        </div>
+        <div class="panel-body">
+            @if (Model.Count > 0)
+            {
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Apellidos</th>
+                            <th>Edad</th>
+                            <th class="text-center">Correo</th>
+                            <th>Grado</th>
+                            <th>Sección</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var alumno in Model)
+                        {
+                            <tr>
+                                <td>@alumno.nombre</td>
+                                <td>@alumno.apellidos</td>
+                                <td>@alumno.edad</td>
+                                <td>@alumno.correoElectronico</td>
+                                <td>@alumno.grado</td>
+                                <td>@alumno.seccion</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+            else
+            {
+                <h3>No se ha generado aún el padrón electoral</h3>
+            }
+
+            @if (TempData["Mensaje"] != null && TempData["Mensaje"] != "")
+            {
+                <h5 class="alert alert-danger">@TempData["Mensaje"]</h5>
+            }
+        </div>
+        <div class="panel-footer">
+            <a href="~/" class="btn btn-default">Salir</a>
+        </div>
+    </div>
+</div>

@@ -143,8 +143,9 @@ appMaster.Prompt = function (options) {
 
     txt.val(options.Dato);
 
-    var contenido = $('<label>' + options.Mensaje + '</label>');
-    contenido.after(txt);
+    var contenido = $('<div>');
+    var label = $('<div>', { 'html': options.Mensaje });
+    contenido.append(label).append(txt);
 
     var buttonYes = $("<input />", { 'class': 'btn btn-primary btn-sm' })
                     .attr({ 'type': 'button', 'value': "Aceptar" });
@@ -159,6 +160,11 @@ appMaster.Prompt = function (options) {
     });
 
     buttonYes.click(function () {
+        if (!txt.val()) {
+            appMaster.MessageBox('Aviso', 'Por favor agregue un texto');
+            return;
+        }
+
         if (typeof options.Aceptar === 'function') options.Aceptar(txt.val());
         modal.Close();
     });
@@ -196,5 +202,9 @@ $(function () {
 
     $('body').on('keypress', 'input:text', function (e) {
         if (e.keyCode == 13) return false;
+    });
+
+    $(document).on('hidden.bs.modal', '.modal', function () {
+        $('.modal:visible').length && $(document.body).addClass('modal-open');
     });
 });

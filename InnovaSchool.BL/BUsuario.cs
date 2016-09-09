@@ -16,9 +16,10 @@ namespace InnovaSchool.BL
         {
             return DUsuario.VerificarUsuario(EUsuario);
         }
-        public List<EUsuario> Login(EUsuario EUsuario)
-        {
-            return DUsuario.Login(EUsuario);
-        }
+
+        //public List<EUsuario> Login(EUsuario EUsuario)
+        //{
+        //    return DUsuario.Login(EUsuario);
+        //}
     }
 }

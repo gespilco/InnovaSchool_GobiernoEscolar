@@ -40,8 +40,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EAlumno.cs" />
+    <Compile Include="EDetalleProceso.cs" />
+    <Compile Include="EEmail.cs" />
     <Compile Include="EIntegrante.cs" />
+    <Compile Include="EObservacion.cs" />
+    <Compile Include="EPlanGobierno.cs" />
+    <Compile Include="Result\SP_ListarActividadesPlanGobierno_Result.cs" />
     <Compile Include="Result\SP_ListarAlumnoById_Result.cs" />
+    <Compile Include="Result\SP_ListarAlumnosPadronElectoral_Result.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Result\SP_ListarInstrumentosPlanGobierno.cs" />
     <Compile Include="Result\SP_ListarIntegrantesPartido_Result.cs" />
     <Compile Include="EAlumnoEmpadronado.cs" />
     <Compile Include="ECargo.cs" />
@@ -51,6 +60,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Result\SP_ListarPartidoPostulanteById_Result.cs" />
     <Compile Include="Result\SP_ListarPartidoPostulante_Result.cs" />
+    <Compile Include="Result\SP_ListarSubActividadesPlanGobierno_Result.cs" />
     <Compile Include="Result\SP_PartidoPostulante_Result.cs" />
     <Compile Include="Result\SP_ValidarIntegrantePartido_Result.cs" />
   </ItemGroup>

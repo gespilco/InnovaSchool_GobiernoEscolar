@@ -19,5 +19,6 @@ namespace InnovaSchool.Entity
         public DateTime? FecCreacion { get; set; }
         public string UsuModificación { get; set; }
         public DateTime? FecModificacion { get; set; }
+        public string Rol { get; set; }
     }
 }
