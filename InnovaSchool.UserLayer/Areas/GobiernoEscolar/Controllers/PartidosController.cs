@@ -157,7 +157,7 @@ namespace InnovaSchool.UserLayer.Areas.GobiernoEscolar.Controllers
             if (Plan != null)
             {
                 Actividades = oBPlanGobierno.SP_ListarActividadesPlanGobierno_BL(Plan.idplan);
-                Instrumentos = oBPlanGobierno.SP_ListarInstrumentosPlanGobierno_BL(idPartido);
+                Instrumentos = oBPlanGobierno.SP_ListarInstrumentosPlanGobierno_BL(Plan.idplan);
             }
 
             return Json(new
