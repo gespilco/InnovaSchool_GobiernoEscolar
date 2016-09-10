@@ -104,3 +104,5 @@ D:\UPC\diana\GitHub\InnovaSchool_GobiernoEscolar\InnovaSchool.UserLayer\bin\WebG
 D:\UPC\diana\GitHub\InnovaSchool_GobiernoEscolar\InnovaSchool.UserLayer\bin\Antlr3.Runtime.pdb
 D:\UPC\diana\GitHub\InnovaSchool_GobiernoEscolar\InnovaSchool.UserLayer\bin\Newtonsoft.Json.xml
 D:\UPC\diana\GitHub\InnovaSchool_GobiernoEscolar\InnovaSchool.UserLayer\bin\System.Web.Optimization.xml
+D:\UPC\diana\GitHub\InnovaSchool_GobiernoEscolar\InnovaSchool.UserLayer\obj\Debug\RdlCompile.cache
+D:\UPC\diana\GitHub\InnovaSchool_GobiernoEscolar\InnovaSchool.UserLayer\obj\Debug\RdlCompile.compiled
