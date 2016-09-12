@@ -1,0 +1,7 @@
+﻿@media print {
+    #resultados-votacion table.cabecera { width: 100%; margin-bottom: 20px; border-collapse: collapse; }
+    #resultados-votacion table.cabecera tr td.logo { text-align: right; }
+    #resultados-votacion table.cabecera tr td.logo img { max-height: 100px; }
+    #nombre-partido { float:left; width:80%; }
+    #logo-partido { float:right; width:15%; }
+}

@@ -74,7 +74,7 @@ namespace InnovaSchool.DAL
             return list.ToList();
         }
 
-        public int SP_GuardarObservacion_DAL(EObservacion objEN)
+        public int SP_GuardarObservacion_DAL(EObservacion objEN, int idPlanGobierno)
         {
             try
             {
@@ -85,6 +85,7 @@ namespace InnovaSchool.DAL
                 cmd.Parameters.AddParameter("@idInstrumento", objEN.idInstrumento);
                 cmd.Parameters.AddParameter("@idActividadPropuesta", objEN.idActividadPropuesta);
                 cmd.Parameters.AddParameter("@idactPlan", objEN.idactPlan);
+                cmd.Parameters.AddWithValue("@idPlanGobierno", idPlanGobierno);
 
                 cn.Open();
                 var result = cmd.ExecuteNonQuery();

@@ -49,7 +49,8 @@
                                     Descripcion: observacion,
                                     idActividadPropuesta: data.idactividadPropuesta,
                                     //idactPlan: data.idactPlan
-                                }
+                                },
+                                idPlanGobierno: self.PlanGobierno.IdPlanGobierno()
                             };
 
                             $.ajax({
@@ -128,7 +129,7 @@
             }
 
             self.Imprimir = function () {
-                $('.panel').printThis({ loadCSS: "@Url.Content("~/Content/css/site.css")" });
+                $('.panel').printThis({ loadCSS: "@Url.Content("~/Content/css/print.css")" });
             }
 
             self.init = function () {

@@ -70,9 +70,3 @@ fieldset.fs-border legend { width: auto; font-size: 10pt; padding: 0 5px; color:
 .loading { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; z-index: 9999999; background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGAwBgAAOAA0CC32ngAAAABJRU5ErkJggg==); }
 .loading .loading-content { position: absolute; top: 50%; left: 50%; margin-top: -32px; margin-left: -32px; text-align: center; color: #076db2; }
 .loading .loading-content .loading-text { margin-top: 5px; }
-
-@media print {     
-    #resultados-votacion table.cabecera { width: 100%; margin-bottom: 20px; border-collapse: collapse; }       
-    #resultados-votacion table.cabecera tr td.logo { text-align: right; }
-    #resultados-votacion table.cabecera tr td.logo img { max-height: 100px; }    
-}

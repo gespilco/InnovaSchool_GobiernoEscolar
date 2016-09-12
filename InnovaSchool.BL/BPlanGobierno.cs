@@ -35,10 +35,10 @@ namespace InnovaSchool.BL
             return oDPlanGobierno.SP_ListarInstrumentosPlanGobierno_DAL(idPlan);
         }
 
-        public int SP_GuardarObservacion_BL(EObservacion objEN)
+        public int SP_GuardarObservacion_BL(EObservacion objEN, int idPlanGobierno)
         {
             DPlanGobierno oDPlanGobierno = new DPlanGobierno();
-            return oDPlanGobierno.SP_GuardarObservacion_DAL(objEN);
+            return oDPlanGobierno.SP_GuardarObservacion_DAL(objEN, idPlanGobierno);
         }
 
         public List<EObservacion> SP_VerObservacionesDetalle_BL(int id, string tipo)
@@ -57,6 +57,49 @@ namespace InnovaSchool.BL
         {
             DPlanGobierno oDPlanGobierno = new DPlanGobierno();
             return oDPlanGobierno.SP_AprobarPlanGobierno_DAL(idPlan);
+        }
+
+        public EEmailStatus EnviarObservaciones(int idPartido, int idPlan)
+        {            
+            List<EObservacion> obsActividades = SP_VerTodasObservacionesPlan_BL(idPlan);
+            EEmailStatus status = new EEmailStatus() { Estado = false, Mensaje = "No se envio el email ya que no hay observaciones para enviar" };
+
+            if (obsActividades.Count > 0)
+            {
+                BPartidoPostulante oBPartidoPostulante = new BPartidoPostulante();
+                List<SP_ListarIntegrantesPartido_Result> integrantes = oBPartidoPostulante.ListarIntegrantesPartido_BL(idPartido);
+
+                if (integrantes.Count > 0)
+                {
+                    List<EEmail> Destinatarios = new List<EEmail>();
+
+                    EEmail Emisor = new EEmail("procesoelectoral@innovaschool.edu.pe", "Innova School");
+
+                    foreach (var item in integrantes)
+                    {
+                        Destinatarios.Add(new EEmail(item.Correo, item.Nombre));
+                    }
+
+                    string html = "";
+                    html += "<h2>Observaciones del Plan de Gobierno</h2>";
+                    html += "<ul>";
+                    foreach (var item in obsActividades)
+                    {
+                        html += string.Format("<li>{0}</li>", item.Descripcion);
+                    }
+
+                    html += "</ul>";
+
+                    status = BEmail.EnviarEmail(Emisor, Destinatarios, "Observaciones", html);
+                }
+                else
+                {
+                    status.Mensaje = "No hay integrantes registrados del partido";
+                }
+
+            }
+
+            return status;
         }
     }
 }
