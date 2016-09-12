@@ -53,7 +53,7 @@ namespace InnovaSchool.UserLayer.Areas.GobiernoEscolar.Controllers
                 UsuarioExistente = oBAlumnoEmpadronado.ObtenerCredencialesVotacion(usuario, objResources.MD5Crypto(clave));
                 if (UsuarioExistente == null)
                 {
-                    ViewBag.Mensaje = "Las credenciales para acceder a votar no son válidas.";
+                    ViewBag.Mensaje = "Usuario y/o contraseña incorrectos";
                     //return View();
                 }
                 else
