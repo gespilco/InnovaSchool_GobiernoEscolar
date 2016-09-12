@@ -49,6 +49,9 @@
     <Compile Include="BOperaciones.cs" />
     <Compile Include="BPartidoPostulante.cs" />
     <Compile Include="BPlanGobierno.cs" />
+    <Compile Include="BResultados.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="BUsuario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

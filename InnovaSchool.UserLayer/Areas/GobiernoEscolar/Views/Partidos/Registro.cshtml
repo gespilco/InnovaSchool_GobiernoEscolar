@@ -14,6 +14,7 @@
 @section scripts
 {
     <script src="~/Scripts/knockout-3.4.0.js"></script>
+    <script src="~/Scripts/jquery-print.js"></script>
     <script type="text/javascript">
         function ViewModel() {
             var self = this;
@@ -167,6 +168,10 @@
                 });
             }
 
+            self.Imprimir = function () {
+                $('.panel').printThis({ loadCSS: "@Url.Content("~/Content/css/print.css")" });
+            }
+
             self.CambiarLogo = function () {
                 $('#upload').click();
             }
@@ -201,7 +206,7 @@
                             self.Partido.NombrePartido(p.Nombre);
 
                             if (data.Logo) {
-                                self.Partido.Logo("data:image/png;base64," + data.Logo);
+                                self.Partido.Logo(data.Logo);
                             }
 
                             //Asignamos la variable seleccionado
@@ -244,17 +249,18 @@
     <div class="panel panel-default">
         <div class="panel-body">
             <div class="row">
-                <div class="col-sm-9">
+                <div class="col-sm-9 hidden-print">
                     <div class="control-group">
                         <label class="control-label">Nombre del partido</label>
                         <div class="controls">
-                            <input name="NombrePartido" type="text" data-bind="value: Partido.NombrePartido" class="form-control" title="Se necesita un nombre">
+                            <input name="NombrePartido" type="text" data-bind="value: Partido.NombrePartido" class="form-control" title="Se necesita un nombre">                            
                         </div>
                     </div>
                 </div>
                 <div class="col-sm-3 text-right">
                     <div class="form-group">
-                        <div class="col-xs-12">
+                        <div class="col-xs-12 clearfix">
+                            <h2 id="nombre-partido" class="text-center visible-print" data-bind="text: Partido.NombrePartido"></h2>
                             <img id="logo-partido" data-bind="attr: {'src': Partido.Logo}, click: CambiarLogo">
                             <br />
                             <input id="upload" type="file" name="image" accept="image/*" style="display:none" />
@@ -263,7 +269,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-sm-4">
+                <div class="col-sm-4 hidden-print">
                     <div class="form-group">
                         <div class="col-sm-6">
                             <label class="control-label">Codigo Alumno</label>
@@ -289,7 +295,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-2 text-center">
+                <div class="col-sm-2 text-center hidden-print">
                     <div class="hidden-xs">
                         <br /><br /><br /><br /><br /><br />
                     </div>
@@ -305,7 +311,7 @@
                     </div>
                 </div>
                 <div class="col-sm-6">
-
+                    <br />
                     <table class="table table-bordered">
                         <thead>
                             <tr>
@@ -336,12 +342,12 @@
                 </div>
             </div>
         </div>
-        <div class="panel-footer text-center">
+        <div class="panel-footer text-center hidden-print">
             <button type="button" class="btn btn-primary" data-bind="click: Guardar">Guardar</button>
-            <button type="button" class="btn btn-default">Imprimir</button>
+            <button type="button" class="btn btn-default" data-bind="click: Imprimir">Imprimir</button>
             @if (@ViewBag.IdPartido != null && SessionHelper.IsInRole("Comision_leg"))
             {
-                <a href="~/GobiernoEscolar/Partidos/PlanGobierno/@ViewBag.IdPartido" class="btn btn-success">Visualizar plan de gobierno</a>
+                <a href="~/GobiernoEscolar/PlanGobierno?id=@ViewBag.IdPartido" class="btn btn-success">Visualizar plan de gobierno</a>
             }
         </div>
     </div>

@@ -9,7 +9,7 @@ namespace InnovaSchool.Entity.Result
     public partial class SP_ListarInstrumentosPlanGobierno_Result
     {
         public int idInstrumento { get; set; }
-        public Nullable<int> Nombre { get; set; }
+        public string Nombre { get; set; }
         public string Descripcion { get; set; }
         public string Objetivo { get; set; }
     }

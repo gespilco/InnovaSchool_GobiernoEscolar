@@ -1,0 +1,14 @@
+﻿@if (Model != null && Model.Count > 0)
+{
+    <b>Observaciones ingresadas:</b>
+    <ol>
+        @foreach (var item in Model)
+        {
+            <li>@item.Descripcion</li>
+        }
+    </ol>
+}
+else
+{
+    <h4>No hay observaciones registradas</h4>
+}

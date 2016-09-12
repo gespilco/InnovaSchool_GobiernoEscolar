@@ -25,11 +25,6 @@ namespace InnovaSchool.UserLayer.Areas.GobiernoEscolar.Controllers
             return View(model);
         }
 
-        public ActionResult Actualizar()
-        {
-            return View();
-        }
-
         public ActionResult Registro(int? id)
         {
             ViewBag.IdPartido = id;
@@ -90,7 +85,7 @@ namespace InnovaSchool.UserLayer.Areas.GobiernoEscolar.Controllers
 
             if (result.Logo != null)
             {
-                foto = System.Convert.ToBase64String(result.Logo);
+                foto = string.Format("data:image/png;base64,{0}", System.Convert.ToBase64String(result.Logo));                
                 result.Logo = null;
             }
 
@@ -130,65 +125,5 @@ namespace InnovaSchool.UserLayer.Areas.GobiernoEscolar.Controllers
 
             return Json(new { Integrante = result }, JsonRequestBehavior.AllowGet);
         }
-
-        #region Plan de gobierno
-        public ActionResult PlanGobierno(int? id)
-        {
-            if (id != null)
-            {
-                ViewBag.IdPartido = id;
-                oBPartidoPostulante = new BPartidoPostulante();
-                var result = oBPartidoPostulante.ListarPartidoPostulante_BL((int)id);
-
-                ViewBag.NombrePartido = result.Nombre;
-            }
-
-            return View();
-        }
-
-        public JsonResult CargarPlanGobierno(int idPartido)
-        {
-            BPlanGobierno oBPlanGobierno = new BPlanGobierno();
-            
-            EPlanGobierno Plan = oBPlanGobierno.SP_PlanGobiernoPartido_BL(idPartido);
-            List<SP_ListarActividadesPlanGobierno_Result> Actividades = null;
-            List<SP_ListarInstrumentosPlanGobierno_Result> Instrumentos = null;
-
-            if (Plan != null)
-            {
-                Actividades = oBPlanGobierno.SP_ListarActividadesPlanGobierno_BL(Plan.idplan);
-                Instrumentos = oBPlanGobierno.SP_ListarInstrumentosPlanGobierno_BL(idPartido);
-            }
-
-            return Json(new
-            {
-                Plan = Plan,
-                Actividades = Actividades,
-                Instrumentos = Instrumentos
-            }, JsonRequestBehavior.AllowGet);
-        }
-
-        public int AprobarPlanGobierno(int idPlan)
-        {
-            BPlanGobierno oBPlanGobierno = new BPlanGobierno();             
-            return oBPlanGobierno.SP_AprobarPlanGobierno_BL(idPlan);
-        }
-
-        public JsonResult VerSubActividadesPlan(int idActividad)
-        {            
-            BPlanGobierno oBPlanGobierno = new BPlanGobierno(); 
-
-            var result = oBPlanGobierno.SP_ListarSubActividadesPlanGobierno_BL(idActividad);
-            return Json(result, JsonRequestBehavior.AllowGet);
-        }
-
-        public int GuardarObservacionActividad(EObservacion obs)
-        {
-            BPlanGobierno oBPlanGobierno = new BPlanGobierno();
-            int result = oBPlanGobierno.SP_GuardarObservacionActividad_DAL(obs);
-
-            return result;
-        }
-        #endregion
     }
 }
