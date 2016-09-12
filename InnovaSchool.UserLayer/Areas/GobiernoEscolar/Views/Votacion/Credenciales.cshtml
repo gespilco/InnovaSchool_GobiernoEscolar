@@ -1,0 +1,79 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <!-- start: Meta -->
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Innova Schools - Login</title>
+    <!-- end: Meta -->
+    <!-- start: Mobile Specific -->
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- end: Mobile Specific -->
+    <!-- start: Favicon -->
+    <link rel="shortcut icon" href="~/Content/img/favicon.png" />
+    <!-- end: Favicon -->
+    <link href="~/Content/font/font-awesome-4.3.0/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/Content/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/css/site.css" rel="stylesheet" />
+    <!-- start: JavaScript-->
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/app.js"></script>
+    <!-- end: JavaScript-->
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800&subset=latin,cyrillic-ext,latin-ext" rel="stylesheet" type="text/css" />
+</head>
+<body class="background-body">
+    <div class="container-fluid">
+        <div class="login-box">
+            <div style="position: relative; margin-left: 60px; margin-bottom: 20px; margin-top: 10px;" class="center">
+                <img id="logo" class="img-responsive" src="~/Content/img/innova_schools.png" />
+            </div>
+            <h2 class="text-center">Elecciones @DateTime.Now.Year</h2>
+            <h5 class="text-center">Gobierno Escolar</h5>            
+            @using (Html.BeginForm("Credenciales", "Votacion", new { area = "GobiernoEscolar" }, FormMethod.Post, new { @id = "form", @class = "form-horizontal" }))
+            {
+                <div class="form-group">
+                    <div class="col-xs-12">
+                        <div class="input-group" title="Username">
+                            <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                            <input type="text" name="usuario" class="form-control" placeholder="Usuario" title="Se requiere un usuario" required autofocus />
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-xs-12">
+                        <div class="input-group" title="Password">
+                            <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+                            <input type="password" name="clave" class="form-control" placeholder="Contraseña" title="Se requiere una contraseña" required />
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-xs-12">
+                        @*<label class="checkbox-inline" for="remember">
+                            <input type="checkbox" id="remember" />Recuérdame
+                        </label>*@
+                        <div class="button-login">
+                            <button type="submit" class="btn btn-primary">Iniciar Sesión</button>
+                        </div>
+                    </div>
+                </div>
+            }
+            <h3>¿Se te olvidó tu contraseña?</h3>
+            <p>No hay problema, haga <a href="#">clic aquí</a>.</p>
+        </div>
+    </div>
+    @if (ViewBag.Mensaje != null)
+    {
+        <script type="text/javascript">
+            appMaster.MessageBox('Acceso denegado', '@Html.Raw(ViewBag.Mensaje)');
+        </script>
+    }     
+
+</body>
+</html>

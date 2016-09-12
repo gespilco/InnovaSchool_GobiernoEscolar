@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace InnovaSchool.Entity.Result
 {
-    public partial class SP_ListarActividadesPlanGobierno_Result
+    public partial class SP_GE_ListarActividadesPlanGobierno_Result
     {
         public int idactividadPropuesta { get; set; }
         public string nombre { get; set; }

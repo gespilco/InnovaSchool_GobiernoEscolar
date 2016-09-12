@@ -2,7 +2,7 @@
 
 namespace InnovaSchool.Entity.Result
 {
-    public partial class SP_ListarSubActividadesPlanGobierno_Result
+    public partial class SP_GE_ListarSubActividadesPlanGobierno_Result
     {
         public int SubActividadID { get; set; }
         public string Nombre { get; set; }

@@ -1,4 +1,4 @@
-﻿@model List<InnovaSchool.Entity.Result.SP_ListarAlumnosPadronElectoral_Result>
+﻿@model List<InnovaSchool.Entity.Result.SP_GE_ListarAlumnosPadronElectoral_Result>
 
 @{
     ViewBag.Title = "Generar padron electoral";
@@ -24,6 +24,7 @@
                 Message: '¿Desea generar las credenciales de los alumnos empadronados?',
                 Yes: function () {
                     $.post('@Url.Content("~/GobiernoEscolar/PadronElectoral/Notificar")', null, function (data) {
+                        console.log('Total de credenciales: ' + data);
                         appMaster.MessageBox('Credenciales generadas', 'Se ha generado las credenciales');
                     });
                 }

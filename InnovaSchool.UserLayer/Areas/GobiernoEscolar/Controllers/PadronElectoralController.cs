@@ -34,7 +34,7 @@ namespace InnovaSchool.UserLayer.Areas.GobiernoEscolar.Controllers
         [HttpPost]
         public JsonResult Notificar()
         {
-            List<SP_ListarAlumnosPadronElectoral_Result> model = (List<SP_ListarAlumnosPadronElectoral_Result>)Session["AlumnosEmpadronados"];
+            List<SP_GE_ListarAlumnosPadronElectoral_Result> model = (List<SP_GE_ListarAlumnosPadronElectoral_Result>)Session["AlumnosEmpadronados"];
 
             BAlumnoEmpadronado oBAlumnoEmpadronado = new BAlumnoEmpadronado();
             int procesados = oBAlumnoEmpadronado.GenerarCredenciales_BL(model);
@@ -56,7 +56,7 @@ namespace InnovaSchool.UserLayer.Areas.GobiernoEscolar.Controllers
                 return RedirectToAction("Index");
             }
 
-            List<SP_ListarAlumnosPadronElectoral_Result> model = (List<SP_ListarAlumnosPadronElectoral_Result>)Session["AlumnosEmpadronados"];
+            List<SP_GE_ListarAlumnosPadronElectoral_Result> model = (List<SP_GE_ListarAlumnosPadronElectoral_Result>)Session["AlumnosEmpadronados"];
             ReportDataSource rd = new ReportDataSource("DataSet1", model);
             lr.DataSources.Add(rd);
 

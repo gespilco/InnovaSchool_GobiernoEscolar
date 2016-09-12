@@ -10,5 +10,7 @@ namespace InnovaSchool.Entity
         public Nullable<int> añoescolar { get; set; }
         public Nullable<int> idAlumno { get; set; }
         public Nullable<int> idProceso { get; set; }
+        public string usuario { get; set; }
+        public string claveAcceso { get; set; }
     }
 }

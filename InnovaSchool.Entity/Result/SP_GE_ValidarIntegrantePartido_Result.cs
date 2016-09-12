@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace InnovaSchool.Entity.Result
 {
-    public class SP_ValidarIntegrantePartido_Result
+    public class SP_GE_ValidarIntegrantePartido_Result
     {
         public int idPartido { get; set; }
         public string Partido { get; set; }

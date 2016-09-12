@@ -10,15 +10,15 @@ namespace InnovaSchool.DAL
     {
         static SqlConnection cn = new SqlConnection(ConexionUtil.Get_Connection());
 
-        public SP_ListarAlumnoById_Result ListarAlumno_DAL(int idAlumno)
+        public SP_GE_ListarAlumnoById_Result ListarAlumno_DAL(int idAlumno)
         {
-            SqlCommand cmd = new SqlCommand("SP_ListarAlumnoById", cn);
+            SqlCommand cmd = new SqlCommand("SP_GE_ListarAlumnoById", cn);
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.AddWithValue("@idAlumno", idAlumno);
 
             cn.Open();
             SqlDataReader drd = cmd.ExecuteReader(CommandBehavior.SingleResult);
-            List<SP_ListarAlumnoById_Result> list = drd.MapToList<SP_ListarAlumnoById_Result>();
+            List<SP_GE_ListarAlumnoById_Result> list = drd.MapToList<SP_GE_ListarAlumnoById_Result>();
             drd.Close();
             cn.Close();
 

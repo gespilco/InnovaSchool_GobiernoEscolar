@@ -32,8 +32,8 @@ namespace InnovaSchool.UserLayer.Areas.GobiernoEscolar.Controllers
             BPlanGobierno oBPlanGobierno = new BPlanGobierno();
 
             EPlanGobierno Plan = oBPlanGobierno.SP_PlanGobiernoPartido_BL(idPartido);
-            List<SP_ListarActividadesPlanGobierno_Result> Actividades = null;
-            List<SP_ListarInstrumentosPlanGobierno_Result> Instrumentos = null;
+            List<SP_GE_ListarActividadesPlanGobierno_Result> Actividades = null;
+            List<SP_GE_ListarInstrumentosPlanGobierno_Result> Instrumentos = null;
 
             if (Plan != null)
             {

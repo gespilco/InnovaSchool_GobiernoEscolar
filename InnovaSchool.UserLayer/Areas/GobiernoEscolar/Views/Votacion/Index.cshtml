@@ -1,0 +1,191 @@
+﻿@{
+    Layout = null;
+}
+
+@using InnovaSchool.Entity.Result
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Gobierno Escolar - Votación @DateTime.Now.Year</title>
+    <link href="~/Content/css/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/css/site.css" rel="stylesheet" />
+    @*<link href="~/Content/css/justified-nav.css" rel="stylesheet" />*@
+    <link href="~/Content/font/font-awesome-4.3.0/css/font-awesome.min.css" rel="stylesheet" />
+    <style type="text/css">
+        body { padding-top: 20px; }
+        .partido { margin: 0 10px 10px 0; cursor: pointer; border: 1px solid #ccc; padding: 10px; }
+        .partido .logo { width: 120px; height: 100px; position: relative; }
+        .partido .logo span { display: none; position: absolute; font-size: 10em; top: 0; left: 0; line-height: 100px; font-weight: 200; text-align: center; width: 100px; color: #8BC34A; opacity: 0.8; }
+        .partido.Seleccionado, .partido:hover { background-color: #f1f1f1; }
+        .partido.Seleccionado { font-weight: bold; }
+        .partido.Seleccionado .logo span { display: block; }
+        .partido img { max-height: 100px; width: 100px; }
+    </style>
+</head>
+<body>
+    @{
+        var usuario = (SP_GE_ObtenerCredencialesVotacion_Result)Session["UsuarioVotacion"];
+        if (usuario == null)
+        {
+            usuario = new SP_GE_ObtenerCredencialesVotacion_Result();
+        }
+    }
+    <div class="container">
+        <div class="masthead">
+            <div class="row">
+                <div class="col-sm-6">
+                    <img src="~/Content/img/innova_schools.png" alt="" />
+                </div>
+                <div class="col-sm-6" style="text-align: right">
+                    <h3 class="text-info">Elecciones @DateTime.Now.Year</h3>
+                    <a href="~/GobiernoEscolar/Votacion/Credenciales"><small>Salir</small></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br /><br />
+    <div class="container">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="form-horizontal">
+                    <div class="form-group">
+                        <div class="col-xs-12">
+                            <div class="row">
+                                <label class="control-label col-sm-2">ID:</label>
+                                <div class="col-sm-10">
+                                    <div class="form-control" data-bind="text: Alumno.idAlumno"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-xs-12">
+                            <div class="row">
+                                <label class="control-label col-sm-2">Nombre:</label>
+                                <div class="col-sm-10">
+                                    <div class="form-control" data-bind="text: Alumno.Nombre"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading"><h4>Selecciona el partido de tu elección</h4></div>
+            <div class="panel-body">
+                <div class="row">
+                    <!--ko foreach: partidos-->
+                    <div class="col-sm-6">
+                        <div class="partido" data-bind="click: $root.SeleccionarPartido, css:{'Seleccionado': $data.Seleccionado}">
+                            <table>
+                                <tr>
+                                    <td class="logo">
+                                        <img alt="" data-bind="attr:{src: $data.Imagen}" />
+                                        <span>&times;</span>
+                                    </td>
+                                    <td data-bind="text: $data.Nombre"></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <!--/ko-->
+                </div>
+            </div>
+            <div class="panel-footer text-center">
+                <!--ko ifnot: FlagVotacion-->
+                <button type="button" class="btn btn-success" data-bind="click: ConfirmarVoto">Confirmar voto</button>
+                <!--/ko-->
+                <a href="~/GobiernoEscolar/Votacion/Credenciales" class="btn btn-danger">Salir</a>
+            </div>
+        </div>
+    </div>
+    @Html.AntiForgeryToken()
+
+    <!--Scripts-->
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/app.js"></script>
+    <script src="~/Scripts/knockout-3.4.0.js"></script>
+    <script type="text/javascript">
+        function ViewModel() {
+            var self = this;
+            self.FlagVotacion = ko.observable(false);
+
+            self.Alumno = {
+                idAlumno: ko.observable('@usuario.idAlumno'),
+                Nombre: ko.observable('@(usuario.Nombres + " " + usuario.Apellidos)')
+            };
+
+            self.partidos = ko.observableArray();
+
+            self.SeleccionarPartido = function (data) {
+                var estado = data.Seleccionado();
+                ko.utils.arrayForEach(self.partidos(), function (x) { x.Seleccionado(false); });
+                data.Seleccionado(!estado);
+            }
+
+            self.ConfirmarVoto = function () {
+                var token = $('input[name="__RequestVerificationToken"]').val();
+                var partido = ko.utils.arrayFirst(self.partidos(), function (x) { return x.Seleccionado() }) || {};
+
+                if (partido == null) {
+                    appMaster.MessageBox('Seleccione', 'Por favor seleccione un partido para emitir su voto');
+                    return;
+                }
+
+                var message = partido.Nombre ? ' al partido <b>' + partido.Nombre + '</b>' : ' <b>votar en blanco</b>';
+                appMaster.Confirm({
+                    Title: 'Alerta',
+                    Message: 'Haz elegido ' + message + '. ¿Confirmas tu voto?',
+                    Yes: function () {
+                        $.ajax({
+                            type: 'POST',
+                            url: '@Url.Content("~/GobiernoEscolar/Votacion/RegistrarVoto")',
+                            data: {
+                                idPartido: partido.idPartido || null,
+                                __RequestVerificationToken: token
+                            },
+                            success: function (data) {
+                                self.FlagVotacion(data.Estado);
+                                if (data.Estado) {
+                                    appMaster.MessageBox('Voto emitido', "Su voto ha sido registrado",
+                                    function () {
+                                        window.location.href = "@Url.Content("~/GobiernoEscolar/Votacion/Credenciales")";
+                                    }
+                                );
+                                } else {
+                                    if (data.Mensaje) self.FlagVotacion(true);
+                                    appMaster.MessageBox('Atención', data.Mensaje || 'No se pudo registrar tu voto, intenta de nuevo');
+                                }
+                            }
+                        });
+                    },
+                    YesText: 'Si',
+                    NoText: 'No'
+                });
+            }
+
+            self.init = function () {                
+                $.getJSON("@Url.Content("~/GobiernoEscolar/Votacion/ListarPartidos")", null, function (data) {
+                    ko.utils.arrayForEach(data, function (x) {
+                        if (!x.Imagen) x.Imagen = '@Url.Content("~/Content/img/default.png")';
+                        x.Seleccionado = ko.observable(false);
+                    });
+
+                    self.partidos(data);
+                });
+            }
+        }
+
+        $(function () {
+            var modelo = new ViewModel();
+            ko.applyBindings(modelo);
+            modelo.init();
+        });
+    </script>
+</body>
+</html>
