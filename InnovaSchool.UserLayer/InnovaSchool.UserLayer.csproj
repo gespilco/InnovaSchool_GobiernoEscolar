@@ -96,7 +96,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Areas\GobiernoEscolar\Views\PlanGobierno\_PartialObservaciones.cshtml">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="Areas\GobiernoEscolar\Views\Plantillas\Credenciales.html" />
+    <Content Include="Areas\GobiernoEscolar\Views\Resultados\Index.cshtml">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="Content\css\bootstrap.css" />
     <Content Include="Content\css\bootstrap.min.css" />
     <Content Include="Content\css\justified-nav.css" />
@@ -111,6 +117,7 @@
     <Content Include="Content\img\innova_schools.png" />
     <Content Include="Content\img\logo.png" />
     <Content Include="Global.asax" />
+    <Content Include="Scripts\amcharts\amcharts.js" />
     <Content Include="Scripts\app.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -149,6 +156,7 @@
     <Content Include="InnovaSchoolDataSet.xsc">
       <DependentUpon>InnovaSchoolDataSet.xsd</DependentUpon>
     </Content>
+    <Content Include="Areas\GobiernoEscolar\Views\PlanGobierno\Index.cshtml" />
     <None Include="InnovaSchoolDataSet.xsd">
       <Generator>MSDataSetGenerator</Generator>
       <LastGenOutput>InnovaSchoolDataSet.Designer.cs</LastGenOutput>
@@ -161,6 +169,7 @@
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery-print.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -171,6 +180,7 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <None Include="Scripts\_references.js" />
+    <Content Include="Scripts\amcharts\serial.js" />
     <Content Include="Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
@@ -182,6 +192,12 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\GobiernoEscolar\Controllers\PadronElectoralController.cs" />
     <Compile Include="Areas\GobiernoEscolar\Controllers\PartidosController.cs" />
+    <Compile Include="Areas\GobiernoEscolar\Controllers\PlanGobiernoController.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Areas\GobiernoEscolar\Controllers\ResultadosController.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Areas\GobiernoEscolar\GobiernoEscolarAreaRegistration.cs" />
     <Compile Include="Areas\GobiernoEscolar\Models\EPartidoModel.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -214,8 +230,6 @@
     <Content Include="Content\font\glyphiconshalflings-regular.ttf" />
     <Content Include="Content\font\glyphiconshalflings-regular.woff" />
     <Content Include="Areas\GobiernoEscolar\Views\Partidos\Registro.cshtml" />
-    <Content Include="Areas\GobiernoEscolar\Views\Partidos\Actualizar.cshtml" />
-    <Content Include="Areas\GobiernoEscolar\Views\Partidos\PlanGobierno.cshtml" />
     <Content Include="Areas\GobiernoEscolar\Views\web.config" />
     <Content Include="Areas\GobiernoEscolar\Views\Partidos\Index.cshtml" />
     <Content Include="Views\Restringido\Index.cshtml" />

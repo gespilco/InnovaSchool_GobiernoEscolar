@@ -204,7 +204,6 @@ namespace InnovaSchool.DAL
             {
                 throw;
             }
-
         }
     }
 }

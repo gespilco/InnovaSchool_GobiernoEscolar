@@ -45,6 +45,8 @@
     <Compile Include="EIntegrante.cs" />
     <Compile Include="EObservacion.cs" />
     <Compile Include="EPlanGobierno.cs" />
+    <Compile Include="Result\SP_GE_ListarConteoVotos_Result.cs" />
+    <Compile Include="Result\SP_GE_ListarResultadosVotos_Result.cs" />
     <Compile Include="Result\SP_ListarActividadesPlanGobierno_Result.cs" />
     <Compile Include="Result\SP_ListarAlumnoById_Result.cs" />
     <Compile Include="Result\SP_ListarAlumnosPadronElectoral_Result.cs">

@@ -1,0 +1,306 @@
+﻿@{
+    ViewBag.Title = "Resultados finales";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section styles
+{
+    <style type="text/css">
+        #resultados thead th { cursor: pointer; user-select: none; -webkit-user-select: none; }
+        #resultados thead th.asc:after, #resultados thead th.desc:after { font: normal normal normal 14px/1 FontAwesome; display: inline-block; margin-left: 5px; }
+        #resultados thead th.asc:after { content: "\f0de"; }
+        #resultados thead th.desc:after { content: "\f0dd"; }
+        table.cabecera { width: 100%; margin-bottom: 20px; border-collapse: collapse; }
+        table.cabecera tr td.logo { text-align: right; padding-left:10px; }
+        table.cabecera tr td.logo img { max-height: 100px; }
+        #chart-resultados { height: 400px; }
+    </style>
+}
+
+@section scripts
+{
+    <script src="~/Scripts/knockout-3.4.0.js"></script>
+    <script src="~/Scripts/jquery-print.js"></script>
+    <script src="~/Scripts/amcharts/amcharts.js"></script>
+    <script src="~/Scripts/amcharts/serial.js"></script>
+    <script type="text/javascript">
+        function ViewModel() {
+            var self = this;
+            self.Anyo = ko.observable('@DateTime.Now.Year');
+
+            self.Resultados = ko.observableArray();
+            self.ConteoVotacion = {
+                Emitidos: ko.observable(),
+                Validos: ko.observable(),
+                NoEfectuados: ko.observable(),
+                Blanco: ko.observable()
+            };
+
+            self.PartidoGanador = {
+                idPartido: ko.observable(),
+                NombrePartido: ko.observable(),
+                Logo: ko.observable('http://placehold.it/200x200'),
+                Integrantes: ko.observableArray()
+            }
+
+            self.Ordenar = function (attribute, d, e) {
+                var dir = $(e.currentTarget).hasClass('asc') ? 'desc' : 'asc';
+                $(e.currentTarget).closest('table').find('th').removeClass('asc desc');
+                $(e.currentTarget).addClass(dir);
+
+                var f_ = function (a, b) {
+                    return dir == 'asc' ? a[attribute] > b[attribute] : a[attribute] < b[attribute];
+                };
+
+                var result = self.Resultados().sort(f_);
+                self.Resultados(result);
+            }
+
+            self.Generar = function () {
+                $('#resultados th').removeClass('asc desc');
+
+                self.PartidoGanador.idPartido(null);
+                self.PartidoGanador.NombrePartido(null);
+                self.PartidoGanador.Logo(null);
+                self.PartidoGanador.Integrantes.removeAll();
+                self.Resultados.removeAll();
+
+                $.getJSON('@Url.Content("~/GobiernoEscolar/Resultados/VerResultados")', { anyo: self.Anyo() })
+                .done(function (data) {
+                    console.log(data);
+
+                    self.Resultados(data.Votos);
+                    if (data.Ganador) {
+                        var d = data.Ganador;
+                        self.PartidoGanador.idPartido(d.Partido.IdPartido);
+                        self.PartidoGanador.NombrePartido(d.Partido.Nombre);
+                        if (d.Logo) self.PartidoGanador.Logo(d.Logo);
+                        self.PartidoGanador.Integrantes(d.Integrantes);
+                    }
+
+                    //Conteo de votacion
+                    self.ConteoVotacion.Emitidos(data.Conteo.VotosEmitidos);
+                    self.ConteoVotacion.Validos(data.Conteo.VotosValidos);
+                    self.ConteoVotacion.Blanco(data.Conteo.VotosEnBlanco);
+                    self.ConteoVotacion.NoEfectuados(data.Conteo.VotosNoEfectuados);
+
+                    self.Graficar(data.Votos);
+                });
+            }
+
+            self.Graficar = function (chartData) {
+                var sum = 0;
+                for (var x in chartData) {
+                    sum += chartData[x].Votos;
+                }
+                for (var x in chartData) {
+                    chartData[x].percentage = Math.round(chartData[x].Votos / sum * 100);
+                }
+
+                //Creamos el gráfico
+                var chart;
+                chart = new AmCharts.AmSerialChart();
+                chart.theme = "light";
+                //chart.pathToImages = "../content_v2/images/";
+                chart.dataProvider = chartData;
+                chart.categoryField = 'NombrePartido';
+                chart.startDuration = 1; //Animación del gráfico
+                chart.rotate = true;
+
+                var categoryAxis = chart.categoryAxis;
+                categoryAxis.axisColor = "#DADADA";
+                categoryAxis.dashLength = 1;
+                categoryAxis.minorGridEnabled = true;
+                categoryAxis.gridPosition = "start";
+
+                // value (Eje y)
+                var valueAxis = new AmCharts.ValueAxis();
+                valueAxis.dashLength = 3;
+                valueAxis.axisAlpha = 0.2;
+                valueAxis.position = "left";
+                valueAxis.title = 'Votos';
+                valueAxis.integersOnly = true;                
+                chart.addValueAxis(valueAxis);
+
+                //VENTAS
+                var graph_barras = new AmCharts.AmGraph();
+                graph_barras.type = 'column';
+                graph_barras.title = 'Votos emitidos';
+                graph_barras.valueField = 'Votos';
+                graph_barras.balloonText = "[[category]]:<br><span style='font-size:18px;'>[[value]] votos ([[percentage]]%)</span>";
+                graph_barras.bulletBorderAlpha = 1;
+                graph_barras.fillAlphas = 0.5;                
+                chart.addGraph(graph_barras);
+
+                chart.write("chart-resultados");
+                chart.invalidateSize();
+
+            }
+
+            self.Notificar = function () {
+                appMaster.Confirm({
+                    Title: 'Notificar',
+                    Message: 'Esta a punto de notificar los resultados a los alumnos empadronados. ¿Proceder?',
+                    Yes: function () {
+                        var html = '<h2>Conteo de votación</h2>';
+                        html += $('#resultados').html();
+                        html += '<h2>' + $('#resultados-votacion .panel-heading').text() + '</h2>';
+                        html += $('#resultados-votacion .panel-body').html();
+
+                        $.ajax({
+                            type: 'POST',
+                            url: '@Url.Content("~/GobiernoEscolar/Resultados/Notificar")',
+                            data: JSON.stringify({ html: html }),
+                            dataType: 'json',
+                            contentType: 'application/json',
+                            success: function (data) {
+                                console.log(data);
+                                appMaster.MessageBox('Listo', 'Se han enviado los resultados a los alumnos empadronados');
+                            }
+                        });
+                    }
+                });
+            }
+
+            self.Imprimir = function () {
+                $('#resultados-votacion').printThis({ loadCSS: "@Url.Content("~/Content/css/site.css")" });
+            }
+        }
+
+        $(function () {
+            var modelo = new ViewModel();
+            ko.applyBindings(modelo);
+        });
+    </script>
+}
+
+@section breadcrumb{
+    <li>
+        <i class="icon-angle-right"></i>
+        <a href="#">Gobierno Escolar</a>
+    </li>
+    <li>
+        <i class="icon-angle-right"></i>
+        <a href="#">Resultados finales</a>
+    </li>
+}
+
+<div class="form-group">
+    <div class="row">
+        <div class="col-sm-3">
+            <button type="button" class="btn btn-success form-control" data-bind="click: Generar">Generar</button>
+        </div>
+        @*<div class="col-sm-2">
+            <div class="input-group">
+                <input type="number" class="form-control textfield" data-bind="value: Anyo" />
+                <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+            </div>
+        </div>*@
+    </div>
+</div>
+<!--ko if: Resultados().length > 0-->
+<div class="panel panel-default">
+    <div class="panel-body">
+        <div id="resultados-votacion" class="row" style="display:none" data-bind="visible:true">
+            <div class="col-sm-5">
+                <div class="table-responsive">
+                    <table id="resultados" class="table table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th data-bind="click: $root.Ordenar.bind(null, 'NombrePartido')">Partido</th>
+                                <th data-bind="click: $root.Ordenar.bind(null, 'Votos')" class="col-xs-3 text-center">Conteo de votos</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!--ko foreach: Resultados-->
+                            <tr>
+                                <td data-bind="text: $data.NombrePartido"></td>
+                                <td style="text-align:center" data-bind="text: $data.Votos"></td>
+                            </tr>
+                            <!--/ko-->
+                        </tbody>
+                    </table>
+                </div>
+                <div class="form-horizontal">
+                    @*<div class="form-group">
+                            <label class="control-label col-sm-8">Votos emitidos:</label>
+                            <div class="col-sm-4">
+                                <div class="form-control" data-bind="text: ConteoVotacion.Emitidos">0</div>
+                            </div>
+                        </div>*@
+                    <div class="form-group">
+                        <label class="control-label col-sm-8">Votos válidos:</label>
+                        <div class="col-sm-4">
+                            <div class="form-control" data-bind="text: ConteoVotacion.Validos">0</div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-8">Votos no efectuados:</label>
+                        <div class="col-sm-4">
+                            <div class="form-control" data-bind="text: ConteoVotacion.NoEfectuados">0</div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-8">Votos en blanco:</label>
+                        <div class="col-sm-4">
+                            <div class="form-control" data-bind="text: ConteoVotacion.Blanco">0</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-7">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h2 class="text-center text-uppercase" style="margin:0">
+                            <!--ko if: PartidoGanador.idPartido-->
+                            <span>Partido ganador</span>
+                            <!--/ko-->
+                            <!--ko ifnot: PartidoGanador.idPartido-->
+                            <span>Resultados</span>
+                            <!--/ko-->
+                        </h2>
+                    </div>
+                    <div class="panel-body">
+                        <!--ko if: PartidoGanador.idPartido-->
+                        <div class="form-horizontal">
+                            <table class="cabecera">
+                                <tr>
+                                    <td>
+                                        <h3 class="text-center text-info" data-bind="text: PartidoGanador.NombrePartido"></h3>
+                                    </td>
+                                    <td class="logo">
+                                        <img alt="" data-bind="attr:{src: PartidoGanador.Logo}" />
+                                    </td>
+                                </tr>
+                            </table>
+                            <!--ko foreach: PartidoGanador.Integrantes-->
+                            <div class="form-group">
+                                <label class="control-label col-sm-3"><span data-bind="text: $data.Cargo"></span>:</label>
+                                <div class="col-sm-9">
+                                    <div class="form-control" data-bind="text: $data.Nombre"></div>
+                                </div>
+                            </div>
+                            <!--/ko-->
+                        </div>
+                        <!--/ko-->
+                        <!--ko ifnot: PartidoGanador.idPartido-->
+                        <h4>Existe empate. Se conformará una comisión de tres profesores, los cuales elegirán al partido ganador en base a las notas y conducta de los integrantes de los partidos empatados.</h4>
+                        <!--/ko-->
+                    </div>
+                    <div class="panel-footer text-center hidden-print">
+                        <button type="button" class="btn btn-primary" data-bind="click: Imprimir">Imprimir</button>
+                        <button type="button" class="btn btn-success" data-bind="click: Notificar">Notificar</button>
+                        <a href="~/" class="btn btn-default">Salir</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="panel panel-default">
+    <div class="panel-heading">Resultados</div>
+    <div class="panel-body">
+        <div id="chart-resultados"></div>
+    </div>
+</div>
+<!--/ko-->

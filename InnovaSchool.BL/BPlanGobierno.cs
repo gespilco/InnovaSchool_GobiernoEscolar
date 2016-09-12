@@ -35,10 +35,22 @@ namespace InnovaSchool.BL
             return oDPlanGobierno.SP_ListarInstrumentosPlanGobierno_DAL(idPlan);
         }
 
-        public int SP_GuardarObservacionActividad_DAL(EObservacion objEN)
+        public int SP_GuardarObservacion_BL(EObservacion objEN)
         {
             DPlanGobierno oDPlanGobierno = new DPlanGobierno();
-            return oDPlanGobierno.SP_GuardarObservacionActividad_DAL(objEN);
+            return oDPlanGobierno.SP_GuardarObservacion_DAL(objEN);
+        }
+
+        public List<EObservacion> SP_VerObservacionesDetalle_BL(int id, string tipo)
+        {
+            DPlanGobierno oDPlanGobierno = new DPlanGobierno();
+            return oDPlanGobierno.SP_VerObservacionesDetalle_DAL(id, tipo);
+        }
+
+        public List<EObservacion> SP_VerTodasObservacionesPlan_BL(int idPlan)
+        {
+            DPlanGobierno oDPlanGobierno = new DPlanGobierno();
+            return oDPlanGobierno.SP_VerTodasObservacionesPlan_DAL(idPlan);
         }
 
         public int SP_AprobarPlanGobierno_BL(int idPlan)

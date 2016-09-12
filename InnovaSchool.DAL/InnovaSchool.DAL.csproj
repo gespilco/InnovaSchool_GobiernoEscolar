@@ -47,6 +47,9 @@
     <Compile Include="DDetalleProceso.cs" />
     <Compile Include="DPartidoPostulante.cs" />
     <Compile Include="DPlanGobierno.cs" />
+    <Compile Include="DResultados.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="DUsuario.cs" />
     <Compile Include="Extensions\DataReaderExtensions.cs" />
     <Compile Include="Extensions\SqlParameterExtensions.cs" />

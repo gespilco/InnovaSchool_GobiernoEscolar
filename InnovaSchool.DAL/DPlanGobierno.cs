@@ -74,15 +74,15 @@ namespace InnovaSchool.DAL
             return list.ToList();
         }
 
-        public int SP_GuardarObservacionActividad_DAL(EObservacion objEN)
+        public int SP_GuardarObservacion_DAL(EObservacion objEN)
         {
             try
             {
-                SqlCommand cmd = new SqlCommand("SP_GuardarObservacionActividad", cn);
+                SqlCommand cmd = new SqlCommand("SP_PlanGobiernoGuardarObservacion", cn);
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddParameter("@Descripcion", objEN.Descripcion);
-                //cmd.Parameters.AddParameter("@NivelObservacion", objEN.NivelObservacion);
-                //cmd.Parameters.AddParameter("@idInstrumento", objEN.idInstrumento);
+                cmd.Parameters.AddParameter("@NivelObservacion", objEN.NivelObservacion);
+                cmd.Parameters.AddParameter("@idInstrumento", objEN.idInstrumento);
                 cmd.Parameters.AddParameter("@idActividadPropuesta", objEN.idActividadPropuesta);
                 cmd.Parameters.AddParameter("@idactPlan", objEN.idactPlan);
 
@@ -97,6 +97,35 @@ namespace InnovaSchool.DAL
                     cn.Close();
                 throw;
             }
+        }
+
+        public List<EObservacion> SP_VerObservacionesDetalle_DAL(int id, string tipo)
+        {
+            SqlCommand cmd = new SqlCommand("SP_PlanGobiernoVerObservacionesDetalle", cn);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@id", id);
+            cmd.Parameters.AddWithValue("@tipo", tipo);
+
+            cn.Open();
+            SqlDataReader drd = cmd.ExecuteReader(CommandBehavior.SingleResult);
+            List<EObservacion> list = drd.MapToList<EObservacion>();
+            cn.Close();
+            drd.Close();
+            return list;
+        }
+
+        public List<EObservacion> SP_VerTodasObservacionesPlan_DAL(int idPlan)
+        {
+            SqlCommand cmd = new SqlCommand("SP_VerTodasObservacionesPlan", cn);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@idPlan", idPlan);            
+
+            cn.Open();
+            SqlDataReader drd = cmd.ExecuteReader(CommandBehavior.SingleResult);
+            List<EObservacion> list = drd.MapToList<EObservacion>();
+            cn.Close();
+            drd.Close();
+            return list;
         }
 
         public int SP_AprobarPlanGobierno_DAL(int idPlan)

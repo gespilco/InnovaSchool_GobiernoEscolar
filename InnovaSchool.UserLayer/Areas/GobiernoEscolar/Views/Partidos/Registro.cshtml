@@ -201,7 +201,7 @@
                             self.Partido.NombrePartido(p.Nombre);
 
                             if (data.Logo) {
-                                self.Partido.Logo("data:image/png;base64," + data.Logo);
+                                self.Partido.Logo(data.Logo);
                             }
 
                             //Asignamos la variable seleccionado
@@ -341,7 +341,7 @@
             <button type="button" class="btn btn-default">Imprimir</button>
             @if (@ViewBag.IdPartido != null && SessionHelper.IsInRole("Comision_leg"))
             {
-                <a href="~/GobiernoEscolar/Partidos/PlanGobierno/@ViewBag.IdPartido" class="btn btn-success">Visualizar plan de gobierno</a>
+                <a href="~/GobiernoEscolar/PlanGobierno?id=@ViewBag.IdPartido" class="btn btn-success">Visualizar plan de gobierno</a>
             }
         </div>
     </div>

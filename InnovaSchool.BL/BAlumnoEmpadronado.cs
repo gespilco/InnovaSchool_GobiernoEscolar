@@ -61,7 +61,7 @@ namespace InnovaSchool.BL
 
         public int GenerarCredenciales_BL(List<SP_ListarAlumnosPadronElectoral_Result> alumnos)
         {
-            EEmail emisor = new EEmail("procesoelectoral@innovaschool.pe", "Innova School");
+            EEmail emisor = new EEmail("procesoelectoral@innovaschool.edu.pe", "Innova School");
             int procesados = 0;
 
             string Plantilla = BOperaciones.GetHtmlPage(HttpContext.Current.Server.MapPath(ConfigurationManager.AppSettings["PlantillaCredencialesVoto"]));
