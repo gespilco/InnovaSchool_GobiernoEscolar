@@ -93,19 +93,22 @@ namespace InnovaSchool.BL
 
                 if (filas_afectadas > 0)
                 {
-                    EEmailStatus status = BEmail.EnviarEmail(emisor, new List<EEmail>() { new EEmail(item.correoElectronico, item.nombre + " " + item.apellidos) },
-                    "Credenciales", Plantilla
-                    .Replace("{Nombres}", item.nombre)
-                    .Replace("{Apellidos}", item.apellidos)
-                    .Replace("{Usuario}", oEAlumnoEmpadronado.usuario)
-                    .Replace("{Clave}", clave)
-                    );
-
-                    if (status.Estado == true)
+                    if (item.correoElectronico != null && item.correoElectronico != string.Empty)
                     {
-                        procesados++;
+                        EEmailStatus status = BEmail.EnviarEmail(emisor, new List<EEmail>() { new EEmail(item.correoElectronico, item.nombre + " " + item.apellidos) },
+                            "Credenciales", Plantilla
+                            .Replace("{Nombres}", item.nombre)
+                            .Replace("{Apellidos}", item.apellidos)
+                            .Replace("{Usuario}", oEAlumnoEmpadronado.usuario)
+                            .Replace("{Clave}", clave)
+                            );
+
+                        if (status.Estado == true)
+                        {
+                            procesados++;
+                        }
                     }
-                }                
+                }
             }
 
             return procesados;
@@ -113,8 +116,8 @@ namespace InnovaSchool.BL
 
         public SP_GE_ObtenerCredencialesVotacion_Result ObtenerCredencialesVotacion(string usuario, string claveAcceso)
         {
-             oDAlumnoEmpadronado = new DAlumnoEmpadronado();
-             return oDAlumnoEmpadronado.ObtenerCredencialesVotacion_DAL(usuario, claveAcceso);
+            oDAlumnoEmpadronado = new DAlumnoEmpadronado();
+            return oDAlumnoEmpadronado.ObtenerCredencialesVotacion_DAL(usuario, claveAcceso);
         }
     }
 }
