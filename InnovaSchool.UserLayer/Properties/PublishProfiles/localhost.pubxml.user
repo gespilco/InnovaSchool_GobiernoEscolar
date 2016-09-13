@@ -1,0 +1,355 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+Este archivo es utilizado por el proceso de paquete/publicación de nuestro proyecto Web. Puede personalizar el comportamiento de este proceso
+editando este archivo MSBuild. Para conocer más acerca de esto, visite http://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <_PublishTargetUrl>http://localhost/innovaschool</_PublishTargetUrl>
+  </PropertyGroup>
+  <ItemGroup>
+    <File Include="Areas/GobiernoEscolar/Views/PadronElectoral/Index.cshtml">
+      <publishTime>09/12/2016 17:48:13</publishTime>
+    </File>
+    <File Include="Areas/GobiernoEscolar/Views/Partidos/Index.cshtml">
+      <publishTime>09/12/2016 17:21:42</publishTime>
+    </File>
+    <File Include="Areas/GobiernoEscolar/Views/Partidos/Registro.cshtml">
+      <publishTime>09/12/2016 16:45:38</publishTime>
+    </File>
+    <File Include="Areas/GobiernoEscolar/Views/PlanGobierno/Index.cshtml">
+      <publishTime>09/12/2016 17:39:00</publishTime>
+    </File>
+    <File Include="Areas/GobiernoEscolar/Views/PlanGobierno/_PartialObservaciones.cshtml">
+      <publishTime>09/12/2016 09:03:59</publishTime>
+    </File>
+    <File Include="Areas/GobiernoEscolar/Views/Plantillas/Credenciales.html">
+      <publishTime>09/12/2016 16:07:07</publishTime>
+    </File>
+    <File Include="Areas/GobiernoEscolar/Views/Resultados/Index.cshtml">
+      <publishTime>09/12/2016 16:45:30</publishTime>
+    </File>
+    <File Include="Areas/GobiernoEscolar/Views/Votacion/Credenciales.cshtml">
+      <publishTime>09/12/2016 16:22:35</publishTime>
+    </File>
+    <File Include="Areas/GobiernoEscolar/Views/Votacion/Index.cshtml">
+      <publishTime>09/12/2016 16:44:00</publishTime>
+    </File>
+    <File Include="Areas/GobiernoEscolar/Views/web.config">
+      <publishTime>09/04/2016 12:28:12</publishTime>
+    </File>
+    <File Include="bin/Antlr3.Runtime.dll">
+      <publishTime>09/07/2016 11:14:18</publishTime>
+    </File>
+    <File Include="bin/es/System.Web.Helpers.resources.dll">
+      <publishTime>09/03/2016 19:41:57</publishTime>
+    </File>
+    <File Include="bin/es/System.Web.Mvc.resources.dll">
+      <publishTime>09/03/2016 19:41:57</publishTime>
+    </File>
+    <File Include="bin/es/System.Web.Razor.resources.dll">
+      <publishTime>09/03/2016 19:41:56</publishTime>
+    </File>
+    <File Include="bin/es/System.Web.Webpages.Deployment.resources.dll">
+      <publishTime>09/03/2016 19:41:57</publishTime>
+    </File>
+    <File Include="bin/es/System.Web.Webpages.Razor.resources.dll">
+      <publishTime>09/03/2016 19:41:57</publishTime>
+    </File>
+    <File Include="bin/es/System.Web.Webpages.resources.dll">
+      <publishTime>09/03/2016 19:41:57</publishTime>
+    </File>
+    <File Include="bin/InnovaSchool.BL.dll">
+      <publishTime>09/12/2016 22:16:36</publishTime>
+    </File>
+    <File Include="bin/InnovaSchool.DAL.dll">
+      <publishTime>09/12/2016 22:16:35</publishTime>
+    </File>
+    <File Include="bin/InnovaSchool.Entity.dll">
+      <publishTime>09/12/2016 22:16:35</publishTime>
+    </File>
+    <File Include="bin/InnovaSchool.UserLayer.dll">
+      <publishTime>09/12/2016 22:16:40</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Web.Infrastructure.dll">
+      <publishTime>09/07/2016 11:14:18</publishTime>
+    </File>
+    <File Include="bin/Newtonsoft.Json.dll">
+      <publishTime>09/07/2016 11:14:18</publishTime>
+    </File>
+    <File Include="bin/System.Web.Helpers.dll">
+      <publishTime>09/03/2016 19:41:55</publishTime>
+    </File>
+    <File Include="bin/System.Web.Mvc.dll">
+      <publishTime>09/03/2016 19:41:56</publishTime>
+    </File>
+    <File Include="bin/System.Web.Optimization.dll">
+      <publishTime>09/07/2016 11:14:18</publishTime>
+    </File>
+    <File Include="bin/System.Web.Razor.dll">
+      <publishTime>09/03/2016 19:41:55</publishTime>
+    </File>
+    <File Include="bin/System.Web.Webpages.Deployment.dll">
+      <publishTime>09/03/2016 19:41:55</publishTime>
+    </File>
+    <File Include="bin/System.Web.Webpages.dll">
+      <publishTime>09/03/2016 19:41:55</publishTime>
+    </File>
+    <File Include="bin/System.Web.Webpages.Razor.dll">
+      <publishTime>09/03/2016 19:41:56</publishTime>
+    </File>
+    <File Include="bin/WebGrease.dll">
+      <publishTime>09/07/2016 11:14:18</publishTime>
+    </File>
+    <File Include="Content/css/bootstrap.css">
+      <publishTime>08/26/2015 17:32:23</publishTime>
+    </File>
+    <File Include="Content/css/bootstrap.min.css">
+      <publishTime>08/10/2016 12:58:41</publishTime>
+    </File>
+    <File Include="Content/css/justified-nav.css">
+      <publishTime>09/07/2016 13:01:39</publishTime>
+    </File>
+    <File Include="Content/css/print.css">
+      <publishTime>09/12/2016 09:03:59</publishTime>
+    </File>
+    <File Include="Content/css/site.css">
+      <publishTime>09/12/2016 12:27:46</publishTime>
+    </File>
+    <File Include="Content/font/font-awesome-4.3.0/css/font-awesome.css">
+      <publishTime>09/07/2016 12:38:48</publishTime>
+    </File>
+    <File Include="Content/font/font-awesome-4.3.0/css/font-awesome.min.css">
+      <publishTime>09/07/2016 12:38:48</publishTime>
+    </File>
+    <File Include="Content/font/font-awesome-4.3.0/fonts/fontawesome-webfont.eot">
+      <publishTime>09/07/2016 12:38:48</publishTime>
+    </File>
+    <File Include="Content/font/font-awesome-4.3.0/fonts/fontawesome-webfont.svg">
+      <publishTime>09/07/2016 12:38:48</publishTime>
+    </File>
+    <File Include="Content/font/font-awesome-4.3.0/fonts/fontawesome-webfont.ttf">
+      <publishTime>09/07/2016 12:38:48</publishTime>
+    </File>
+    <File Include="Content/font/font-awesome-4.3.0/fonts/fontawesome-webfont.woff">
+      <publishTime>09/07/2016 12:38:48</publishTime>
+    </File>
+    <File Include="Content/font/font-awesome-4.3.0/fonts/fontawesome-webfont.woff2">
+      <publishTime>09/07/2016 12:38:48</publishTime>
+    </File>
+    <File Include="Content/font/font-awesome-4.3.0/fonts/FontAwesome.otf">
+      <publishTime>09/07/2016 12:38:48</publishTime>
+    </File>
+    <File Include="Content/font/font-awesome-4.3.0/less/animated.less">
+      <publishTime>09/07/2016 12:38:48</publishTime>
+    </File>
+    <File Include="Content/font/font-awesome-4.3.0/less/bordered-pulled.less">
+      <publishTime>09/07/2016 12:38:48</publishTime>
+    </File>
+    <File Include="Content/font/font-awesome-4.3.0/less/core.less">
+      <publishTime>09/07/2016 12:38:48</publishTime>
+    </File>
+    <File Include="Content/font/font-awesome-4.3.0/less/fixed-width.less">
+      <publishTime>09/07/2016 12:38:48</publishTime>
+    </File>
+    <File Include="Content/font/font-awesome-4.3.0/less/font-awesome.less">
+      <publishTime>09/07/2016 12:38:48</publishTime>
+    </File>
+    <File Include="Content/font/font-awesome-4.3.0/less/icons.less">
+      <publishTime>09/07/2016 12:38:48</publishTime>
+    </File>
+    <File Include="Content/font/font-awesome-4.3.0/less/larger.less">
+      <publishTime>09/07/2016 12:38:48</publishTime>
+    </File>
+    <File Include="Content/font/font-awesome-4.3.0/less/list.less">
+      <publishTime>09/07/2016 12:38:48</publishTime>
+    </File>
+    <File Include="Content/font/font-awesome-4.3.0/less/mixins.less">
+      <publishTime>09/07/2016 12:38:48</publishTime>
+    </File>
+    <File Include="Content/font/font-awesome-4.3.0/less/path.less">
+      <publishTime>09/07/2016 12:38:48</publishTime>
+    </File>
+    <File Include="Content/font/font-awesome-4.3.0/less/rotated-flipped.less">
+      <publishTime>09/07/2016 12:38:48</publishTime>
+    </File>
+    <File Include="Content/font/font-awesome-4.3.0/less/stacked.less">
+      <publishTime>09/07/2016 12:38:48</publishTime>
+    </File>
+    <File Include="Content/font/font-awesome-4.3.0/less/variables.less">
+      <publishTime>09/07/2016 12:38:48</publishTime>
+    </File>
+    <File Include="Content/font/font-awesome-4.3.0/scss/font-awesome.scss">
+      <publishTime>09/07/2016 12:38:48</publishTime>
+    </File>
+    <File Include="Content/font/font-awesome-4.3.0/scss/_animated.scss">
+      <publishTime>09/07/2016 12:38:48</publishTime>
+    </File>
+    <File Include="Content/font/font-awesome-4.3.0/scss/_bordered-pulled.scss">
+      <publishTime>09/07/2016 12:38:48</publishTime>
+    </File>
+    <File Include="Content/font/font-awesome-4.3.0/scss/_core.scss">
+      <publishTime>09/07/2016 12:38:48</publishTime>
+    </File>
+    <File Include="Content/font/font-awesome-4.3.0/scss/_fixed-width.scss">
+      <publishTime>09/07/2016 12:38:48</publishTime>
+    </File>
+    <File Include="Content/font/font-awesome-4.3.0/scss/_icons.scss">
+      <publishTime>09/07/2016 12:38:48</publishTime>
+    </File>
+    <File Include="Content/font/font-awesome-4.3.0/scss/_larger.scss">
+      <publishTime>09/07/2016 12:38:48</publishTime>
+    </File>
+    <File Include="Content/font/font-awesome-4.3.0/scss/_list.scss">
+      <publishTime>09/07/2016 12:38:48</publishTime>
+    </File>
+    <File Include="Content/font/font-awesome-4.3.0/scss/_mixins.scss">
+      <publishTime>09/07/2016 12:38:49</publishTime>
+    </File>
+    <File Include="Content/font/font-awesome-4.3.0/scss/_path.scss">
+      <publishTime>09/07/2016 12:38:49</publishTime>
+    </File>
+    <File Include="Content/font/font-awesome-4.3.0/scss/_rotated-flipped.scss">
+      <publishTime>09/07/2016 12:38:49</publishTime>
+    </File>
+    <File Include="Content/font/font-awesome-4.3.0/scss/_stacked.scss">
+      <publishTime>09/07/2016 12:38:49</publishTime>
+    </File>
+    <File Include="Content/font/font-awesome-4.3.0/scss/_variables.scss">
+      <publishTime>09/07/2016 12:38:49</publishTime>
+    </File>
+    <File Include="Content/font/glyphicons-regular-0.eot">
+      <publishTime>09/03/2016 20:06:08</publishTime>
+    </File>
+    <File Include="Content/font/glyphicons-regular.eot">
+      <publishTime>09/03/2016 20:06:08</publishTime>
+    </File>
+    <File Include="Content/font/glyphicons-regular.svg">
+      <publishTime>09/03/2016 20:06:08</publishTime>
+    </File>
+    <File Include="Content/font/glyphicons-regular.ttf">
+      <publishTime>09/03/2016 20:06:08</publishTime>
+    </File>
+    <File Include="Content/font/glyphicons-regular.woff">
+      <publishTime>09/03/2016 20:06:08</publishTime>
+    </File>
+    <File Include="Content/font/glyphiconshalflings-regular-0.eot">
+      <publishTime>09/03/2016 20:06:08</publishTime>
+    </File>
+    <File Include="Content/font/glyphiconshalflings-regular.eot">
+      <publishTime>09/03/2016 20:06:08</publishTime>
+    </File>
+    <File Include="Content/font/glyphiconshalflings-regular.svg">
+      <publishTime>09/03/2016 20:06:08</publishTime>
+    </File>
+    <File Include="Content/font/glyphiconshalflings-regular.ttf">
+      <publishTime>09/03/2016 20:06:08</publishTime>
+    </File>
+    <File Include="Content/font/glyphiconshalflings-regular.woff">
+      <publishTime>09/03/2016 20:06:08</publishTime>
+    </File>
+    <File Include="Content/img/bg-login.png">
+      <publishTime>09/07/2016 12:24:31</publishTime>
+    </File>
+    <File Include="Content/img/ColegioPortada.jpg">
+      <publishTime>09/07/2016 11:29:24</publishTime>
+    </File>
+    <File Include="Content/img/default.png">
+      <publishTime>09/12/2016 16:34:37</publishTime>
+    </File>
+    <File Include="Content/img/innova_schools.png">
+      <publishTime>09/07/2016 11:29:24</publishTime>
+    </File>
+    <File Include="Content/img/logo.png">
+      <publishTime>09/07/2016 11:29:24</publishTime>
+    </File>
+    <File Include="Global.asax">
+      <publishTime>09/03/2016 19:41:54</publishTime>
+    </File>
+    <File Include="InnovaSchoolDataSet.xsc">
+      <publishTime>09/12/2016 09:03:59</publishTime>
+    </File>
+    <File Include="InnovaSchoolDataSet.xss">
+      <publishTime>09/12/2016 09:03:59</publishTime>
+    </File>
+    <File Include="packages.config">
+      <publishTime>09/07/2016 11:14:22</publishTime>
+    </File>
+    <File Include="Scripts/amcharts/amcharts.js">
+      <publishTime>09/12/2016 09:03:59</publishTime>
+    </File>
+    <File Include="Scripts/amcharts/serial.js">
+      <publishTime>09/12/2016 09:03:59</publishTime>
+    </File>
+    <File Include="Scripts/app.js">
+      <publishTime>09/08/2016 16:32:53</publishTime>
+    </File>
+    <File Include="Scripts/bootstrap.js">
+      <publishTime>08/26/2015 17:32:23</publishTime>
+    </File>
+    <File Include="Scripts/bootstrap.min.js">
+      <publishTime>08/26/2015 17:32:23</publishTime>
+    </File>
+    <File Include="Scripts/jquery-1.10.2.js">
+      <publishTime>09/07/2016 11:17:50</publishTime>
+    </File>
+    <File Include="Scripts/jquery-1.10.2.min.js">
+      <publishTime>09/07/2016 11:17:50</publishTime>
+    </File>
+    <File Include="Scripts/jquery-1.10.2.min.map">
+      <publishTime>09/07/2016 11:17:50</publishTime>
+    </File>
+    <File Include="Scripts/jquery-print.js">
+      <publishTime>09/12/2016 09:03:59</publishTime>
+    </File>
+    <File Include="Scripts/jquery.validate.js">
+      <publishTime>09/07/2016 11:17:50</publishTime>
+    </File>
+    <File Include="Scripts/jquery.validate.min.js">
+      <publishTime>09/07/2016 11:17:50</publishTime>
+    </File>
+    <File Include="Scripts/jquery.validate.unobtrusive.js">
+      <publishTime>09/07/2016 11:17:50</publishTime>
+    </File>
+    <File Include="Scripts/jquery.validate.unobtrusive.min.js">
+      <publishTime>09/07/2016 11:17:50</publishTime>
+    </File>
+    <File Include="Scripts/knockout-3.4.0.debug.js">
+      <publishTime>09/07/2016 08:55:06</publishTime>
+    </File>
+    <File Include="Scripts/knockout-3.4.0.js">
+      <publishTime>09/07/2016 08:55:06</publishTime>
+    </File>
+    <File Include="Scripts/modernizr-2.6.2.js">
+      <publishTime>09/07/2016 11:17:50</publishTime>
+    </File>
+    <File Include="Scripts/respond.js">
+      <publishTime>09/07/2016 11:17:50</publishTime>
+    </File>
+    <File Include="Scripts/respond.min.js">
+      <publishTime>09/07/2016 11:17:50</publishTime>
+    </File>
+    <File Include="Views/Account/Login.cshtml">
+      <publishTime>09/08/2016 17:37:23</publishTime>
+    </File>
+    <File Include="Views/Home/Index.cshtml">
+      <publishTime>09/07/2016 12:03:08</publishTime>
+    </File>
+    <File Include="Views/Restringido/Index.cshtml">
+      <publishTime>09/05/2016 23:16:48</publishTime>
+    </File>
+    <File Include="Views/Shared/_Layout.cshtml">
+      <publishTime>09/12/2016 09:03:59</publishTime>
+    </File>
+    <File Include="Views/web.config">
+      <publishTime>09/07/2016 11:21:26</publishTime>
+    </File>
+    <File Include="Views/_ViewStart.cshtml">
+      <publishTime>09/03/2016 19:44:21</publishTime>
+    </File>
+    <File Include="Web.config">
+      <publishTime>09/12/2016 22:16:41</publishTime>
+    </File>
+  </ItemGroup>
+</Project>

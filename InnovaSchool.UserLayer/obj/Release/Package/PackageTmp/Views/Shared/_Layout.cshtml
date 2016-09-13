@@ -1,0 +1,101 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Innova School</title>
+    @Styles.Render("~/Content/css")
+    @RenderSection("styles", false)
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <div class="container">
+        <div class="masthead">
+            <div class="row">
+                <div class="col-sm-6">
+                    <img src="~/Content/img/innova_schools.png" alt="" />
+                </div>
+                <div class="col-sm-6" style="text-align: right">
+                    <h3 class="text-info">
+                        <a href='@Url.Content("~/Home/Index")'>Sistema de gestión académica</a>
+                    </h3>
+                    <a href="~/Account/Login"><small>Cerrar sesión</small></a>
+                </div>
+            </div>
+            <ul class="nav nav-justified">
+                <li class="dropdown">
+                    <a class="dropdown-toggle" aria-expanded="false" aria-haspopup="true" role="button" data-toggle="dropdown" href="#">
+                        Gestion<br />Pedagógica
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href='@Url.Content("~/Home/Opcion1Modulo1")'>Opcion1</a>
+                        </li>
+                        <li>
+                            <a href='@Url.Content("~/Home/Opcion2Modulo1")'>Opcion2</a>
+                        </li>
+                        <li>
+                            <a href='@Url.Content("~/Home/Opcion3Modulo1")'>Opcion3</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>                    
+                    <a href='@Url.Content("~/Home/Modulo2")'>
+                        Gestión<br />Directiva
+                    </a>
+                </li>
+                <li>@Html.ActionLink("Gestión Apoyo Académico", "Modulo3", "Home")</li>
+                <li>
+                    <a href='@Url.Content("~/Home/Modulo4")'>
+                        Gestión de<br />personal
+                    </a>
+                </li>
+                <li>@Html.ActionLink("Gestion Académica y Formativa", "Modulo5", "Home")</li>
+                <li>
+                    <a class="dropdown-toggle" aria-expanded="false" aria-haspopup="true" role="button" data-toggle="dropdown" href="#">
+                        Gestion de Gobierno Escolar 
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href='@Url.Content("~/GobiernoEscolar/Partidos")'>Partidos</a>
+                        </li>
+                        <li>
+                            <a href='@Url.Content("~/GobiernoEscolar/PadronElectoral")'>Padrón Electoral</a>
+                        </li>
+                        <li class="divider" role="separator"></li>
+                        <li>
+                            <a href='@Url.Content("~/GobiernoEscolar/Resultados")'>Reporte de votaciones</a>
+                        </li>                         
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="container body-content">
+        <br />
+        <ul class="breadcrumb">
+            <li>                
+                <a href="~/">Inicio</a>
+            </li>
+            @RenderSection("breadcrumb", required: false)
+        </ul>        
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+        </footer>
+    </div>
+    <div class="loading">
+        <div class="loading-content">
+            <div><i class="fa fa-spinner fa-spin fa-3x"></i></div>
+            <div class="loading-text">Procesando</div>
+        </div>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

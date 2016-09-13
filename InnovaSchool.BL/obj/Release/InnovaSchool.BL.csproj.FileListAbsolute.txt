@@ -1,0 +1,9 @@
+D:\team\UPC\diana\InnovaSchool\InnovaSchool.BL\bin\Release\InnovaSchool.BL.dll
+D:\team\UPC\diana\InnovaSchool\InnovaSchool.BL\bin\Release\InnovaSchool.BL.pdb
+D:\team\UPC\diana\InnovaSchool\InnovaSchool.BL\bin\Release\InnovaSchool.DAL.dll
+D:\team\UPC\diana\InnovaSchool\InnovaSchool.BL\bin\Release\InnovaSchool.Entity.dll
+D:\team\UPC\diana\InnovaSchool\InnovaSchool.BL\bin\Release\InnovaSchool.DAL.pdb
+D:\team\UPC\diana\InnovaSchool\InnovaSchool.BL\bin\Release\InnovaSchool.Entity.pdb
+D:\team\UPC\diana\InnovaSchool\InnovaSchool.BL\obj\Release\InnovaSchool.BL.csprojResolveAssemblyReference.cache
+D:\team\UPC\diana\InnovaSchool\InnovaSchool.BL\obj\Release\InnovaSchool.BL.dll
+D:\team\UPC\diana\InnovaSchool\InnovaSchool.BL\obj\Release\InnovaSchool.BL.pdb
