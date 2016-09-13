@@ -69,24 +69,14 @@ namespace InnovaSchool.BL
             return result;
         }
 
-        public bool ValidarPartido(string nombre)
+        public Dictionary<string, object> ValidarNombrePartido_BL(string nombre)
         {
             DPartidoPostulante Obj_Dal = new DPartidoPostulante();
-            List<string> partidos = Obj_Dal.ListarPartidosValidacion_DAL();
-
-            foreach (string p in partidos)
-            {
-                if (p == nombre)
-                {
-                    return false;
-                }
-            }
-
-            return true;
-
+            var result = Obj_Dal.SP_ValidarNombrePartido_DAL(nombre);            
+            return result;
         }
 
-        public SP_GE_ValidarIntegrantePartido_Result ValidarIntegranteInscrito(int idAlumno)
+        public SP_GE_ValidarIntegrantePartido_Result ValidarIntegranteInscrito_BL(int idAlumno)
         {
             DPartidoPostulante Obj_Dal = new DPartidoPostulante();
             return Obj_Dal.ValidarIntegranteInscrito_DAL(idAlumno, DateTime.Now.Year);

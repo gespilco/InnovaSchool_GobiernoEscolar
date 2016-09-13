@@ -69,22 +69,27 @@
                 .done(function (data) {
                     console.log(data);
 
-                    self.Resultados(data.Votos);
-                    if (data.Ganador) {
-                        var d = data.Ganador;
-                        self.PartidoGanador.idPartido(d.Partido.IdPartido);
-                        self.PartidoGanador.NombrePartido(d.Partido.Nombre);
-                        if (d.Logo) self.PartidoGanador.Logo(d.Logo);
-                        self.PartidoGanador.Integrantes(d.Integrantes);
+                    if (!data.Mensaje) {
+                        self.Resultados(data.Votos);
+                        if (data.Ganador) {
+                            var d = data.Ganador;
+                            self.PartidoGanador.idPartido(d.Partido.IdPartido);
+                            self.PartidoGanador.NombrePartido(d.Partido.Nombre);
+                            if (d.Logo) self.PartidoGanador.Logo(d.Logo);
+                            self.PartidoGanador.Integrantes(d.Integrantes);
+                        }
+
+                        //Conteo de votacion
+                        self.ConteoVotacion.Emitidos(data.Conteo.VotosEmitidos);
+                        self.ConteoVotacion.Validos(data.Conteo.VotosValidos);
+                        self.ConteoVotacion.Blanco(data.Conteo.VotosEnBlanco);
+                        self.ConteoVotacion.NoEfectuados(data.Conteo.VotosNoEfectuados);
+
+                        self.Graficar(data.Votos);
+                    } else {
+                        appMaster.MessageBox('Alerta', data.Mensaje);
                     }
-
-                    //Conteo de votacion
-                    self.ConteoVotacion.Emitidos(data.Conteo.VotosEmitidos);
-                    self.ConteoVotacion.Validos(data.Conteo.VotosValidos);
-                    self.ConteoVotacion.Blanco(data.Conteo.VotosEnBlanco);
-                    self.ConteoVotacion.NoEfectuados(data.Conteo.VotosNoEfectuados);
-
-                    self.Graficar(data.Votos);
+                    
                 });
             }
 

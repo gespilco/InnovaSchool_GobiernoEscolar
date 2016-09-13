@@ -63,13 +63,19 @@ namespace InnovaSchool.UserLayer.Areas.GobiernoEscolar.Controllers
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
-        public PartialViewResult VerObservaciones(int id, string tipo)
+        public JsonResult VerObservaciones(int id, string tipo)
         {
-
             BPlanGobierno oBPlanGobierno = new BPlanGobierno();
             List<EObservacion> model = oBPlanGobierno.SP_VerObservacionesDetalle_BL(id, tipo);
 
-            return PartialView("_PartialObservaciones", model);
+            return Json(model, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult EliminarObservacion(int idObservacion)
+        {
+            BPlanGobierno oBPlanGobierno = new BPlanGobierno();
+            var result = oBPlanGobierno.SP_EliminarObservacion_BL(idObservacion);
+            return Json(result);
         }
 
         public int GuardarObservacion(EObservacion obs, int idPlanGobierno)

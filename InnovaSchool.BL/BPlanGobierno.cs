@@ -47,6 +47,12 @@ namespace InnovaSchool.BL
             return oDPlanGobierno.SP_VerObservacionesDetalle_DAL(id, tipo);
         }
 
+        public bool SP_EliminarObservacion_BL(int idObservacion)
+        {
+            DPlanGobierno oDPlanGobierno = new DPlanGobierno();
+            return oDPlanGobierno.SP_PlanGobiernoEliminarObservacion_DAL(idObservacion);
+        }
+
         public List<EObservacion> SP_VerTodasObservacionesPlan_BL(int idPlan)
         {
             DPlanGobierno oDPlanGobierno = new DPlanGobierno();
@@ -61,10 +67,10 @@ namespace InnovaSchool.BL
 
         public EEmailStatus EnviarObservaciones(int idPartido, int idPlan)
         {            
-            List<EObservacion> obsActividades = SP_VerTodasObservacionesPlan_BL(idPlan);
+            List<EObservacion> observaciones = SP_VerTodasObservacionesPlan_BL(idPlan);
             EEmailStatus status = new EEmailStatus() { Estado = false, Mensaje = "No se envio el email ya que no hay observaciones para enviar" };
 
-            if (obsActividades.Count > 0)
+            if (observaciones.Count > 0)
             {
                 BPartidoPostulante oBPartidoPostulante = new BPartidoPostulante();
                 List<SP_GE_ListarIntegrantesPartido_Result> integrantes = oBPartidoPostulante.ListarIntegrantesPartido_BL(idPartido);
@@ -82,13 +88,33 @@ namespace InnovaSchool.BL
 
                     string html = "";
                     html += "<h2>Observaciones del Plan de Gobierno</h2>";
-                    html += "<ul>";
-                    foreach (var item in obsActividades)
+                    var obsActividades = observaciones.Where(x => x.idActividadPropuesta != null).ToList();
+                    var obsInstrumentos = observaciones.Where(x => x.idInstrumento != null).ToList();
+
+                    if (obsActividades.Count > 0)
                     {
-                        html += string.Format("<li>{0}</li>", item.Descripcion);
+                        html += "<h3>Observaciones de actividades:</h3>";
+                        html += "<ul>";
+                        foreach (var item in obsActividades)
+                        {
+                            html += string.Format("<li>{0}</li>", item.Descripcion);
+                        }
+
+                        html += "</ul>";
                     }
 
-                    html += "</ul>";
+                    if (obsInstrumentos.Count > 0)
+                    {
+                        html += "<br/>";
+                        html += "<h3>Observaciones de instrumentos:</h3>";
+                        html += "<ul>";
+                        foreach (var item in obsInstrumentos)
+                        {
+                            html += string.Format("<li>{0}</li>", item.Descripcion);
+                        }
+
+                        html += "</ul>";
+                    }
 
                     status = BEmail.EnviarEmail(Emisor, Destinatarios, "Observaciones", html);
                 }

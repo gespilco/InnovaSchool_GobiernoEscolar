@@ -24,47 +24,60 @@ namespace InnovaSchool.BL
         }
 
         public object GenerarResultados_BL(int anyo)
-        {            
-            BPartidoPostulante oBPartidoPostulante = new BPartidoPostulante();
+        {
+            object result = null;
+            string mensaje = "";
 
-            var resultados = ListarResultadosVotos_BL(anyo);
-            var conteo = ListarConteoVotos_BL(anyo);
-            var ganador = resultados.FirstOrDefault();
+            BDetalleProceso oBDetalleProceso = new BDetalleProceso();
+            var proceso = oBDetalleProceso.ObtenerProcesoVigente_BL("Realizar Votaciones");
 
-            dynamic dataPartido = null;
-            if (ganador != null)
+            if (proceso == null)
             {
-                //verificamos si existen otros partidos con la misma cantidad de votos
-                int cantidad = resultados.Where(x => x.Votos == ganador.Votos).Count();
+                BPartidoPostulante oBPartidoPostulante = new BPartidoPostulante();
 
-                //Si existe un unico ganador
-                if (cantidad == 1)
+                var resultados = ListarResultadosVotos_BL(anyo);
+                var conteo = ListarConteoVotos_BL(anyo);
+                var ganador = resultados.FirstOrDefault();
+
+                object dataPartido = null;
+                if (ganador != null)
                 {
-                    var p = oBPartidoPostulante.ListarPartidoPostulante_BL(ganador.idPartido);
-                    string foto = "";
-                    if (p.Logo != null)
-                    {
-                        foto = string.Format("data:image/png;base64,{0}", System.Convert.ToBase64String(p.Logo));
-                        p.Logo = null;
-                    }
+                    //verificamos si existen otros partidos con la misma cantidad de votos
+                    int cantidad = resultados.Where(x => x.Votos == ganador.Votos).Count();
 
-                    dataPartido = new
+                    //Si existe un unico ganador
+                    if (cantidad == 1)
                     {
-                        Partido = p,
-                        Logo = foto,
-                        Integrantes = oBPartidoPostulante.ListarIntegrantesPartido_BL(ganador.idPartido)
-                    };
+                        var p = oBPartidoPostulante.ListarPartidoPostulante_BL(ganador.idPartido);
+                        string foto = "";
+                        if (p.Logo != null)
+                        {
+                            foto = string.Format("data:image/png;base64,{0}", System.Convert.ToBase64String(p.Logo));
+                            p.Logo = null;
+                        }
+
+                        dataPartido = new
+                        {
+                            Partido = p,
+                            Logo = foto,
+                            Integrantes = oBPartidoPostulante.ListarIntegrantesPartido_BL(ganador.idPartido)
+                        };
+                    }
                 }
+
+                result = new
+                {
+                    Votos = resultados,
+                    Conteo = conteo,
+                    Ganador = dataPartido
+                };
+            }
+            else
+            {
+                mensaje = "El proceso de votación no ha concluido";
             }
 
-            var result = new
-            {
-                Votos = resultados,
-                Conteo = conteo,
-                Ganador = dataPartido
-            };
-
-            return result;
+            return result ?? new { Mensaje = mensaje };
         }
 
         public EEmailStatus Notificar_BL(string html)

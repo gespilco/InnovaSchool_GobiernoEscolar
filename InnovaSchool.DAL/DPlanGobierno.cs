@@ -88,9 +88,9 @@ namespace InnovaSchool.DAL
                 cmd.Parameters.AddWithValue("@idPlanGobierno", idPlanGobierno);
 
                 cn.Open();
-                var result = cmd.ExecuteNonQuery();
+                var result = cmd.ExecuteScalar();
                 cn.Close();
-                return result;
+                return int.Parse(result.ToString());
             }
             catch (Exception)
             {
@@ -113,6 +113,19 @@ namespace InnovaSchool.DAL
             cn.Close();
             drd.Close();
             return list;
+        }
+
+        public bool SP_PlanGobiernoEliminarObservacion_DAL(int idObservacion)
+        {
+            SqlCommand cmd = new SqlCommand("SP_GE_PlanGobiernoEliminarObservacion", cn);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@idObservacion", idObservacion);            
+
+            cn.Open();
+            var result = cmd.ExecuteNonQuery();
+            cn.Close();
+            
+            return result != 0;
         }
 
         public List<EObservacion> SP_VerTodasObservacionesPlan_DAL(int idPlan)

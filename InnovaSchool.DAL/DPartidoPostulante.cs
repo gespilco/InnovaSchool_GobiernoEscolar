@@ -27,8 +27,7 @@ namespace InnovaSchool.DAL
             cn.Close();
 
             return list;
-        }
-
+        }        
 
         public SP_GE_ListarPartidoPostulanteById_Result ListarPartidoPostulante_DAL(int IdPartido)
         {
@@ -70,28 +69,37 @@ namespace InnovaSchool.DAL
             }
         }
 
-        public List<string> ListarPartidosValidacion_DAL()
+        public Dictionary<string, object> SP_ValidarNombrePartido_DAL(string nombre)
         {
             try
             {
-                SqlCommand cmd = new SqlCommand("SP_GE_ListarPartidosValidacion", cn);
-                cmd.CommandType = CommandType.StoredProcedure;                              
+                SqlCommand cmd = new SqlCommand("SP_GE_ValidarNombrePartido", cn);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.Add(new SqlParameter("Cadena", nombre));
+                cmd.Parameters.Add(new SqlParameter("TABLA", "gge.PartidoPostulante"));
+                cmd.Parameters.Add(new SqlParameter("cncampo", "Nombre"));
+                
+                var mess = new SqlParameter("mess", SqlDbType.VarChar, 200) { Direction = ParameterDirection.Output };                
+                var iderror = new SqlParameter("iderror", SqlDbType.Int) { Direction = ParameterDirection.Output };
+                
+                cmd.Parameters.Add(mess);
+                cmd.Parameters.Add(iderror);
 
                 cn.Open();
-                SqlDataReader drd = cmd.ExecuteReader(CommandBehavior.SingleResult);
+                Dictionary<string, object> obj = new Dictionary<string, object>();
 
-                List<string> lista = new List<string>();
-                if (drd != null && drd.HasRows)
+                using(SqlDataReader drd = cmd.ExecuteReader(CommandBehavior.SingleResult))
                 {
-                    while (drd.Read())
-                    {
-                        lista.Add(drd.GetString(0));
-                    }
-                }                
+                    //var result = drd.MapToList<T>();
+
+                    obj["Mensaje"] = (mess.Value == DBNull.Value ? "" : mess.Value.ToString());
+                    obj["IdError"] = (iderror.Value == DBNull.Value) ? 0 : Convert.ToInt32(iderror.Value);                  
+
+                    cn.Close();                    
+                }
                 
-                cn.Close();
-                drd.Close();
-                return lista;
+                return obj;
             }
             catch (Exception)
             {

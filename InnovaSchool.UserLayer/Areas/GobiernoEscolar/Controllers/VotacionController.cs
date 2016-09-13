@@ -25,9 +25,9 @@ namespace InnovaSchool.UserLayer.Areas.GobiernoEscolar.Controllers
         }
 
         public JsonResult ListarPartidos()
-        {            
-            BPartidoPostulante oBPartidoPostulante = new BPartidoPostulante();
-            var model = oBPartidoPostulante.ListarPartidoPostulante_BL();
+        {
+            BVotacion oBVotacion = new BVotacion();
+            var model = oBVotacion.ListarPartidosVotacion_DAL();
 
             return Json(model, JsonRequestBehavior.AllowGet);
         }
@@ -42,15 +42,15 @@ namespace InnovaSchool.UserLayer.Areas.GobiernoEscolar.Controllers
         public ActionResult Credenciales(string usuario, string clave)
         {
             BDetalleProceso oBDetalleProceso = new BDetalleProceso();
-            var proceso = oBDetalleProceso.ObtenerProceso_BL("Realizar Votaciones");
+            var proceso = oBDetalleProceso.ObtenerProcesoVigente_BL("Realizar Votaciones");
 
             if (proceso != null)
             {
                 SP_GE_ObtenerCredencialesVotacion_Result UsuarioExistente;
                 BAlumnoEmpadronado oBAlumnoEmpadronado = new BAlumnoEmpadronado();
 
-                Resources.Resources objResources = new Resources.Resources();
-                UsuarioExistente = oBAlumnoEmpadronado.ObtenerCredencialesVotacion(usuario, objResources.MD5Crypto(clave));
+                //Resources.Resources objResources = new Resources.Resources();
+                UsuarioExistente = oBAlumnoEmpadronado.ObtenerCredencialesVotacion(usuario, BOperaciones.MD5Crypto(clave));
                 if (UsuarioExistente == null)
                 {
                     ViewBag.Mensaje = "Usuario y/o contraseña incorrectos";
@@ -94,16 +94,19 @@ namespace InnovaSchool.UserLayer.Areas.GobiernoEscolar.Controllers
                     BVotacion oBVotacion = new BVotacion();
                     result = oBVotacion.RegistrarVotacion_DAL(usuario.idAlumno, idPartido);
                     if (result)
-                    {
-                        usuario.estado = "Votante";
-                        Session["UsuarioVotacion"] = usuario;
+                    {                        
+                        Session["UsuarioVotacion"] = null;
                     }
                 }
                 else
                 {
                     mensaje = "Ya realizaste tu voto, no puedes votar 2 veces";
-                }                
+                }
             }
+            else
+            {
+                mensaje = "Su sesión ha expirado. Vuelva a ingresar con sus credenciales";
+            }            
 
             return Json(new { Estado = result, Mensaje = mensaje });
         }

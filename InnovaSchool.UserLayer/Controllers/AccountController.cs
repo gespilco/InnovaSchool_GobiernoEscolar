@@ -22,11 +22,11 @@ namespace InnovaSchool.UserLayer.Controllers
         [HttpPost]
         public ActionResult Login(string username, string password, string ReturnUrl)
         {
-            Resources.Resources objResources = new Resources.Resources();
+            //Resources.Resources objResources = new Resources.Resources();
             EUsuario EUsuario = new EUsuario
             {
                 Usuario = username,
-                UPassword = objResources.MD5Crypto(password)
+                UPassword = BOperaciones.MD5Crypto(password)
             };
             EUsuario UsuarioExistente;
             BUsuario BUsuario = new BUsuario();

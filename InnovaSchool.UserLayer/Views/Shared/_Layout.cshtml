@@ -19,7 +19,11 @@
                     <h3 class="text-info">
                         <a href='@Url.Content("~/Home/Index")'>Sistema de gestión académica</a>
                     </h3>
-                    <a href="~/Account/Login"><small>Cerrar sesión</small></a>
+                    <p>
+                        <i class="fa fa-user"></i> @SessionHelper.Usuario.Nombre    
+                        <span style="margin:0 10px">|</span>    
+                        <a href="~/Account/Login"><small>Cerrar sesión</small></a>
+                    </p>
                 </div>
             </div>
             <ul class="nav nav-justified">
@@ -40,7 +44,7 @@
                         </li>
                     </ul>
                 </li>
-                <li>                    
+                <li>
                     <a href='@Url.Content("~/Home/Modulo2")'>
                         Gestión<br />Directiva
                     </a>
@@ -54,7 +58,7 @@
                 <li>@Html.ActionLink("Gestion Académica y Formativa", "Modulo5", "Home")</li>
                 <li>
                     <a class="dropdown-toggle" aria-expanded="false" aria-haspopup="true" role="button" data-toggle="dropdown" href="#">
-                        Gestion de Gobierno Escolar 
+                        Gestion de Gobierno Escolar
                         <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu">
@@ -67,7 +71,7 @@
                         <li class="divider" role="separator"></li>
                         <li>
                             <a href='@Url.Content("~/GobiernoEscolar/Resultados")'>Reporte de votaciones</a>
-                        </li>                         
+                        </li>
                     </ul>
                 </li>
             </ul>
@@ -76,11 +80,11 @@
     <div class="container body-content">
         <br />
         <ul class="breadcrumb">
-            <li>                
+            <li>
                 <a href="~/">Inicio</a>
             </li>
             @RenderSection("breadcrumb", required: false)
-        </ul>        
+        </ul>
         @RenderBody()
         <hr />
         <footer>

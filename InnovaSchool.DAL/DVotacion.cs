@@ -36,5 +36,20 @@ namespace InnovaSchool.DAL
             }
         }
 
+        public List<SP_GE_ListarPartidoPostulante_Result> ListarPartidosVotacion_DAL()
+        {
+            SqlCommand cmd = new SqlCommand("SP_GE_ListarPartidosVotacion", cn);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            cn.Open();
+            SqlDataReader drd = cmd.ExecuteReader(CommandBehavior.SingleResult);
+            List<SP_GE_ListarPartidoPostulante_Result> list = drd.MapToList<SP_GE_ListarPartidoPostulante_Result>();
+            drd.Close();
+
+            cn.Close();
+
+            return list;
+        }
+
     }
 }
