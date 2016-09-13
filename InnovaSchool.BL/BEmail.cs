@@ -12,12 +12,12 @@ namespace InnovaSchool.BL
     {
         //Configuración esta en Web.config
         public static EEmailStatus EnviarEmail(
-            EEmail Emisor, 
+            EEmail Emisor,
             List<EEmail> Destinatarios,
-            string Asunto, string Cuerpo, 
-            List<EEmail> CC = null, 
-            List<EEmail> CCO = null, 
-            List<Attachment> Adjuntos = null, 
+            string Asunto, string Cuerpo,
+            List<EEmail> CC = null,
+            List<EEmail> CCO = null,
+            List<Attachment> Adjuntos = null,
             bool FormatoHtml = true)
         {
             try
@@ -30,7 +30,8 @@ namespace InnovaSchool.BL
                     //Destinatarios
                     foreach (EEmail obj in Destinatarios)
                     {
-                        sms.To.Add(new MailAddress(obj.Email, obj.Nombre));
+                        if (obj.Email != null && obj.Email != "")
+                            sms.To.Add(new MailAddress(obj.Email, obj.Nombre));
                     }
 
                     //CC (Con Copia)
@@ -38,7 +39,8 @@ namespace InnovaSchool.BL
                     {
                         foreach (EEmail obj in CC)
                         {
-                            sms.CC.Add(new MailAddress(obj.Email, obj.Nombre));
+                            if (obj.Email != null && obj.Email != "")
+                                sms.CC.Add(new MailAddress(obj.Email, obj.Nombre));
                         }
                     }
 
@@ -47,7 +49,8 @@ namespace InnovaSchool.BL
                     {
                         foreach (EEmail obj in CCO)
                         {
-                            sms.Bcc.Add(new MailAddress(obj.Email, obj.Nombre));
+                            if (obj.Email != null && obj.Email != "")
+                                sms.Bcc.Add(new MailAddress(obj.Email, obj.Nombre));
                         }
                     }
 

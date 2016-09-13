@@ -11,8 +11,7 @@ namespace InnovaSchool.UserLayer.Areas.GobiernoEscolar.Controllers
 {
     public class ResultadosController : BaseController
     {
-        //
-        // GET: /GobiernoEscolar/Resultados/
+        [CustomAuthorize(Roles = "Rep_academico")]
         public ActionResult Index()
         {
             return View();
