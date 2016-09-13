@@ -1,4 +1,4 @@
-﻿@model List<InnovaSchool.Entity.Result.SP_ListarAlumnosPadronElectoral_Result>
+﻿@model List<InnovaSchool.Entity.Result.SP_GE_ListarAlumnosPadronElectoral_Result>
 
 @{
     ViewBag.Title = "Generar padron electoral";
@@ -24,6 +24,7 @@
                 Message: '¿Desea generar las credenciales de los alumnos empadronados?',
                 Yes: function () {
                     $.post('@Url.Content("~/GobiernoEscolar/PadronElectoral/Notificar")', null, function (data) {
+                        console.log('Total de credenciales: ' + data);
                         appMaster.MessageBox('Credenciales generadas', 'Se ha generado las credenciales');
                     });
                 }
@@ -68,10 +69,10 @@
                         <tr>
                             <th>Nombre</th>
                             <th>Apellidos</th>
-                            <th>Edad</th>
+                            <th class="text-center">Edad</th>
                             <th class="text-center">Correo</th>
-                            <th>Grado</th>
-                            <th>Sección</th>
+                            <th class="text-center">Grado</th>
+                            <th class="text-center">Sección</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -80,10 +81,10 @@
                             <tr>
                                 <td>@alumno.nombre</td>
                                 <td>@alumno.apellidos</td>
-                                <td>@alumno.edad</td>
+                                <td class="text-center">@alumno.edad</td>
                                 <td>@alumno.correoElectronico</td>
-                                <td>@alumno.grado</td>
-                                <td>@alumno.seccion</td>
+                                <td class="text-center">@alumno.grado</td>
+                                <td class="text-center">@alumno.seccion</td>
                             </tr>
                         }
                     </tbody>

@@ -6,6 +6,7 @@ img { border: 0 none; }
 textarea { resize: none; }
 /*ul, li { margin: 0; padding: 0; }*/
 label { font-weight: normal; }
+table { width:100%; }
 
 input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill { -webkit-box-shadow: 0 0 0 1000px white inset; background-color: #fff !important; }
 input[type='text'], input[type='password'], select, textarea { border: 1px solid #ccc; }

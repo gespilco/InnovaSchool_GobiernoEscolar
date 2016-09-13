@@ -95,7 +95,7 @@ namespace InnovaSchool.UserLayer.Areas.GobiernoEscolar.Controllers
         [CustomAuthorize(Roles = "Comision_leg")]
         public JsonResult GenerarCredenciales()
         {
-            var lista = (List<SP_ListarPartidoPostulante_Result>)Session["Partidos"];
+            var lista = (List<SP_GE_ListarPartidoPostulante_Result>)Session["Partidos"];
 
             if (lista != null)
             {

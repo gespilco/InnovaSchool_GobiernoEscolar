@@ -12,7 +12,7 @@ namespace InnovaSchool.BL
     {
         DAlumno oDAlumno;
 
-        public SP_ListarAlumnoById_Result ListarAlumno_BL(int idAlumno)
+        public SP_GE_ListarAlumnoById_Result ListarAlumno_BL(int idAlumno)
         {
             oDAlumno = new DAlumno();
             return oDAlumno.ListarAlumno_DAL(idAlumno);

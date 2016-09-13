@@ -2,7 +2,7 @@
 
 namespace InnovaSchool.Entity.Result
 {
-    public partial class SP_ListarAlumnosPadronElectoral_Result
+    public partial class SP_GE_ListarAlumnosPadronElectoral_Result
     {
         public int idAlumno { get; set; }
         public string nombre { get; set; }

@@ -16,7 +16,7 @@ namespace InnovaSchool.DAL
 
         public EPlanGobierno SP_PlanGobiernoPartido_DAL(int idPartido)
         {
-            SqlCommand cmd = new SqlCommand("SP_PlanGobiernoPartido", cn);
+            SqlCommand cmd = new SqlCommand("SP_GE_PlanGobiernoPartido", cn);
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.AddWithValue("@idPartido", idPartido);
 
@@ -29,45 +29,45 @@ namespace InnovaSchool.DAL
             return list.FirstOrDefault();
         }
 
-        public List<SP_ListarActividadesPlanGobierno_Result> SP_ListarActividadesPlanGobierno_DAL(int idPlan)
+        public List<SP_GE_ListarActividadesPlanGobierno_Result> SP_ListarActividadesPlanGobierno_DAL(int idPlan)
         {
-            SqlCommand cmd = new SqlCommand("SP_ListarActividadesPlanGobierno", cn);
+            SqlCommand cmd = new SqlCommand("SP_GE_ListarActividadesPlanGobierno", cn);
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.AddWithValue("@idPlan", idPlan);
 
             cn.Open();
             SqlDataReader drd = cmd.ExecuteReader(CommandBehavior.SingleResult);
-            List<SP_ListarActividadesPlanGobierno_Result> list = drd.MapToList<SP_ListarActividadesPlanGobierno_Result>();
+            List<SP_GE_ListarActividadesPlanGobierno_Result> list = drd.MapToList<SP_GE_ListarActividadesPlanGobierno_Result>();
             drd.Close();
             cn.Close();
 
             return list.ToList();
         }
 
-        public List<SP_ListarSubActividadesPlanGobierno_Result> SP_ListarSubActividadesPlanGobierno_DAL(int idActividad)
+        public List<SP_GE_ListarSubActividadesPlanGobierno_Result> SP_ListarSubActividadesPlanGobierno_DAL(int idActividad)
         {
-            SqlCommand cmd = new SqlCommand("SP_ListarSubActividadesPlanGobierno", cn);
+            SqlCommand cmd = new SqlCommand("SP_GE_ListarSubActividadesPlanGobierno", cn);
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.AddWithValue("@idActividad", idActividad);
 
             cn.Open();
             SqlDataReader drd = cmd.ExecuteReader(CommandBehavior.SingleResult);
-            var list = drd.MapToList<SP_ListarSubActividadesPlanGobierno_Result>();
+            var list = drd.MapToList<SP_GE_ListarSubActividadesPlanGobierno_Result>();
             drd.Close();
             cn.Close();
 
             return list.ToList();
         }
 
-        public List<SP_ListarInstrumentosPlanGobierno_Result> SP_ListarInstrumentosPlanGobierno_DAL(int idPlan)
+        public List<SP_GE_ListarInstrumentosPlanGobierno_Result> SP_ListarInstrumentosPlanGobierno_DAL(int idPlan)
         {
-            SqlCommand cmd = new SqlCommand("SP_ListarInstrumentosPlanGobierno", cn);
+            SqlCommand cmd = new SqlCommand("SP_GE_ListarInstrumentosPlanGobierno", cn);
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.AddWithValue("@idPlan", idPlan);
 
             cn.Open();
             SqlDataReader drd = cmd.ExecuteReader(CommandBehavior.SingleResult);
-            List<SP_ListarInstrumentosPlanGobierno_Result> list = drd.MapToList<SP_ListarInstrumentosPlanGobierno_Result>();
+            List<SP_GE_ListarInstrumentosPlanGobierno_Result> list = drd.MapToList<SP_GE_ListarInstrumentosPlanGobierno_Result>();
             drd.Close();
             cn.Close();
 
@@ -78,7 +78,7 @@ namespace InnovaSchool.DAL
         {
             try
             {
-                SqlCommand cmd = new SqlCommand("SP_PlanGobiernoGuardarObservacion", cn);
+                SqlCommand cmd = new SqlCommand("SP_GE_PlanGobiernoGuardarObservacion", cn);
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddParameter("@Descripcion", objEN.Descripcion);
                 cmd.Parameters.AddParameter("@NivelObservacion", objEN.NivelObservacion);
@@ -102,7 +102,7 @@ namespace InnovaSchool.DAL
 
         public List<EObservacion> SP_VerObservacionesDetalle_DAL(int id, string tipo)
         {
-            SqlCommand cmd = new SqlCommand("SP_PlanGobiernoVerObservacionesDetalle", cn);
+            SqlCommand cmd = new SqlCommand("SP_GE_PlanGobiernoVerObservacionesDetalle", cn);
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.AddWithValue("@id", id);
             cmd.Parameters.AddWithValue("@tipo", tipo);
@@ -117,7 +117,7 @@ namespace InnovaSchool.DAL
 
         public List<EObservacion> SP_VerTodasObservacionesPlan_DAL(int idPlan)
         {
-            SqlCommand cmd = new SqlCommand("SP_VerTodasObservacionesPlan", cn);
+            SqlCommand cmd = new SqlCommand("SP_GE_VerTodasObservacionesPlan", cn);
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.AddWithValue("@idPlan", idPlan);            
 
@@ -133,7 +133,7 @@ namespace InnovaSchool.DAL
         {
             try
             {
-                SqlCommand cmd = new SqlCommand("SP_AprobarPlanGobierno", cn);
+                SqlCommand cmd = new SqlCommand("SP_GE_AprobarPlanGobierno", cn);
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@idPlan", idPlan);                
 

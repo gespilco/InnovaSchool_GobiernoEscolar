@@ -17,19 +17,19 @@ namespace InnovaSchool.BL
             return oDPlanGobierno.SP_PlanGobiernoPartido_DAL(idPartido);
         }
 
-        public List<SP_ListarActividadesPlanGobierno_Result> SP_ListarActividadesPlanGobierno_BL(int idPlan)
+        public List<SP_GE_ListarActividadesPlanGobierno_Result> SP_ListarActividadesPlanGobierno_BL(int idPlan)
         {
             DPlanGobierno oDPlanGobierno = new DPlanGobierno();
             return oDPlanGobierno.SP_ListarActividadesPlanGobierno_DAL(idPlan);
         }
 
-        public List<SP_ListarSubActividadesPlanGobierno_Result> SP_ListarSubActividadesPlanGobierno_BL(int idActividad)
+        public List<SP_GE_ListarSubActividadesPlanGobierno_Result> SP_ListarSubActividadesPlanGobierno_BL(int idActividad)
         {
             DPlanGobierno oDPlanGobierno = new DPlanGobierno();
             return oDPlanGobierno.SP_ListarSubActividadesPlanGobierno_DAL(idActividad);
         }
 
-        public List<SP_ListarInstrumentosPlanGobierno_Result> SP_ListarInstrumentosPlanGobierno_BL(int idPlan)
+        public List<SP_GE_ListarInstrumentosPlanGobierno_Result> SP_ListarInstrumentosPlanGobierno_BL(int idPlan)
         {
             DPlanGobierno oDPlanGobierno = new DPlanGobierno();
             return oDPlanGobierno.SP_ListarInstrumentosPlanGobierno_DAL(idPlan);
@@ -67,7 +67,7 @@ namespace InnovaSchool.BL
             if (obsActividades.Count > 0)
             {
                 BPartidoPostulante oBPartidoPostulante = new BPartidoPostulante();
-                List<SP_ListarIntegrantesPartido_Result> integrantes = oBPartidoPostulante.ListarIntegrantesPartido_BL(idPartido);
+                List<SP_GE_ListarIntegrantesPartido_Result> integrantes = oBPartidoPostulante.ListarIntegrantesPartido_BL(idPartido);
 
                 if (integrantes.Count > 0)
                 {

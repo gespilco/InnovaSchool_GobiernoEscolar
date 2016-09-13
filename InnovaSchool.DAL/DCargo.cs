@@ -18,7 +18,7 @@ namespace InnovaSchool.DAL
         {
             try
             {
-                SqlCommand cmd = new SqlCommand("SP_ListarCargos", cn);
+                SqlCommand cmd = new SqlCommand("SP_GE_ListarCargos", cn);
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@anoAcademico", anoAcademico);
                 cn.Open();
@@ -44,7 +44,7 @@ namespace InnovaSchool.DAL
         //{
         //    try
         //    {
-        //        SqlCommand cmd = new SqlCommand("SP_RegistrarCargo", cn);
+        //        SqlCommand cmd = new SqlCommand("SP_GE_RegistrarCargo", cn);
         //        cmd.CommandType = CommandType.StoredProcedure;
         //        cmd.Parameters.AddWithValue("@CargoID", objEN.CargoID);
         //        cmd.Parameters.AddWithValue("@TipoCargo", objEN.TipoCargo);
@@ -68,7 +68,7 @@ namespace InnovaSchool.DAL
         //{
         //    try
         //    {
-        //        SqlCommand cmd = new SqlCommand("SP_ActualizarCargo", cn);
+        //        SqlCommand cmd = new SqlCommand("SP_GE_ActualizarCargo", cn);
         //        cmd.CommandType = CommandType.StoredProcedure;
         //        cmd.Parameters.AddWithValue("@CargoID", objEN.CargoID);
         //        cmd.Parameters.AddWithValue("@TipoCargo", objEN.TipoCargo);
@@ -91,7 +91,7 @@ namespace InnovaSchool.DAL
         //{
         //    try
         //    {
-        //        SqlCommand cmd = new SqlCommand("SP_EliminarCargo", cn);
+        //        SqlCommand cmd = new SqlCommand("SP_GE_EliminarCargo", cn);
         //        cmd.CommandType = CommandType.StoredProcedure;
         //        cmd.Parameters.AddWithValue("@CargoID", objEN.CargoID);
         //        SqlDataAdapter da = new SqlDataAdapter(cmd);

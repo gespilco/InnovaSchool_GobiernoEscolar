@@ -14,14 +14,14 @@ namespace InnovaSchool.DAL
     {
         static SqlConnection cn = new SqlConnection(ConexionUtil.Get_Connection());
 
-        public List<SP_ListarPartidoPostulante_Result> ListarPartidoPostulante_DAL()
+        public List<SP_GE_ListarPartidoPostulante_Result> ListarPartidoPostulante_DAL()
         {
-            SqlCommand cmd = new SqlCommand("SP_ListarPartidoPostulante", cn);
+            SqlCommand cmd = new SqlCommand("SP_GE_ListarPartidoPostulante", cn);
             cmd.CommandType = CommandType.StoredProcedure;
 
             cn.Open();
             SqlDataReader drd = cmd.ExecuteReader(CommandBehavior.SingleResult);
-            List<SP_ListarPartidoPostulante_Result> list = drd.MapToList<SP_ListarPartidoPostulante_Result>();
+            List<SP_GE_ListarPartidoPostulante_Result> list = drd.MapToList<SP_GE_ListarPartidoPostulante_Result>();
             drd.Close();
 
             cn.Close();
@@ -30,15 +30,15 @@ namespace InnovaSchool.DAL
         }
 
 
-        public SP_ListarPartidoPostulanteById_Result ListarPartidoPostulante_DAL(int IdPartido)
+        public SP_GE_ListarPartidoPostulanteById_Result ListarPartidoPostulante_DAL(int IdPartido)
         {
-            SqlCommand cmd = new SqlCommand("SP_ListarPartidoPostulanteById", cn);
+            SqlCommand cmd = new SqlCommand("SP_GE_ListarPartidoPostulanteById", cn);
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.AddWithValue("@IdPartido", IdPartido);
 
             cn.Open();
             SqlDataReader drd = cmd.ExecuteReader(CommandBehavior.SingleResult);
-            List<SP_ListarPartidoPostulanteById_Result> list = drd.MapToList<SP_ListarPartidoPostulanteById_Result>();
+            List<SP_GE_ListarPartidoPostulanteById_Result> list = drd.MapToList<SP_GE_ListarPartidoPostulanteById_Result>();
             drd.Close();
 
             cn.Close();
@@ -50,7 +50,7 @@ namespace InnovaSchool.DAL
         {
             try
             {
-                SqlCommand cmd = new SqlCommand("SP_RegistrarPartido", cn);
+                SqlCommand cmd = new SqlCommand("SP_GE_RegistrarPartido", cn);
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@PartidoID", objEN.idPartido);
                 cmd.Parameters.AddWithValue("@Nombre", objEN.Nombre);
@@ -74,7 +74,7 @@ namespace InnovaSchool.DAL
         {
             try
             {
-                SqlCommand cmd = new SqlCommand("SP_ListarPartidosValidacion", cn);
+                SqlCommand cmd = new SqlCommand("SP_GE_ListarPartidosValidacion", cn);
                 cmd.CommandType = CommandType.StoredProcedure;                              
 
                 cn.Open();
@@ -101,18 +101,18 @@ namespace InnovaSchool.DAL
             }
         }
 
-        public SP_ValidarIntegrantePartido_Result ValidarIntegranteInscrito_DAL(int idAlumno, int anoAcademico)
+        public SP_GE_ValidarIntegrantePartido_Result ValidarIntegranteInscrito_DAL(int idAlumno, int anoAcademico)
         {
             try
             {
-                SqlCommand cmd = new SqlCommand("SP_ValidarIntegrantePartido", cn);
+                SqlCommand cmd = new SqlCommand("SP_GE_ValidarIntegrantePartido", cn);
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@idAlumno", idAlumno);
                 cmd.Parameters.AddWithValue("@anoAcademico", anoAcademico);
 
                 cn.Open();
                 SqlDataReader drd = cmd.ExecuteReader(CommandBehavior.SingleResult);
-                var result = drd.MapToList<SP_ValidarIntegrantePartido_Result>();
+                var result = drd.MapToList<SP_GE_ValidarIntegrantePartido_Result>();
 
                 cn.Close();
                 drd.Close();
@@ -127,15 +127,15 @@ namespace InnovaSchool.DAL
             }
         }
 
-        public List<SP_ListarIntegrantesPartido_Result> ListarIntegrantesPartido_DAL(int idPartido)
+        public List<SP_GE_ListarIntegrantesPartido_Result> ListarIntegrantesPartido_DAL(int idPartido)
         {
-            SqlCommand cmd = new SqlCommand("SP_ListarIntegrantesPartido", cn);
+            SqlCommand cmd = new SqlCommand("SP_GE_ListarIntegrantesPartido", cn);
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.AddWithValue("@idPartido", idPartido);
 
             cn.Open();
             SqlDataReader drd = cmd.ExecuteReader(CommandBehavior.SingleResult);
-            var list = drd.MapToList<SP_ListarIntegrantesPartido_Result>();
+            var list = drd.MapToList<SP_GE_ListarIntegrantesPartido_Result>();
             drd.Close();
 
             cn.Close();
@@ -147,7 +147,7 @@ namespace InnovaSchool.DAL
         {
             try
             {
-                SqlCommand cmd = new SqlCommand("SP_RegistrarPartidoIntegrante", cn);
+                SqlCommand cmd = new SqlCommand("SP_GE_RegistrarPartidoIntegrante", cn);
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@idAlumno", objEN.idAlumno);
                 cmd.Parameters.AddWithValue("@idCargo", objEN.idCargo);
@@ -170,7 +170,7 @@ namespace InnovaSchool.DAL
         {
             try
             {
-                SqlCommand cmd = new SqlCommand("SP_EliminarIntegrantesPartido", cn);
+                SqlCommand cmd = new SqlCommand("SP_GE_EliminarIntegrantesPartido", cn);
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@idPartido", idPartido);               
 
@@ -191,7 +191,7 @@ namespace InnovaSchool.DAL
         {
             try
             {
-                SqlCommand cmd = new SqlCommand("SP_EliminarPartido", cn);
+                SqlCommand cmd = new SqlCommand("SP_GE_EliminarPartido", cn);
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@PartidoID", objEN.idPartido);
                 SqlDataAdapter da = new SqlDataAdapter(cmd);

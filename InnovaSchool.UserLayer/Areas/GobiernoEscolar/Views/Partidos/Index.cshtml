@@ -1,4 +1,4 @@
-﻿@model List<InnovaSchool.Entity.Result.SP_ListarPartidoPostulante_Result>
+﻿@model List<InnovaSchool.Entity.Result.SP_GE_ListarPartidoPostulante_Result>
 @{
     ViewBag.Title = "Partidos";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -8,6 +8,7 @@
 {
     <style type="text/css">
         .Incompleto { color: red; }
+        table img { max-height:50px; width: 50px; }
     </style>
 }
 
@@ -69,7 +70,10 @@
                         @foreach (var row in Model)
                         {
                             <tr class="@row.Estado">
-                                <td><a href="~/GobiernoEscolar/Partidos/Registro/@row.idPartido">@row.Nombre</a></td>
+                                <td>
+                                    <img alt="" src="@(row.Imagen ?? Url.Content("~/Content/img/default.png"))" />
+                                    <a href="~/GobiernoEscolar/Partidos/Registro/@row.idPartido">@row.Nombre</a>
+                                </td>
                                 <td class="text-center">@row.Estado</td>
                             </tr>
                         }

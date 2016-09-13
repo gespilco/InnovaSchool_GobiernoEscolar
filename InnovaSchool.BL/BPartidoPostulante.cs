@@ -14,13 +14,26 @@ namespace InnovaSchool.BL
 {
     public class BPartidoPostulante
     {
-        public List<SP_ListarPartidoPostulante_Result> ListarPartidoPostulante_BL()
+        public List<SP_GE_ListarPartidoPostulante_Result> ListarPartidoPostulante_BL()
         {
             DPartidoPostulante Obj_Dal = new DPartidoPostulante();
-            return Obj_Dal.ListarPartidoPostulante_DAL();
+            var result = Obj_Dal.ListarPartidoPostulante_DAL();
+
+            foreach(var item in result)
+            {
+                item.Imagen = null;
+
+                if (item.Logo != null)
+                {
+                    item.Imagen = string.Format("data:image/png;base64,{0}", System.Convert.ToBase64String(item.Logo));                
+                    item.Logo = null;
+                }                
+            }
+
+            return result;
         }
 
-        public SP_ListarPartidoPostulanteById_Result ListarPartidoPostulante_BL(int IdPartido)
+        public SP_GE_ListarPartidoPostulanteById_Result ListarPartidoPostulante_BL(int IdPartido)
         {
             DPartidoPostulante Obj_Dal = new DPartidoPostulante();
             return Obj_Dal.ListarPartidoPostulante_DAL(IdPartido);
@@ -73,13 +86,13 @@ namespace InnovaSchool.BL
 
         }
 
-        public SP_ValidarIntegrantePartido_Result ValidarIntegranteInscrito(int idAlumno)
+        public SP_GE_ValidarIntegrantePartido_Result ValidarIntegranteInscrito(int idAlumno)
         {
             DPartidoPostulante Obj_Dal = new DPartidoPostulante();
             return Obj_Dal.ValidarIntegranteInscrito_DAL(idAlumno, DateTime.Now.Year);
         }
 
-        public List<SP_ListarIntegrantesPartido_Result> ListarIntegrantesPartido_BL(int idPartido)
+        public List<SP_GE_ListarIntegrantesPartido_Result> ListarIntegrantesPartido_BL(int idPartido)
         {
             DPartidoPostulante Obj_Dal = new DPartidoPostulante();
             return Obj_Dal.ListarIntegrantesPartido_DAL(idPartido);
@@ -91,7 +104,7 @@ namespace InnovaSchool.BL
             return Obj_Dal.EliminarPartidoPostulante_DAL(objEN);
         }
 
-        public int GenerarCredenciales_BL(List<SP_ListarIntegrantesPartido_Result> alumnos)
+        public int GenerarCredenciales_BL(List<SP_GE_ListarIntegrantesPartido_Result> alumnos)
         {
             EEmail emisor = new EEmail("procesoelectoral@innovaschool.pe", "Innova School");
             int procesados = 0;
