@@ -185,7 +185,7 @@
                             self.PlanGobierno.Instrumentos(data.Instrumentos);
                             self.PlanGobierno.Estado(data.Plan.Estado);
 
-                            self.PlanGobierno.Autorizacion(data.Plan.idPersonaAsesor == '@SessionHelper.Usuario.IdPersona')
+                            self.PlanGobierno.Autorizacion(data.Plan.idPersonaAsesor == '@SessionHelper.Usuario.idPersona')
                             
                             console.log('Autorizado', self.PlanGobierno.Autorizacion(), 'idPersonaAsesor autorizado -> ', self.PlanGobierno.idPersonaAsesor());
                         }
@@ -239,7 +239,9 @@
                             <th>Descripción</th>
                             <th>Fecha</th>
                             <th class="col-xs-2 text-center hidden-print">Sub Actividad</th>
+                            <!--ko if: $root.PlanGobierno.Autorizacion-->
                             <th class="col-xs-2 text-center hidden-print">Observaciones</th>
+                            <!--/ko-->
                         </tr>
                     </thead>
                     <tbody>
@@ -255,9 +257,11 @@
                             <td class="text-center hidden-print">
                                 <a class="btn btn-link" data-bind="click: $root.VerSubActividades">Ver</a>
                             </td>
+                            <!--ko if: $root.PlanGobierno.Autorizacion-->
                             <td class="text-center hidden-print">
                                 <a class="btn btn-link" data-bind="click: $root.AgregarObservacionActividad">Observar</a>
                             </td>
+                            <!--/ko-->
                         </tr>
                         <!--/ko-->
                         <!--/ko-->
@@ -274,7 +278,9 @@
                         <tr>
                             <th>Nombre</th>
                             <th>Objetivo</th>
+                            <!--ko if: $root.PlanGobierno.Autorizacion-->
                             <th class="col-xs-2 text-center hidden-print">Observaciones</th>
+                            <!--/ko-->
                         </tr>
                     </thead>
                     <tbody>
@@ -283,9 +289,11 @@
                         <tr>
                             <td data-bind="text: $data.Nombre"></td>
                             <td data-bind="text: $data.Objetivo"></td>
+                            <!--ko if: $root.PlanGobierno.Autorizacion-->
                             <td class="text-center hidden-print">
                                 <a class="btn btn-link" data-bind="click: $root.AgregarObservacionInstrumento">Observar</a>
                             </td>
+                            <!--/ko-->
                         </tr>
                         <!--/ko-->
                         <!--/ko-->

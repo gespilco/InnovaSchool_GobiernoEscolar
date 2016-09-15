@@ -13,7 +13,7 @@ namespace InnovaSchool.DAL
     {
         SqlConnection cn = new SqlConnection(ConexionUtil.Get_Connection());
 
-        public EUsuario VerificarUsuario(EUsuario EUsuario)
+        public EUsuario VerificarUsuario_DAL(EUsuario EUsuario)
         {
             EUsuario retval = null;
             cn.Open();
@@ -42,29 +42,39 @@ namespace InnovaSchool.DAL
             return retval;
         }
 
-        //public List<EUsuario> Login(EUsuario EUsuario)
-        //{
-        //    List<EUsuario> retval = new List<EUsuario>();
-        //    cn.Open();
-        //    using (SqlCommand cmd = new SqlCommand("SP_VerificarUsuario", cn))
-        //    {
-        //        cmd.CommandType = CommandType.StoredProcedure;
-        //        cmd.Parameters.Add(new SqlParameter("@Usuario", EUsuario.Usuario));
-        //        cmd.Parameters.Add(new SqlParameter("@UPassword", EUsuario.UPassword));
-        //        using (SqlDataReader reader = cmd.ExecuteReader())
-        //        {
-        //            while (reader.Read())
-        //            {
-        //                retval.Add(new EUsuario
-        //                {
-        //                    IdUsuario = int.Parse(reader["IdUsuario"].ToString()),
-        //                    Usuario = reader["Usuario"].ToString()
-        //                });
-        //            }
-        //        }
-        //        cn.Close();
-        //    }
-        //    return retval;
-        //}
+        public int RegistrarUsuario_DAL(EUsuario objEN)
+        {            
+            try
+            {
+                SqlCommand cmd = new SqlCommand("SP_GE_RegistrarUsuario", cn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                //cmd.Parameters.AddWithValue("@IdUsuario", objEN.IdUsuario);
+                cmd.Parameters.AddWithValue("@Usuario", objEN.Usuario);
+                cmd.Parameters.AddWithValue("@Email", objEN.Email);
+                cmd.Parameters.AddWithValue("@UPassword", objEN.UPassword);
+                cmd.Parameters.AddWithValue("@IdPregunta", objEN.IdPregunta);
+                cmd.Parameters.AddWithValue("@Respuesta", objEN.Respuesta);
+                cmd.Parameters.AddWithValue("@Estado", objEN.Estado);
+                cmd.Parameters.AddWithValue("@UsuCreacion", objEN.UsuCreacion);
+                //cmd.Parameters.AddWithValue("@FecCreacion", objEN.FecCreacion);
+                //cmd.Parameters.AddWithValue("@UsuModificacion", objEN.UsuModificacion);
+                //cmd.Parameters.AddWithValue("@FecModificacion", objEN.FecModificacion);
+                cmd.Parameters.AddParameter("@idRol", objEN.idRol);
+                cmd.Parameters.AddParameter("@idPersona", objEN.idPersona);
+
+                cn.Open();
+                var result = cmd.ExecuteScalar();
+                cn.Close();
+
+                return int.Parse(result.ToString());
+            }
+            catch (Exception)
+            {
+                if (cn.State == ConnectionState.Open)
+                    cn.Close();
+                throw;
+            }
+        }
+
     }
 }

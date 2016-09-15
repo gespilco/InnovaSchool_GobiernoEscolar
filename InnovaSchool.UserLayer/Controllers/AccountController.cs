@@ -30,7 +30,7 @@ namespace InnovaSchool.UserLayer.Controllers
             };
             EUsuario UsuarioExistente;
             BUsuario BUsuario = new BUsuario();
-            UsuarioExistente = BUsuario.VerificarUsuario(EUsuario);
+            UsuarioExistente = BUsuario.VerificarUsuario_BL(EUsuario);
             //UsuarioExistente = new EUsuario() { IdUsuario = 1, Usuario = "admin", Estado = 1 };
             if (UsuarioExistente == null)
             {                

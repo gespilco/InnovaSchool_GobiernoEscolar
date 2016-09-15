@@ -36,4 +36,3 @@ D:\team\UPC\diana\InnovaSchool\InnovaSchool.Entity\bin\Debug\InnovaSchool.Entity
 D:\team\UPC\diana\InnovaSchool\InnovaSchool.Entity\bin\Debug\InnovaSchool.Entity.pdb
 D:\team\UPC\diana\InnovaSchool\InnovaSchool.Entity\obj\Debug\InnovaSchool.Entity.dll
 D:\team\UPC\diana\InnovaSchool\InnovaSchool.Entity\obj\Debug\InnovaSchool.Entity.pdb
-D:\team\UPC\diana\InnovaSchool\InnovaSchool.Entity\obj\Debug\InnovaSchool.Entity.csprojResolveAssemblyReference.cache

@@ -106,11 +106,24 @@ namespace InnovaSchool.BL
 
             Plantilla = Plantilla.Replace("{Url}", urlVotacion);
 
+            BUsuario oBUsuario = new BUsuario();
+
             foreach (var item in alumnos)
             {
                 string usuario = double.Parse(item.idAlumno.ToString()).ToString("#000000");
-                string clave = "123";
-                
+                string clave = usuario; //Deberia haber una vista para cambiar clave
+
+                oBUsuario.RegistrarUsuario_BL(new EUsuario() { 
+                    Usuario = usuario,
+                    UPassword = BOperaciones.MD5Crypto(clave),
+                    Email = item.Correo,
+                    IdPregunta = 1,
+                    Respuesta = "",
+                    UsuCreacion = "admin",
+                    Estado = 1,
+                    idPersona = item.idPersona
+                });
+
                 EEmailStatus status = BEmail.EnviarEmail(emisor, new List<EEmail>() { new EEmail(item.Correo, item.Nombre) },
                      "Credenciales", Plantilla
                      .Replace("{Nombres}", item.Nombre)                    
