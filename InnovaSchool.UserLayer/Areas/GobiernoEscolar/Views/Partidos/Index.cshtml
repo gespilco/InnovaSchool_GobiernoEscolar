@@ -19,7 +19,7 @@
     </li>
     <li>
         <i class="icon-angle-right"></i>
-        <a href="~/GobiernoEscolar/Partidos">Partidos</a>
+        <a href="#">Partidos</a>
     </li>
 }
 
@@ -27,14 +27,14 @@
 {
     <script type="text/javascript">
         $(function () {
-            $('.btn-primary').click(function () {
+            $('#btnCredenciales').click(function () {
                 appMaster.Confirm({
                     Title: 'Aviso',
                     Message: 'Se va a generar credenciales para los partidos registrados. ¿Procedemos?',
                     Yes: function () {
                         $.ajax({
                             type: 'POST',
-                            url: '@Url.Content("~/GobiernoEscolar/Partidos/GenerarCredenciales")',
+                            url: '@Url.Action("GenerarCredenciales")',
                             contentType: 'application/json',
                             success: function (data) {
                                 appMaster.MessageBox('Listo', 'Se han generado las credenciales para los integrantes de los partidos.');
@@ -85,7 +85,7 @@
                         <a href="~/GobiernoEscolar/Partidos/Registro" class="btn btn-default">Nuevo</a>
                         @if (SessionHelper.IsInRole("Comision_leg"))
                         {
-                            <button type="button" class="btn btn-primary">Generar credenciales</button>
+                            <button id="btnCredenciales" type="button" class="btn btn-primary">Generar credenciales</button>
                         }
                     </div>
                 </div>

@@ -96,26 +96,33 @@ namespace InnovaSchool.BL
 
         public int GenerarCredenciales_BL(List<SP_GE_ListarIntegrantesPartido_Result> alumnos)
         {
-            EEmail emisor = new EEmail("procesoelectoral@innovaschool.pe", "Innova School");
+            EEmail emisor = new EEmail("innovaschool2016@gmail.com", "Innova School");
             int procesados = 0;
 
-            string Plantilla = BOperaciones.GetHtmlPage(HttpContext.Current.Server.MapPath(ConfigurationManager.AppSettings["PlantillaCredencialesVoto"]));
+            string Plantilla = BOperaciones.GetHtmlPage(HttpContext.Current.Server.MapPath(ConfigurationManager.AppSettings["PlantillaCredencialesIntegrante"]));
 
-            //foreach (var item in alumnos)
-            //{
-            //    EEmailStatus status = BEmail.EnviarEmail(emisor, new List<EEmail>() { new EEmail(item.correoElectronico, item.nombre + " " + item.apellidos) },
-            //         "Credenciales", Plantilla
-            //         .Replace("{Nombres}", item.nombre)
-            //         .Replace("{Apellidos}", item.apellidos)
-            //         .Replace("{Usuario}", "ALUMNO-" + item.idAlumno.ToString())
-            //         .Replace("{Clave}", "123456")
-            //         );
+            var path = VirtualPathUtility.ToAbsolute("~/Account/Login");
+            var urlVotacion = new Uri(HttpContext.Current.Request.Url, path).AbsoluteUri;
 
-            //    if (status.Estado == true)
-            //    {
-            //        procesados++;
-            //    }
-            //}
+            Plantilla = Plantilla.Replace("{Url}", urlVotacion);
+
+            foreach (var item in alumnos)
+            {
+                string usuario = double.Parse(item.idAlumno.ToString()).ToString("#000000");
+                string clave = "123";
+                
+                EEmailStatus status = BEmail.EnviarEmail(emisor, new List<EEmail>() { new EEmail(item.Correo, item.Nombre) },
+                     "Credenciales", Plantilla
+                     .Replace("{Nombres}", item.Nombre)                    
+                     .Replace("{Usuario}", usuario)
+                     .Replace("{Clave}", clave)
+                     );
+
+                if (status.Estado == true)
+                {
+                    procesados++;
+                }
+            }
 
             return procesados;
         }

@@ -13,7 +13,7 @@
                 Title: 'Padrón Electoral',
                 Message: '¿Desea generar el padrón electoral?',
                 Yes: function () {
-                    window.location.href = '@Url.Content("~/GobiernoEscolar/PadronElectoral/GenerarPadron")';
+                    window.location.href = '@Url.Action("GenerarPadron")';                    
                 }
             });
 
@@ -22,14 +22,14 @@
             appMaster.Confirm({
                 Title: 'Credenciales',
                 Message: '¿Desea generar las credenciales de los alumnos empadronados?',
-                Yes: function () {
-                    $.post('@Url.Content("~/GobiernoEscolar/PadronElectoral/Notificar")', null, function (data) {
+                Yes: function () {                    
+                    $.post('@Url.Action("Notificar")', null, function (data) {
                         console.log('Total de credenciales: ' + data);
                         if (data != -1) {
                             appMaster.MessageBox('Credenciales generadas', 'Se ha generado las credenciales');
                         } else {
                             appMaster.MessageBox('Alerta', 'No se pudo generar las credenciales ya que no se encontró ningun proceso de votación válido');
-                        }                        
+                        }
                     });
                 }
             });
@@ -61,7 +61,7 @@
             }
             else
             {
-                <a target="_blank" href="~/GobiernoEscolar/PadronElectoral/Reporte/PDF" class="btn btn-link">Imprimir informe</a><span>|</span>
+                <a target="_blank" href="@Url.Action("Reporte", new { id = "PDF" })" class="btn btn-link">Imprimir informe</a><span>|</span>
                 <a class="btn btn-link" onclick="Notificar()">Notificar alumnos</a>
             }
         </div>
