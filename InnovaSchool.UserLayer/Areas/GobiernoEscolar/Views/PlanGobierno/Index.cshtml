@@ -220,12 +220,17 @@
         <a href="#">Plan de Gobierno</a>
     </li>
 }
-<!--ko if: PlanGobierno.Autorizacion-->
-<div class="form-horizontal" style="display:none" data-bind="visible: true">
+
+<div class="form-horizontal" style="display:none" data-bind="visible: PlanGobierno.IdPlanGobierno">
     <fieldset>
         <div class="panel panel-default">
             <div class="panel-heading"><h4 style="margin:0">Plan de Gobierno - @ViewBag.NombrePartido</h4></div>
             <div class="panel-body">
+                <!--ko if: PlanGobierno.IdPlanGobierno-->
+                <!--ko ifnot: PlanGobierno.idPersonaAsesor-->
+                <h4>Este partido postulante no tiene un asesor asignado</h4>
+                <!--/ko-->
+                <!--/ko-->
                 <h2>Actividades</h2>
                 <table class="table table-bordered table-hover">
                     <thead>
@@ -292,11 +297,11 @@
                     </tbody>
                 </table>
             </div>
-            <!--ko if: PlanGobierno.IdPlanGobierno() && PlanGobierno.Autorizacion()-->
-            <div class="panel-footer text-center hidden-print">                
+            <!--ko if: PlanGobierno.IdPlanGobierno-->
+            <div class="panel-footer text-center hidden-print">
                 <!--ko if: $root.PlanGobierno.Estado() != 'Aprobado'-->
-                <button type="button" class="btn btn-success" data-bind="click: AprobarPlan">Aprobar PG</button>
-                <button type="button" class="btn btn-primary" data-bind="click: EnviarObservaciones">Enviar observaciones del PG</button>
+                <button type="button" class="btn btn-success" data-bind="click: AprobarPlan, enable: PlanGobierno.Autorizacion">Aprobar PG</button>
+                <button type="button" class="btn btn-primary" data-bind="click: EnviarObservaciones, enable: PlanGobierno.Autorizacion">Enviar observaciones del PG</button>
                 <!--/ko-->
                 <button type="button" class="btn btn-default" data-bind="click: Imprimir">Imprime</button>
             </div>
@@ -304,19 +309,6 @@
         </div>
     </fieldset>
 </div>
-<!--/ko-->
-<!--ko if: PlanGobierno.IdPlanGobierno-->
-<!--ko if: PlanGobierno.idPersonaAsesor-->
-<div style="display:none;" data-bind="visible: !PlanGobierno.Autorizacion()">
-    <h4 class="alert alert-warning">
-       <i class="fa fa-warning"></i> Únicamente el asesor del partido puede acceder a esta vista
-    </h4>
-</div>
-<!--/ko-->
-<!--ko ifnot: PlanGobierno.idPersonaAsesor-->
-<h4>Este partido postulante no tiene un asesor asignado</h4>
-<!--/ko-->
-<!--/ko-->
 
 <h4 style="display:none;" data-bind="visible: !PlanGobierno.IdPlanGobierno()">No se ha encontrado ningún plan de gobierno</h4>
 
