@@ -99,23 +99,23 @@ namespace InnovaSchool.BL
             EEmail emisor = new EEmail("procesoelectoral@innovaschool.pe", "Innova School");
             int procesados = 0;
 
-            string Plantilla = BOperaciones.GetHtmlPage(HttpContext.Current.Server.MapPath(ConfigurationManager.AppSettings["PlantillaCredencialesVoto"]));
+            string Plantilla = BOperaciones.GetHtmlPage(HttpContext.Current.Server.MapPath(ConfigurationManager.AppSettings["PlantillaCredencialesIntegrante"]));
 
-            //foreach (var item in alumnos)
-            //{
-            //    EEmailStatus status = BEmail.EnviarEmail(emisor, new List<EEmail>() { new EEmail(item.correoElectronico, item.nombre + " " + item.apellidos) },
-            //         "Credenciales", Plantilla
-            //         .Replace("{Nombres}", item.nombre)
-            //         .Replace("{Apellidos}", item.apellidos)
-            //         .Replace("{Usuario}", "ALUMNO-" + item.idAlumno.ToString())
-            //         .Replace("{Clave}", "123456")
-            //         );
+            foreach (var item in alumnos)
+            {
+                EEmailStatus status = BEmail.EnviarEmail(emisor, new List<EEmail>() { new EEmail(item.Correo, item.Nombre) },
+                     "Credenciales", Plantilla
+                     .Replace("{Nombres}", item.Nombre)
+                     //.Replace("{Apellidos}", item.apellidos)
+                     .Replace("{Usuario}", double.Parse(item.idAlumno.ToString()).ToString("#000000"))
+                     .Replace("{Clave}", "123456")
+                     );
 
-            //    if (status.Estado == true)
-            //    {
-            //        procesados++;
-            //    }
-            //}
+                if (status.Estado == true)
+                {
+                    procesados++;
+                }
+            }
 
             return procesados;
         }

@@ -99,7 +99,8 @@
     <Content Include="Areas\GobiernoEscolar\Views\PlanGobierno\_PartialObservaciones.cshtml">
       <SubType>Code</SubType>
     </Content>
-    <Content Include="Areas\GobiernoEscolar\Views\Plantillas\Credenciales.html" />
+    <Content Include="Areas\GobiernoEscolar\Views\Plantillas\CredencialesVoto.html" />
+    <Content Include="Areas\GobiernoEscolar\Views\Plantillas\CredencialesIntegrante.html" />
     <Content Include="Areas\GobiernoEscolar\Views\Resultados\Index.cshtml">
       <SubType>Code</SubType>
     </Content>

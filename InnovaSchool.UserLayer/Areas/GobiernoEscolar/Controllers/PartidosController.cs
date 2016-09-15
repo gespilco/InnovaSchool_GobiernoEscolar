@@ -92,13 +92,13 @@ namespace InnovaSchool.UserLayer.Areas.GobiernoEscolar.Controllers
             if (lista != null)
             {
                 oBPartidoPostulante = new BPartidoPostulante();
-                //List<SP_ListarIntegrantesPartido_Result> integrantes = null;
+                List<SP_GE_ListarIntegrantesPartido_Result> integrantes = null;
 
-                //foreach (var row in lista)
-                //{
-                //    integrantes = oBPartidoPostulante.ListarIntegrantesPartido_BL(row.idPartido);
-                //    oBPartidoPostulante.GenerarCredenciales_BL(integrantes);
-                //}
+                foreach (var row in lista)
+                {
+                    integrantes = oBPartidoPostulante.ListarIntegrantesPartido_BL(row.idPartido);
+                    oBPartidoPostulante.GenerarCredenciales_BL(integrantes);
+                }
             }
 
             return Json(lista.Count);
