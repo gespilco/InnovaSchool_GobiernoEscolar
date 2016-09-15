@@ -76,7 +76,7 @@ namespace InnovaSchool.BL
                 var path = VirtualPathUtility.ToAbsolute("~/GobiernoEscolar/Votacion");
                 var urlVotacion = new Uri(HttpContext.Current.Request.Url, path).AbsoluteUri;
 
-                Plantilla = Plantilla.Replace("{UrlVotacion}", urlVotacion);
+                Plantilla = Plantilla.Replace("{Url}", urlVotacion);
 
                 foreach (var item in alumnos)
                 {
@@ -107,7 +107,7 @@ namespace InnovaSchool.BL
                                 .Replace("{Usuario}", oEAlumnoEmpadronado.usuario)
                                 .Replace("{Clave}", clave)
                                 .Replace("{FechaVotacion}", string.Format("{0} al {1}", proceso.FechaInicio.Value.ToString("dd/MM/yyyy HH:mm"), proceso.FechaFin.Value.ToString("dd/MM/yyyy HH:mm")))
-                                .Replace("{LugarVotacion}", "Aula A1")
+                                //.Replace("{LugarVotacion}", "Aula A1")
                                 );
 
                             if (status.Estado == true)
