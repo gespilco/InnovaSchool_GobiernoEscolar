@@ -20,5 +20,8 @@ namespace InnovaSchool.Entity
         public string UsuModificación { get; set; }
         public DateTime? FecModificacion { get; set; }
         public string Rol { get; set; }
+        //Auxiliar
+        public int? IdPersona { get; set; }
+        public string Nombre { get; set; }
     }
 }

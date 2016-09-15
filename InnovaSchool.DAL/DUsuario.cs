@@ -24,15 +24,18 @@ namespace InnovaSchool.DAL
                 cmd.Parameters.Add(new SqlParameter("@UPassword", EUsuario.UPassword));
                 using (SqlDataReader reader = cmd.ExecuteReader())
                 {
-                    if (reader.Read())
-                    {
-                        retval = new EUsuario()
-                        {
-                            IdUsuario = int.Parse(reader["IdUsuario"].ToString()),
-                            Usuario = reader["Usuario"].ToString(),
-                            Rol = reader["Rol"].ToString()
-                        };
-                    }
+                    var result = reader.MapToList<EUsuario>();
+                    retval = result.FirstOrDefault();
+
+                    //if (reader.Read())
+                    //{
+                    //    retval = new EUsuario()
+                    //    {
+                    //        IdUsuario = int.Parse(reader["IdUsuario"].ToString()),
+                    //        Usuario = reader["Usuario"].ToString(),
+                    //        Rol = reader["Rol"].ToString()
+                    //    };
+                    //}
                 }
             }
             cn.Close();

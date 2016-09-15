@@ -12,7 +12,7 @@ namespace InnovaSchool.UserLayer
         {
             if (requestContext.HttpContext.Session["Usuario"] == null)
             {
-                string url = requestContext.HttpContext.Request.Url.AbsolutePath;
+                string url = requestContext.HttpContext.Request.Url.AbsoluteUri;
                 string ReturnUrl = "";
                 if (url != "/")
                 {

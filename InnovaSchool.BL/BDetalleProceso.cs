@@ -10,10 +10,16 @@ namespace InnovaSchool.BL
 {
     public class BDetalleProceso
     {
-        public EDetalleProceso ObtenerProceso_BL(string proceso)
+        public EDetalleProceso ObtenerProcesoVigente_BL(string proceso)
         {
             DDetalleProceso oDetalleProceso = new DDetalleProceso();
-            return oDetalleProceso.ObtenerProceso_DAL(proceso);
+            return oDetalleProceso.ObtenerProcesoVigente_DAL(proceso);
+        }
+
+        public EDetalleProceso ObtenerProcesoValido_BL(string proceso)
+        {
+            DDetalleProceso oDetalleProceso = new DDetalleProceso();
+            return oDetalleProceso.ObtenerProcesoValido_DAL(proceso);
         }
     }
 }

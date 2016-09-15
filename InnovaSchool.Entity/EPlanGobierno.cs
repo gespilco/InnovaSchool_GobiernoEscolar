@@ -16,5 +16,7 @@ namespace InnovaSchool.Entity
         public Nullable<int> codAlumno { get; set; }
         public Nullable<int> idProceso { get; set; }
         public Nullable<int> idPartido { get; set; }
+        //Variable auxiliar
+        public Nullable<int> idPersonaAsesor { get; set; }
     }
 }

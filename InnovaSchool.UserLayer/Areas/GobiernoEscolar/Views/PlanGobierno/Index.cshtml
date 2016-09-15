@@ -13,9 +13,18 @@
             self.PlanGobierno = {
                 IdPartido: ko.observable('@ViewBag.IdPartido'),
                 IdPlanGobierno: ko.observable(),
+                idPersonaAsesor: ko.observable(),
                 Actividades: ko.observableArray(),
                 SubActividades: ko.observableArray(),
-                Instrumentos: ko.observableArray()
+                Instrumentos: ko.observableArray(),
+                Autorizacion: ko.observable(false),
+                Estado: ko.observable()
+            };
+
+            self.Observaciones = ko.observableArray();
+            self.Observacion = {
+                idObservacion: ko.observable(),
+                Detalle: ko.observable()
             };
 
             self.AprobarPlan = function () {
@@ -26,6 +35,7 @@
                         $.post('@Url.Content("~/GobiernoEscolar/PlanGobierno/AprobarPlanGobierno")', { idPlan: self.PlanGobierno.IdPlanGobierno() })
                         .done(function (data) {
                             if (data != 0) {
+                                self.PlanGobierno.Estado('Aprobado');
                                 appMaster.MessageBox('Aprobado', 'El plan de gobierno ha sido aprobado');
                             } else {
                                 appMaster.MessageBox('Aviso', 'El plan de gobierno ya está aprobado, no procede la aprobación');
@@ -35,36 +45,42 @@
                 });
             }
 
+            self.AgregarObservacion = function () {
+                if (typeof appMaster.CallBack_RegistroObservacion === 'function')
+                    appMaster.CallBack_RegistroObservacion();
+            }
+
             self.AgregarObservacionActividad = function (data) {
                 //console.log(data);
+                self.Observacion.Detalle(null);
 
-                var success = function (observaciones) {
-                    appMaster.Prompt({
-                        Titulo: 'Observación',
-                        Mensaje: observaciones + 'Ingrese su observación:',
-                        Tipo: 'textarea',
-                        Aceptar: function (observacion) {
-                            var params = {
-                                obs: {
-                                    Descripcion: observacion,
-                                    idActividadPropuesta: data.idactividadPropuesta,
-                                    //idactPlan: data.idactPlan
-                                },
-                                idPlanGobierno: self.PlanGobierno.IdPlanGobierno()
-                            };
+                var success = function (observaciones) {                    
+                    $('#modal-observaciones').modal('show');
+                    self.Observaciones(observaciones);
 
-                            $.ajax({
-                                type: 'POST',
-                                url: '@Url.Content("~/GobiernoEscolar/PlanGobierno/GuardarObservacion")',
-                                data: JSON.stringify(params),
-                                dataType: 'json',
-                                contentType: 'application/json',
-                                success: function (data) {
-                                    appMaster.MessageBox('Listo', 'Se agregó la observación');
-                                }
-                            });
-                        }
-                    });
+                    appMaster.CallBack_RegistroObservacion = function () {
+                        var params = {
+                            obs: {
+                                Descripcion: self.Observacion.Detalle(),
+                                idActividadPropuesta: data.idactividadPropuesta,
+                                //idactPlan: data.idactPlan
+                            },
+                            idPlanGobierno: self.PlanGobierno.IdPlanGobierno()
+                        };
+
+                        $.ajax({
+                            type: 'POST',
+                            url: '@Url.Content("~/GobiernoEscolar/PlanGobierno/GuardarObservacion")',
+                            data: JSON.stringify(params),
+                            dataType: 'json',
+                            contentType: 'application/json',
+                            success: function (id) {
+                                appMaster.MessageBox('Listo', 'Se agregó la observación');
+                                self.Observaciones.push({ idObservacion: id, Descripcion: params.obs.Descripcion });
+                                self.Observacion.Detalle(null);
+                            }
+                        });
+                    }
                 }
 
                 $.get('@Url.Content("~/GobiernoEscolar/PlanGobierno/VerObservaciones")', { id: data.idactividadPropuesta, tipo: 'Actividad' }).done(success);
@@ -72,35 +88,59 @@
 
             self.AgregarObservacionInstrumento = function (data) {
                 //console.log(data);
-                var success = function (observaciones) {
-                    appMaster.Prompt({
-                        Titulo: 'Observación',
-                        Mensaje: observaciones + 'Ingrese su observación:',
-                        Tipo: 'textarea',
-                        Aceptar: function (observacion) {
-                            var params = {
-                                obs: {
-                                    Descripcion: observacion,
-                                    idInstrumento: data.idInstrumento,
-                                    //idactPlan: data.idactPlan
-                                }
-                            };
+                self.Observacion.Detalle(null);
 
-                            $.ajax({
-                                type: 'POST',
-                                url: '@Url.Content("~/GobiernoEscolar/PlanGobierno/GuardarObservacion")',
-                                data: JSON.stringify(params),
-                                dataType: 'json',
-                                contentType: 'application/json',
-                                success: function (data) {
-                                    appMaster.MessageBox('Listo', 'Se agregó la observación');
-                                }
-                            });
-                        }
-                    });
+                var success = function (observaciones) {
+                    //console.log(observaciones);
+                    $('#modal-observaciones').modal('show');
+                    self.Observaciones(observaciones);
+
+                    appMaster.CallBack_RegistroObservacion = function () {
+                        var params = {
+                            obs: {
+                                Descripcion: self.Observacion.Detalle(),
+                                idInstrumento: data.idInstrumento,
+                                //idactPlan: data.idactPlan
+                            },
+                            idPlanGobierno: self.PlanGobierno.IdPlanGobierno()
+                        };
+
+                        $.ajax({
+                            type: 'POST',
+                            url: '@Url.Content("~/GobiernoEscolar/PlanGobierno/GuardarObservacion")',
+                            data: JSON.stringify(params),
+                            dataType: 'json',
+                            contentType: 'application/json',
+                            success: function (id) {
+                                appMaster.MessageBox('Listo', 'Se agregó la observación');
+                                self.Observaciones.push({ idObservacion: id, Descripcion: params.obs.Descripcion });
+                                self.Observacion.Detalle(null);
+                            }
+                        });
+                    }
                 }
 
                 $.get('@Url.Content("~/GobiernoEscolar/PlanGobierno/VerObservaciones")', { id: data.idInstrumento, tipo: 'Instrumento' }).done(success);
+            }
+
+            self.EliminarObservacion = function (data) {
+                if (self.PlanGobierno.Estado() != 'Observado') {
+                    appMaster.MessageBox('Alerta', 'No se puede eliminar la observación con el plan de gobierno en estado ' + self.PlanGobierno.Estado());
+                    return;
+                }
+
+                appMaster.Confirm({
+                    Title: 'Eliminar',
+                    Message: '¿Desea eliminar la observación?',
+                    Yes: function () {
+                        $.post('@Url.Content("~/GobiernoEscolar/PlanGobierno/EliminarObservacion")', { idObservacion: data.idObservacion })
+                        .done(function (r) {
+                            if (r)
+                                self.Observaciones.remove(data);
+                        });
+                    }
+                });
+                
             }
 
             self.VerSubActividades = function (data) {
@@ -121,6 +161,7 @@
                     })
                 .done(function (data) {
                     if (data.Estado) {
+                        self.PlanGobierno.Estado('Observado');
                         appMaster.MessageBox('Listo', 'Se han enviado las observaciones');
                     } else {
                         appMaster.MessageBox('Aviso', data.Mensaje);
@@ -136,11 +177,17 @@
                 if (self.PlanGobierno.IdPartido()) {
                     $.getJSON('@Url.Content("~/GobiernoEscolar/PlanGobierno/CargarPlanGobierno")', { idPartido: self.PlanGobierno.IdPartido() }).
                     done(function (data) {
-                        //console.log(data);
+                        console.log(data);
                         if (data.Plan) {
                             self.PlanGobierno.IdPlanGobierno(data.Plan.idplan);
+                            self.PlanGobierno.idPersonaAsesor(data.Plan.idPersonaAsesor);
                             self.PlanGobierno.Actividades(data.Actividades);
                             self.PlanGobierno.Instrumentos(data.Instrumentos);
+                            self.PlanGobierno.Estado(data.Plan.Estado);
+
+                            self.PlanGobierno.Autorizacion(data.Plan.idPersonaAsesor == '@SessionHelper.Usuario.IdPersona')
+                            
+                            console.log('Autorizado', self.PlanGobierno.Autorizacion(), 'idPersonaAsesor autorizado -> ', self.PlanGobierno.idPersonaAsesor());
                         }
                     });
                 }
@@ -173,7 +220,8 @@
         <a href="#">Plan de Gobierno</a>
     </li>
 }
-<div class="form-horizontal">
+<!--ko if: PlanGobierno.Autorizacion-->
+<div class="form-horizontal" style="display:none" data-bind="visible: true">
     <fieldset>
         <div class="panel panel-default">
             <div class="panel-heading"><h4 style="margin:0">Plan de Gobierno - @ViewBag.NombrePartido</h4></div>
@@ -244,16 +292,34 @@
                     </tbody>
                 </table>
             </div>
-            <!--ko if: PlanGobierno.IdPlanGobierno-->
-            <div class="panel-footer text-center hidden-print">
+            <!--ko if: PlanGobierno.IdPlanGobierno() && PlanGobierno.Autorizacion()-->
+            <div class="panel-footer text-center hidden-print">                
+                <!--ko if: $root.PlanGobierno.Estado() != 'Aprobado'-->
                 <button type="button" class="btn btn-success" data-bind="click: AprobarPlan">Aprobar PG</button>
                 <button type="button" class="btn btn-primary" data-bind="click: EnviarObservaciones">Enviar observaciones del PG</button>
+                <!--/ko-->
                 <button type="button" class="btn btn-default" data-bind="click: Imprimir">Imprime</button>
             </div>
             <!--/ko-->
         </div>
     </fieldset>
 </div>
+<!--/ko-->
+<!--ko if: PlanGobierno.IdPlanGobierno-->
+<!--ko if: PlanGobierno.idPersonaAsesor-->
+<div style="display:none;" data-bind="visible: !PlanGobierno.Autorizacion()">
+    <h4 class="alert alert-warning">
+       <i class="fa fa-warning"></i> Únicamente el asesor del partido puede acceder a esta vista
+    </h4>
+</div>
+<!--/ko-->
+<!--ko ifnot: PlanGobierno.idPersonaAsesor-->
+<h4>Este partido postulante no tiene un asesor asignado</h4>
+<!--/ko-->
+<!--/ko-->
+
+<h4 style="display:none;" data-bind="visible: !PlanGobierno.IdPlanGobierno()">No se ha encontrado ningún plan de gobierno</h4>
+
 <div id="modal-subactividades" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -286,6 +352,51 @@
             </div>
             <div class="modal-footer">
                 <button data-dismiss="modal" type="button" class="btn btn-default">Aceptar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="modal-observaciones" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Observaciones</h4>
+            </div>
+            <div class="modal-body">
+                <!--ko if: Observaciones().length == 0-->
+                <h5>No hay observaciones para mostrar</h5>
+                <!--/ko-->
+                <!--ko if: Observaciones().length > 0-->
+                <h4>Observaciones ingresadas:</h4>
+                <table>
+                    <tbody>
+                        <!--ko foreach: Observaciones-->
+                        <tr>
+                            <td>
+                                <i class="fa fa-check"></i> <span data-bind="text: $data.Descripcion"></span>
+                            </td>
+                            <!--ko if: $root.PlanGobierno.Estado() != 'Aprobado'-->
+                            <td class="text-center col-xs-1">
+                                <i class="fa fa-trash-o" data-bind="click: $root.EliminarObservacion"></i>
+                            </td>
+                            <!--/ko-->
+                        </tr>
+                        <!--/ko-->
+                    </tbody>                    
+                </table>
+                <br />
+                <!--/ko-->
+                <!--ko if: $root.PlanGobierno.Estado() != 'Aprobado'-->
+                <h4>Agregar observación</h4>              
+                <textarea class="form-control" rows="5" maxlength="200" data-bind="value: Observacion.Detalle"></textarea>
+                <!--/ko-->
+            </div>
+            <div class="modal-footer">
+                <!--ko if: $root.PlanGobierno.Estado() != 'Aprobado'-->
+                <button type="button" class="btn btn-primary" data-bind="click: AgregarObservacion">Agregar</button>
+                <!--/ko-->
+                <button data-dismiss="modal" type="button" class="btn btn-default">Salir</button>
             </div>
         </div>
     </div>

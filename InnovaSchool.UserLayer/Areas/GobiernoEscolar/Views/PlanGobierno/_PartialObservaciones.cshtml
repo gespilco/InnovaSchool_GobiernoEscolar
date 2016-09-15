@@ -1,12 +1,17 @@
 ﻿@if (Model != null && Model.Count > 0)
 {
     <b>Observaciones ingresadas:</b>
-    <ol>
+    <table class="table table-bordered">
         @foreach (var item in Model)
         {
-            <li>@item.Descripcion</li>
+            <tr>
+                <td>@item.Descripcion</td>
+                <td class="text-center col-xs-1">
+                    <i class="fa fa-trash-o"></i>
+                </td>
+            </tr>
         }
-    </ol>
+    </table>
 }
 else
 {

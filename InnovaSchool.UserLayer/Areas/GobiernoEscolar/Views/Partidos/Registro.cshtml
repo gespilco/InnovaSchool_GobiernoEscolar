@@ -11,6 +11,10 @@
     </style>
 }
 
+@{
+    bool ProcesoActivo = (ViewBag.ProcesoActivo ?? false);
+}
+
 @section scripts
 {
     <script src="~/Scripts/knockout-3.4.0.js"></script>
@@ -18,6 +22,9 @@
     <script type="text/javascript">
         function ViewModel() {
             var self = this;
+
+            self.ProcesoActivo = ('@ProcesoActivo' == 'True');
+
             self.Partido = {
                 IdPartido: ko.observable('@ViewBag.IdPartido'),
                 NombrePartido: ko.observable(),
@@ -47,7 +54,7 @@
                     return;
                 }
 
-                var f = function () {
+                var RegistrarPartido = function () {
                     $.ajax({
                         type: 'POST',
                         url: '@Url.Content("~/GobiernoEscolar/Partidos/Registro")',
@@ -55,12 +62,8 @@
                         dataType: 'json',
                         contentType: 'application/json',
                         success: function (data) {
-                            if (data.Id) {
-                                self.Partido.IdPartido(data.Id);
-                                appMaster.MessageBox('Listo', 'El partido ha sido guardado');
-                            } else {
-                                appMaster.MessageBox('Atención', data.Mensaje);
-                            }
+                            self.Partido.IdPartido(data);
+                            appMaster.MessageBox('Listo', 'El partido ha sido guardado');
                         },
                         error: function (xhr) {
                             alert("error");
@@ -68,17 +71,51 @@
                     });
                 }
 
-                if (params.Integrantes.length < 3) {
-                    appMaster.Confirm({
-                        Title: 'Aviso',
-                        Message: 'Faltan registrar ' + (3 - params.Integrantes.length) + ' Candidatos de este partido. ¿Procedemos con la grabación?',
-                        Yes: function () {
-                            f();
-                        }
-                    })
-                } else {
-                    f();
+                var VerificarCantidadIntegrantes = function () {
+                    if (params.Integrantes.length < 3) {
+                        appMaster.Confirm({
+                            Title: 'Aviso',
+                            Message: 'Faltan registrar ' + (3 - params.Integrantes.length) + ' Candidatos de este partido. ¿Procedemos con la grabación?',
+                            Yes: function () {
+                                RegistrarPartido();
+                            }
+                        })
+                    } else {
+                        RegistrarPartido();
+                    }
                 }
+
+                //Si es nuevo validamos el nombre del partido
+                if (!params.IdPartido) {
+                    $.getJSON('@Url.Content("~/GobiernoEscolar/Partidos/ValidarNombre")', { nombre: params.NombrePartido })
+                    .done(function (data) {
+                        console.log(data);
+
+                        //Si hay Errores
+                        if (data.IdError) {
+                            if (data.IdError == 3) {
+                                appMaster.Confirm({
+                                    Title: 'Alerta',
+                                    Message: data.Mensaje,
+                                    Yes: function () {
+                                        VerificarCantidadIntegrantes();
+                                    }
+                                });
+                            } else {
+                                appMaster.MessageBox('Alerta', data.Mensaje);
+                            }
+                        } else {
+                            VerificarCantidadIntegrantes();
+                        }                        
+
+                    }).fail(function (xhr) {
+                        console.log(xhr);
+                        alert("Error. Revise la consola!");
+                    });
+                } else {
+                    VerificarCantidadIntegrantes();
+                }
+                
             }
 
             self.BuscarAlumno = function (v, e) {
@@ -141,9 +178,11 @@
             }
 
             self.SeleccionarIntegrante = function (data) {
-                self.IntegranteSeleccionado(data);
-                ko.utils.arrayForEach(self.Partido.Integrantes(), function (x) { x.Seleccionado(false) });
-                data.Seleccionado(true);
+                if (self.ProcesoActivo) {
+                    self.IntegranteSeleccionado(data);
+                    ko.utils.arrayForEach(self.Partido.Integrantes(), function (x) { x.Seleccionado(false) });
+                    data.Seleccionado(true);
+                }
             }
 
             self.EliminarIntegrante = function () {
@@ -173,7 +212,8 @@
             }
 
             self.CambiarLogo = function () {
-                $('#upload').click();
+                if (self.ProcesoActivo)
+                    $('#upload').click();
             }
 
             $('#upload').change(function () {
@@ -248,12 +288,16 @@
 <div class="form-horizontal">
     <div class="panel panel-default">
         <div class="panel-body">
+            @if (!ProcesoActivo)
+            {
+                <h3 class="alert alert-danger hidden-print" style="margin-top:0">El proceso de registro de partido postulante no esta disponible</h3>
+            }
             <div class="row">
                 <div class="col-sm-9 hidden-print">
                     <div class="control-group">
                         <label class="control-label">Nombre del partido</label>
                         <div class="controls">
-                            <input name="NombrePartido" type="text" data-bind="value: Partido.NombrePartido" class="form-control" maxlength="200" title="Se necesita un nombre">                            
+                            <input name="NombrePartido" type="text" data-bind="value: Partido.NombrePartido, enable: ProcesoActivo" class="form-control" maxlength="200" title="Se necesita un nombre">
                         </div>
                     </div>
                 </div>
@@ -269,48 +313,51 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-sm-4 hidden-print">
-                    <div class="form-group">
-                        <div class="col-sm-6">
-                            <label class="control-label">Codigo Alumno</label>
-                            <input name="CodigoAlumno" type="text" data-bind="value: Alumno.idAlumno, valueUpdate: 'afterkeydown', event: { keyup: BuscarAlumno }" class="form-control" title="Se necesita un nombre" />
+                @if (ProcesoActivo)
+                {
+                    <div class="col-sm-4 hidden-print">
+                        <div class="form-group">
+                            <div class="col-sm-6">
+                                <label class="control-label">Codigo Alumno</label>
+                                <input name="CodigoAlumno" type="text" data-bind="value: Alumno.idAlumno, valueUpdate: 'afterkeydown', event: { keyup: BuscarAlumno }" class="form-control" title="Se necesita un nombre" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-xs-12">
+                                <label class="control-label">Nombre Alumno</label>
+                                <input name="NombreAlumno" type="text" data-bind="value: Alumno.Nombre" class="form-control" title="Se necesita un nombre" disabled />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-xs-12">
+                                <label class="control-label">Grado</label>
+                                <input name="GradoAlumno" type="text" data-bind="value: Alumno.Grado" class="form-control" title="Se necesita un nombre" disabled />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-xs-12">
+                                <label class="control-label">Cargo</label>
+                                <select name="Cargo" class="form-control" data-bind="options: Cargos, optionsText: 'tipoCargo', optionsValue: 'idCargo', value: Alumno.idCargo"></select>
+                            </div>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <div class="col-xs-12">
-                            <label class="control-label">Nombre Alumno</label>
-                            <input name="NombreAlumno" type="text" data-bind="value: Alumno.Nombre" class="form-control" title="Se necesita un nombre" disabled />
+                    <div class="col-sm-2 text-center hidden-print">
+                        <div class="hidden-xs">
+                            <br /><br /><br /><br /><br /><br />
+                        </div>
+                        <div class="form-group">
+                            <div class="col-xs-12">
+                                <button class="btn btn-default" data-bind="enable: Alumno.Nombre, click: AgregarIntegrante">>></button>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-xs-12">
+                                <button class="btn btn-default" data-bind="enable: IntegranteSeleccionado, click: EliminarIntegrante"><<</button>
+                            </div>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <div class="col-xs-12">
-                            <label class="control-label">Grado</label>
-                            <input name="GradoAlumno" type="text" data-bind="value: Alumno.Grado" class="form-control" title="Se necesita un nombre" disabled />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-xs-12">
-                            <label class="control-label">Cargo</label>
-                            <select name="Cargo" class="form-control" data-bind="options: Cargos, optionsText: 'tipoCargo', optionsValue: 'idCargo', value: Alumno.idCargo"></select>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-2 text-center hidden-print">
-                    <div class="hidden-xs">
-                        <br /><br /><br /><br /><br /><br />
-                    </div>
-                    <div class="form-group">
-                        <div class="col-xs-12">
-                            <button class="btn btn-default" data-bind="enable: Alumno.Nombre, click: AgregarIntegrante">>></button>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-xs-12">
-                            <button class="btn btn-default" data-bind="enable: IntegranteSeleccionado, click: EliminarIntegrante"><<</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6">
+                }
+                <div class="@(ProcesoActivo ? "col-sm-6" : "col-xs-12")">
                     <br />
                     <table class="table table-bordered">
                         <thead>
@@ -343,9 +390,13 @@
             </div>
         </div>
         <div class="panel-footer text-center hidden-print">
-            <button type="button" class="btn btn-primary" data-bind="click: Guardar">Guardar</button>
+            @if (ProcesoActivo)
+            {
+                <button type="button" class="btn btn-primary" data-bind="click: Guardar">Guardar</button>
+            }
+
             <button type="button" class="btn btn-default" data-bind="click: Imprimir">Imprimir</button>
-            @if (@ViewBag.IdPartido != null && SessionHelper.IsInRole("Comision_leg"))
+            @if (@ViewBag.IdPartido != null)
             {
                 <a href="~/GobiernoEscolar/PlanGobierno?id=@ViewBag.IdPartido" class="btn btn-success">Visualizar plan de gobierno</a>
             }

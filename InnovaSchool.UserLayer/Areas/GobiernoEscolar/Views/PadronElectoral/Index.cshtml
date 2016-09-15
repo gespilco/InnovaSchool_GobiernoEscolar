@@ -25,7 +25,11 @@
                 Yes: function () {
                     $.post('@Url.Content("~/GobiernoEscolar/PadronElectoral/Notificar")', null, function (data) {
                         console.log('Total de credenciales: ' + data);
-                        appMaster.MessageBox('Credenciales generadas', 'Se ha generado las credenciales');
+                        if (data != -1) {
+                            appMaster.MessageBox('Credenciales generadas', 'Se ha generado las credenciales');
+                        } else {
+                            appMaster.MessageBox('Alerta', 'No se pudo generar las credenciales ya que no se encontró ningun proceso de votación válido');
+                        }                        
                     });
                 }
             });
