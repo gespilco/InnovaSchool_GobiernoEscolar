@@ -66,7 +66,7 @@ namespace InnovaSchool.BL
 
             if (proceso != null)
             {
-                EEmail emisor = new EEmail("procesoelectoral@innovaschool.edu.pe", "Innova School");
+                EEmail emisor = new EEmail("innovaschool2016@gmail.com", "Innova School");
                 int procesados = 0;
 
                 string Plantilla = BOperaciones.GetHtmlPage(HttpContext.Current.Server.MapPath(ConfigurationManager.AppSettings["PlantillaCredencialesVoto"]));

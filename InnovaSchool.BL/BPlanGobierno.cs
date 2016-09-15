@@ -79,7 +79,7 @@ namespace InnovaSchool.BL
                 {
                     List<EEmail> Destinatarios = new List<EEmail>();
 
-                    EEmail Emisor = new EEmail("procesoelectoral@innovaschool.edu.pe", "Innova School");
+                    EEmail Emisor = new EEmail("innovaschool2016@gmail.com", "Innova School");
 
                     foreach (var item in integrantes)
                     {

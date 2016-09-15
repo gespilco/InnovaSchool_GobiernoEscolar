@@ -83,7 +83,7 @@ namespace InnovaSchool.BL
         public EEmailStatus Notificar_BL(string html)
         {
             BAlumnoEmpadronado oBAlumnoEmpadronado = new BAlumnoEmpadronado();
-            EEmail Emisor = new EEmail("procesoelectoral@innovaschool.edu.pe", "Innova School");
+            EEmail Emisor = new EEmail("innovaschool2016@gmail.com", "Innova School");
             List<SP_GE_ListarAlumnosPadronElectoral_Result> alumnos = oBAlumnoEmpadronado.ListarAlumnosEmpadronados_BL();
             List<EEmail> Destinatarios = new List<EEmail>();
 
