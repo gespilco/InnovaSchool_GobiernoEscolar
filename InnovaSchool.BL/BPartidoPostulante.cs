@@ -101,7 +101,7 @@ namespace InnovaSchool.BL
 
             string Plantilla = BOperaciones.GetHtmlPage(HttpContext.Current.Server.MapPath(ConfigurationManager.AppSettings["PlantillaCredencialesIntegrante"]));
 
-            var path = VirtualPathUtility.ToAbsolute("~/GobiernoEscolar/Votacion");
+            var path = VirtualPathUtility.ToAbsolute("~/Account/Login");
             var urlVotacion = new Uri(HttpContext.Current.Request.Url, path).AbsoluteUri;
 
             Plantilla = Plantilla.Replace("{Url}", urlVotacion);
