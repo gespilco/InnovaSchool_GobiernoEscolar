@@ -68,6 +68,9 @@ D:\UPC\diana\GitHub\InnovaSchool_GobiernoEscolar\InnovaSchool.UserLayer\bin\Newt
 D:\UPC\diana\GitHub\InnovaSchool_GobiernoEscolar\InnovaSchool.UserLayer\bin\System.Web.Optimization.xml
 D:\UPC\diana\GitHub\InnovaSchool_GobiernoEscolar\InnovaSchool.UserLayer\obj\Debug\RdlCompile.cache
 D:\UPC\diana\GitHub\InnovaSchool_GobiernoEscolar\InnovaSchool.UserLayer\obj\Debug\RdlCompile.compiled
+D:\team\UPC\diana\InnovaSchool\InnovaSchool.UserLayer\obj\Debug\InnovaSchool.UserLayer.csprojResolveAssemblyReference.cache
+D:\team\UPC\diana\InnovaSchool\InnovaSchool.UserLayer\obj\Debug\RdlCompile.cache
+D:\team\UPC\diana\InnovaSchool\InnovaSchool.UserLayer\obj\Debug\RdlCompile.compiled
 D:\team\UPC\diana\InnovaSchool\InnovaSchool.UserLayer\bin\InnovaSchool.UserLayer.dll.config
 D:\team\UPC\diana\InnovaSchool\InnovaSchool.UserLayer\bin\InnovaSchool.UserLayer.dll
 D:\team\UPC\diana\InnovaSchool\InnovaSchool.UserLayer\bin\InnovaSchool.UserLayer.pdb
@@ -96,15 +99,12 @@ D:\team\UPC\diana\InnovaSchool\InnovaSchool.UserLayer\bin\System.Web.Webpages.De
 D:\team\UPC\diana\InnovaSchool\InnovaSchool.UserLayer\bin\System.Web.Webpages.Razor.xml
 D:\team\UPC\diana\InnovaSchool\InnovaSchool.UserLayer\bin\System.Web.Helpers.xml
 D:\team\UPC\diana\InnovaSchool\InnovaSchool.UserLayer\bin\System.Web.Mvc.xml
-D:\team\UPC\diana\InnovaSchool\InnovaSchool.UserLayer\bin\InnovaSchool.DAL.pdb
 D:\team\UPC\diana\InnovaSchool\InnovaSchool.UserLayer\bin\es\System.Web.Razor.resources.dll
 D:\team\UPC\diana\InnovaSchool\InnovaSchool.UserLayer\bin\es\System.Web.Webpages.resources.dll
 D:\team\UPC\diana\InnovaSchool\InnovaSchool.UserLayer\bin\es\System.Web.Webpages.Deployment.resources.dll
 D:\team\UPC\diana\InnovaSchool\InnovaSchool.UserLayer\bin\es\System.Web.Webpages.Razor.resources.dll
 D:\team\UPC\diana\InnovaSchool\InnovaSchool.UserLayer\bin\es\System.Web.Helpers.resources.dll
 D:\team\UPC\diana\InnovaSchool\InnovaSchool.UserLayer\bin\es\System.Web.Mvc.resources.dll
-D:\team\UPC\diana\InnovaSchool\InnovaSchool.UserLayer\obj\Debug\InnovaSchool.UserLayer.csprojResolveAssemblyReference.cache
-D:\team\UPC\diana\InnovaSchool\InnovaSchool.UserLayer\obj\Debug\RdlCompile.cache
-D:\team\UPC\diana\InnovaSchool\InnovaSchool.UserLayer\obj\Debug\RdlCompile.compiled
 D:\team\UPC\diana\InnovaSchool\InnovaSchool.UserLayer\obj\Debug\InnovaSchool.UserLayer.dll
 D:\team\UPC\diana\InnovaSchool\InnovaSchool.UserLayer\obj\Debug\InnovaSchool.UserLayer.pdb
+D:\team\UPC\diana\InnovaSchool\InnovaSchool.UserLayer\bin\InnovaSchool.DAL.pdb

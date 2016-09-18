@@ -10,16 +10,16 @@ namespace InnovaSchool.BL
 {
     public class BUsuario
     {
-        DUsuario DUsuario = new DUsuario();
+        DUsuario oDUsuario = new DUsuario();
 
-        public EUsuario VerificarUsuario(EUsuario EUsuario)
+        public EUsuario VerificarUsuario_BL(EUsuario EUsuario)
         {
-            return DUsuario.VerificarUsuario(EUsuario);
+            return oDUsuario.VerificarUsuario_DAL(EUsuario);
         }
 
-        //public List<EUsuario> Login(EUsuario EUsuario)
-        //{
-        //    return DUsuario.Login(EUsuario);
-        //}
+        public int RegistrarUsuario_BL(EUsuario objEN)
+        {
+            return oDUsuario.RegistrarUsuario_DAL(objEN);
+        }
     }
 }

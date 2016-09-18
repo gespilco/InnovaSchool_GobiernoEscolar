@@ -13,6 +13,7 @@
 
 @{
     bool ProcesoActivo = (ViewBag.ProcesoActivo ?? false);
+    bool PuedeGuardar = ProcesoActivo && !SessionHelper.IsInRole("");
 }
 
 @section scripts
@@ -23,7 +24,7 @@
         function ViewModel() {
             var self = this;
 
-            self.ProcesoActivo = ('@ProcesoActivo' == 'True');
+            self.PuedeGuardar = ('@PuedeGuardar' == 'True');
 
             self.Partido = {
                 IdPartido: ko.observable('@ViewBag.IdPartido'),
@@ -106,7 +107,7 @@
                             }
                         } else {
                             VerificarCantidadIntegrantes();
-                        }                        
+                        }
 
                     }).fail(function (xhr) {
                         console.log(xhr);
@@ -115,7 +116,7 @@
                 } else {
                     VerificarCantidadIntegrantes();
                 }
-                
+
             }
 
             self.BuscarAlumno = function (v, e) {
@@ -178,7 +179,7 @@
             }
 
             self.SeleccionarIntegrante = function (data) {
-                if (self.ProcesoActivo) {
+                if (self.PuedeGuardar) {
                     self.IntegranteSeleccionado(data);
                     ko.utils.arrayForEach(self.Partido.Integrantes(), function (x) { x.Seleccionado(false) });
                     data.Seleccionado(true);
@@ -212,7 +213,7 @@
             }
 
             self.CambiarLogo = function () {
-                if (self.ProcesoActivo)
+                if (self.PuedeGuardar)
                     $('#upload').click();
             }
 
@@ -288,17 +289,25 @@
 <div class="form-horizontal">
     <div class="panel panel-default">
         <div class="panel-body">
-            @if (!ProcesoActivo)
+            @if (!ProcesoActivo && PuedeGuardar)
             {
                 <h3 class="alert alert-danger hidden-print" style="margin-top:0">El proceso de registro de partido postulante no esta disponible</h3>
             }
             <div class="row">
                 <div class="col-sm-9 hidden-print">
-                    <div class="control-group">
-                        <label class="control-label">Nombre del partido</label>
-                        <div class="controls">
-                            <input name="NombrePartido" type="text" data-bind="value: Partido.NombrePartido, enable: ProcesoActivo" class="form-control" maxlength="200" title="Se necesita un nombre">
-                        </div>
+                    <div>
+                        @if (PuedeGuardar)
+                        {
+                            <label class="control-label">Nombre del partido</label>
+                            <input name="NombrePartido" type="text" data-bind="value: Partido.NombrePartido, enable: PuedeGuardar" class="form-control" maxlength="200" title="Se necesita un nombre">
+                        }
+                        else
+                        {
+                            <div class="text-center">
+                                <h4>Partido Político Estudiantil:</h4>
+                                <h1 data-bind="text: Partido.NombrePartido"></h1>
+                            </div>
+                        }
                     </div>
                 </div>
                 <div class="col-sm-3 text-right">
@@ -313,7 +322,7 @@
                 </div>
             </div>
             <div class="row">
-                @if (ProcesoActivo)
+                @if (PuedeGuardar)
                 {
                     <div class="col-sm-4 hidden-print">
                         <div class="form-group">
@@ -357,7 +366,7 @@
                         </div>
                     </div>
                 }
-                <div class="@(ProcesoActivo ? "col-sm-6" : "col-xs-12")">
+                <div class="@(PuedeGuardar ? "col-sm-6" : "col-xs-12")">
                     <br />
                     <table class="table table-bordered">
                         <thead>
@@ -390,7 +399,7 @@
             </div>
         </div>
         <div class="panel-footer text-center hidden-print">
-            @if (ProcesoActivo)
+            @if (PuedeGuardar)
             {
                 <button type="button" class="btn btn-primary" data-bind="click: Guardar">Guardar</button>
             }

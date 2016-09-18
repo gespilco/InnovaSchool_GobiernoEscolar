@@ -57,12 +57,16 @@
         <div class="panel-heading">
             @if (Model != null && Model.Count == 0)
             {
-                <a class="btn btn-link" onclick="GenerarPadron()">Generar padrón electoral</a><span>|</span>
+                <a class="btn btn-link" onclick="GenerarPadron()">Generar padrón electoral</a>
             }
             else
             {
-                <a target="_blank" href="@Url.Action("Reporte", new { id = "PDF" })" class="btn btn-link">Imprimir informe</a><span>|</span>
-                <a class="btn btn-link" onclick="Notificar()">Notificar alumnos</a>
+                <a target="_blank" href="@Url.Action("Reporte", new { id = "PDF" })" class="btn btn-link">Imprimir informe</a>
+                if (!SessionHelper.IsInRole(""))
+                {
+                    <span>|</span>
+                    <a class="btn btn-link" onclick="Notificar()">Notificar alumnos</a>    
+                }                
             }
         </div>
         <div class="panel-body">
