@@ -32,6 +32,8 @@
                     Title: 'Aviso',
                     Message: 'Se va a generar credenciales para los partidos registrados. ¿Procedemos?',
                     Yes: function () {
+                        toastr.success('Es probable que el envio de correos tarde más de lo debido en realizarse', 'Atención');
+
                         $.ajax({
                             type: 'POST',
                             url: '@Url.Action("GenerarCredenciales")',

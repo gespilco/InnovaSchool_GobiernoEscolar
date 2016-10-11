@@ -23,6 +23,8 @@
                 Title: 'Credenciales',
                 Message: '¿Desea generar las credenciales de los alumnos empadronados?',
                 Yes: function () {                    
+                    toastr.success('Es probable que el envio de correos tarde más de lo debido en realizarse', 'Atención');
+
                     $.post('@Url.Action("Notificar")', null, function (data) {
                         console.log('Total de credenciales: ' + data);
                         if (data != -1) {

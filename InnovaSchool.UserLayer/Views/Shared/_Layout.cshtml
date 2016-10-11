@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - Innova School</title>
     @Styles.Render("~/Content/css")
+    <link href="~/Scripts/toastr/toastr.min.css" rel="stylesheet" />
     @RenderSection("styles", false)
     @Scripts.Render("~/bundles/modernizr")
 </head>
@@ -100,6 +101,10 @@
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+    <script src="~/Scripts/toastr/toastr.min.js"></script>
+    <script type="text/javascript">
+        toastr.options = { "progressBar": false, "positionClass": "toast-bottom-right", "closeButton": true, "showMethod": "slideDown" };
+    </script>
     @RenderSection("scripts", required: false)
 </body>
 </html>
