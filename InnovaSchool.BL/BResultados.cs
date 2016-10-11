@@ -37,39 +37,40 @@ namespace InnovaSchool.BL
 
                 var resultados = ListarResultadosVotos_BL(anyo);
                 var conteo = ListarConteoVotos_BL(anyo);
-                var ganador = resultados.FirstOrDefault();
+                
+                //Maxima cantidad de votos
+                int maxVotacion = resultados.Max(x => x.Votos);
+                var ganadores = resultados.Where(x => x.Votos == maxVotacion).ToList();
 
                 object dataPartido = null;
-                if (ganador != null)
+
+                //Si existe un unico ganador
+                if (ganadores.Count == 1)
                 {
-                    //verificamos si existen otros partidos con la misma cantidad de votos
-                    int cantidad = resultados.Where(x => x.Votos == ganador.Votos).Count();
+                    var ganador = ganadores.FirstOrDefault();
 
-                    //Si existe un unico ganador
-                    if (cantidad == 1)
+                    var p = oBPartidoPostulante.ListarPartidoPostulante_BL(ganador.idPartido);
+
+                    string foto = "";
+                    if (p.Logo != null)
                     {
-                        var p = oBPartidoPostulante.ListarPartidoPostulante_BL(ganador.idPartido);
-                        string foto = "";
-                        if (p.Logo != null)
-                        {
-                            foto = string.Format("data:image/png;base64,{0}", System.Convert.ToBase64String(p.Logo));
-                            p.Logo = null;
-                        }
-
-                        dataPartido = new
-                        {
-                            Partido = p,
-                            Logo = foto,
-                            Integrantes = oBPartidoPostulante.ListarIntegrantesPartido_BL(ganador.idPartido)
-                        };
+                        foto = string.Format("data:image/png;base64,{0}", System.Convert.ToBase64String(p.Logo));
+                        p.Logo = null;
                     }
+
+                    dataPartido = new
+                    {
+                        Partido = p,
+                        Logo = foto,
+                        Integrantes = oBPartidoPostulante.ListarIntegrantesPartido_BL(ganador.idPartido)
+                    };
                 }
 
                 result = new
                 {
                     Votos = resultados,
                     Conteo = conteo,
-                    Ganador = dataPartido
+                    Ganador = dataPartido ?? ganadores
                 };
             }
             else

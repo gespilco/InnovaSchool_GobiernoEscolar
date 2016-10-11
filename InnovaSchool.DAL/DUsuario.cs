@@ -17,7 +17,7 @@ namespace InnovaSchool.DAL
         {
             EUsuario retval = null;
             cn.Open();
-            using (SqlCommand cmd = new SqlCommand("SP_VerificarUsuario", cn))
+            using (SqlCommand cmd = new SqlCommand("SP_GE_VerificarUsuario", cn))
             {
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.Add(new SqlParameter("@Usuario", EUsuario.Usuario));

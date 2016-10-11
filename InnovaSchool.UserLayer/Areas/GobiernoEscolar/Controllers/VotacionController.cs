@@ -80,7 +80,7 @@ namespace InnovaSchool.UserLayer.Areas.GobiernoEscolar.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
+        //[ValidateAntiForgeryToken]
         public JsonResult RegistrarVoto(int? idPartido)
         {
             bool result = false;

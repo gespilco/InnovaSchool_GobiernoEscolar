@@ -103,7 +103,7 @@
             </div>
         </div>
     </div>
-    @Html.AntiForgeryToken()
+    @*@Html.AntiForgeryToken()*@
 
     <!--Scripts-->
     <script src="~/Scripts/jquery-1.10.2.min.js"></script>
@@ -129,7 +129,7 @@
             }
 
             self.ConfirmarVoto = function () {
-                var token = $('input[name="__RequestVerificationToken"]').val();
+                //var token = $('input[name="__RequestVerificationToken"]').val();
                 var partido = ko.utils.arrayFirst(self.partidos(), function (x) { return x.Seleccionado() }) || {};
 
                 if (partido == null) {
@@ -146,8 +146,8 @@
                             type: 'POST',
                             url: '@Url.Content("~/GobiernoEscolar/Votacion/RegistrarVoto")',
                             data: {
-                                idPartido: partido.idPartido || null,
-                                __RequestVerificationToken: token
+                                idPartido: partido.idPartido || null
+                                //,__RequestVerificationToken: token
                             },
                             success: function (data) {
                                 self.FlagVotacion(data.Estado);

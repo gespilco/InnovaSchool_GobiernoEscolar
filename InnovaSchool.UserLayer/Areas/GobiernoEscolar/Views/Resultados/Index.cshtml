@@ -36,6 +36,8 @@
                 Blanco: ko.observable()
             };
 
+            self.PartidosEmpatados = ko.observableArray();
+
             self.PartidoGanador = {
                 idPartido: ko.observable(),
                 NombrePartido: ko.observable(),
@@ -71,12 +73,15 @@
 
                     if (!data.Mensaje) {
                         self.Resultados(data.Votos);
-                        if (data.Ganador) {
+                        if (data.Ganador && data.Ganador.Partido) {
                             var d = data.Ganador;
                             self.PartidoGanador.idPartido(d.Partido.IdPartido);
                             self.PartidoGanador.NombrePartido(d.Partido.Nombre);
                             if (d.Logo) self.PartidoGanador.Logo(d.Logo);
                             self.PartidoGanador.Integrantes(d.Integrantes);
+                        } else {
+                            //Partidos empatados
+                            self.PartidosEmpatados(data.Ganador);
                         }
 
                         //Conteo de votacion
@@ -234,6 +239,12 @@
                         </div>
                     </div>
                     <div class="form-group">
+                        <label class="control-label col-sm-8">Votos en blanco:</label>
+                        <div class="col-sm-4">
+                            <div class="form-control" data-bind="text: ConteoVotacion.Blanco">0</div>
+                        </div>
+                    </div>
+                    <div class="form-group">
                         <label class="control-label col-sm-8">Votos válidos:</label>
                         <div class="col-sm-4">
                             <div class="form-control" data-bind="text: ConteoVotacion.Validos">0</div>
@@ -244,13 +255,7 @@
                         <div class="col-sm-4">
                             <div class="form-control" data-bind="text: ConteoVotacion.NoEfectuados">0</div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label col-sm-8">Votos en blanco:</label>
-                        <div class="col-sm-4">
-                            <div class="form-control" data-bind="text: ConteoVotacion.Blanco">0</div>
-                        </div>
-                    </div>
+                    </div>                    
                 </div>
             </div>
             <div class="col-sm-7">
@@ -288,8 +293,25 @@
                             <!--/ko-->
                         </div>
                         <!--/ko-->
-                        <!--ko ifnot: PartidoGanador.idPartido-->
-                        <h4>Existe empate. Se conformará una comisión de tres profesores, los cuales elegirán al partido ganador en base a las notas y conducta de los integrantes de los partidos empatados.</h4>
+                        <!--ko ifnot: PartidoGanador.idPartido-->                        
+                        <h3>Partidos empatados</h3>
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Nombre del partido</th>
+                                    <th class="text-center">Votos</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!--ko foreach: PartidosEmpatados-->
+                                <tr>
+                                    <td data-bind="text: $data.NombrePartido"></td>
+                                    <td class="text-center" data-bind="text: $data.Votos"></td>
+                                </tr>
+                                <!--/ko-->
+                            </tbody>
+                        </table>
+                        <div class="alert alert-warning">Se conformará una comisión de tres profesores, los cuales elegirán al partido ganador en base a las notas y conducta de los integrantes de los partidos empatados.</div>
                         <!--/ko-->
                     </div>
                     <div class="panel-footer text-center hidden-print">
